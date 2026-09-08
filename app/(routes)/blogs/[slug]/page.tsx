@@ -2,23 +2,30 @@ import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { SITE } from "@/lib/metadata";
 import { breadcrumbSchema, jsonLd } from "@/lib/schema";
-import { BLOG_POSTS, getPostBySlug, type BlogPost } from "@/lib/content/blog";
+import type { BlogPost } from "@/lib/content/blog";
+import {
+  getPublishedBlogPost,
+  getPublishedBlogSlugs,
+  getRelatedPublishedPosts,
+} from "@/lib/ranked/posts";
 import BlogPostContent from "@/components/blog/BlogPostContent";
+
+export const revalidate = 3600;
+export const dynamicParams = true;
 
 const LIVE_ORIGIN = "https://revivalhealthandwellnessgroup.com";
 const LOGO_URL = `${LIVE_ORIGIN}/wp-content/uploads/2025/08/66ce476cca1ded6cc6d21cdc_revival-dark-ver-2@3x-p-1080-3.png`;
 
 type Params = { slug: string };
 
-/** Pre-build a local detail page for every post. */
-export function generateStaticParams(): Params[] {
-  return BLOG_POSTS.map((p) => ({ slug: p.slug }));
+export async function generateStaticParams(): Promise<Params[]> {
+  const slugs = await getPublishedBlogSlugs().catch(() => []);
+  return slugs.map((slug) => ({ slug }));
 }
 
 /** Prefer live-site fields when available, fall back to sensible defaults. */
 function resolvePost(post: BlogPost) {
-  const canonical =
-    post.canonical ?? `${LIVE_ORIGIN}/${post.slug}/`;
+  const canonical = post.canonical ?? `${LIVE_ORIGIN}/${post.slug}/`;
   const ogImage =
     post.ogImage ??
     (post.cover.startsWith("http")
@@ -36,7 +43,7 @@ export async function generateMetadata({
   params: Promise<Params>;
 }): Promise<Metadata> {
   const { slug } = await params;
-  const post = getPostBySlug(slug);
+  const post = await getPublishedBlogPost(slug);
   if (!post) return { title: "Article not found" };
 
   const { canonical, ogImage, metaTitle, metaDescription, publishDate } =
@@ -76,13 +83,13 @@ export default async function BlogPostPage({
   params: Promise<Params>;
 }) {
   const { slug } = await params;
-  const post = getPostBySlug(slug);
+  const post = await getPublishedBlogPost(slug);
   if (!post) notFound();
 
-  const { canonical, ogImage, metaTitle, metaDescription, publishDate } =
+  const related = await getRelatedPublishedPosts(slug);
+  const { canonical, ogImage, metaDescription, publishDate } =
     resolvePost(post);
 
-  // BlogPosting JSON-LD (spec).
   const blogPostingSchema = post.schema ?? {
     "@context": "https://schema.org",
     "@type": "BlogPosting",
@@ -132,7 +139,7 @@ export default async function BlogPostPage({
           ]),
         }}
       />
-      <BlogPostContent post={post} />
+      <BlogPostContent post={post} related={related} />
     </>
   );
 }

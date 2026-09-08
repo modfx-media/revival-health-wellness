@@ -1,9 +1,11 @@
-import { buildMetadata, SITE } from "@/lib/metadata";
+import { buildMetadata } from "@/lib/metadata";
 import { breadcrumbSchema, jsonLd } from "@/lib/schema";
 import PageHero from "@/components/ui/PageHero";
 import CTABanner from "@/components/ui/CTABanner";
 import BlogsIndex from "@/components/blog/BlogsIndex";
-import { BLOG_POSTS } from "@/lib/content/blog";
+import { getPublishedBlogPosts } from "@/lib/ranked/posts";
+
+export const revalidate = 3600;
 
 const LIVE_ORIGIN = "https://revivalhealthandwellnessgroup.com";
 const TITLE = "Blog";
@@ -18,28 +20,35 @@ export const metadata = buildMetadata({
   path: PATH,
 });
 
-const blogCollectionSchema = {
-  "@context": "https://schema.org",
-  "@type": "Blog",
-  name: "Revival Health & Wellness Blog",
-  description:
-    "Expert health tips, treatment guides, and wellness insights from Revival Health and Wellness in Las Vegas.",
-  url: `${LIVE_ORIGIN}/blogs/`,
-  publisher: {
-    "@type": "Organization",
-    name: "Revival Health and Wellness",
-    url: LIVE_ORIGIN,
-  },
-  blogPost: BLOG_POSTS.map((p) => ({
-    "@type": "BlogPosting",
-    headline: p.title,
-    url: p.canonical ?? `${LIVE_ORIGIN}/${p.slug}/`,
-    datePublished: p.publishDate ?? p.date,
-    image: p.ogImage ?? p.cover,
-  })),
-};
+export default async function BlogsPage() {
+  const posts = await getPublishedBlogPosts();
+  const sorted = [...posts].sort(
+    (a, b) =>
+      new Date(b.publishDate ?? b.date).getTime() -
+      new Date(a.publishDate ?? a.date).getTime(),
+  );
 
-export default function BlogsPage() {
+  const blogCollectionSchema = {
+    "@context": "https://schema.org",
+    "@type": "Blog",
+    name: "Revival Health & Wellness Blog",
+    description:
+      "Expert health tips, treatment guides, and wellness insights from Revival Health and Wellness in Las Vegas.",
+    url: `${LIVE_ORIGIN}/blogs/`,
+    publisher: {
+      "@type": "Organization",
+      name: "Revival Health and Wellness",
+      url: LIVE_ORIGIN,
+    },
+    blogPost: sorted.map((p) => ({
+      "@type": "BlogPosting",
+      headline: p.title,
+      url: p.canonical ?? `${LIVE_ORIGIN}/${p.slug}/`,
+      datePublished: p.publishDate ?? p.date,
+      image: p.ogImage ?? p.cover,
+    })),
+  };
+
   return (
     <>
       <script
@@ -74,7 +83,7 @@ export default function BlogsPage() {
         ]}
       />
 
-      <BlogsIndex />
+      <BlogsIndex posts={sorted} />
 
       <div className="mx-auto max-w-7xl px-4 py-20 sm:px-6 lg:px-8">
         <CTABanner

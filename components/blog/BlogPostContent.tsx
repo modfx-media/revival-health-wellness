@@ -14,9 +14,8 @@ import {
   Copy,
   List,
 } from "lucide-react";
-import { useEffect, useMemo, useState } from "react";
+import { useEffect, useMemo, useState, Fragment } from "react";
 import type { BlogPost } from "@/lib/content/blog";
-import { getRelatedPosts } from "@/lib/content/blog";
 import PortraitFrame from "@/components/ui/PortraitFrame";
 import RichContent, { extractHeadings } from "./RichContent";
 
@@ -57,8 +56,14 @@ function categorySlug(category: BlogPost["category"]) {
   return CATEGORY_HREF[category];
 }
 
-export default function BlogPostContent({ post }: { post: BlogPost }) {
-  const related = getRelatedPosts(post.slug);
+export default function BlogPostContent({
+  post,
+  related: relatedProp,
+}: {
+  post: BlogPost;
+  related?: BlogPost[];
+}) {
+  const related = relatedProp ?? [];
 
   // TOC: prefer explicit `headings`, then derive from raw `content`, else
   // fall back to `body[].heading`.
@@ -212,7 +217,7 @@ export default function BlogPostContent({ post }: { post: BlogPost }) {
           >
             <Image
               src={post.cover}
-              alt=""
+              alt={post.title}
               fill
               sizes="(max-width: 1024px) 100vw, 960px"
               className="object-cover"
@@ -270,7 +275,7 @@ export default function BlogPostContent({ post }: { post: BlogPost }) {
                       key={j}
                       className="text-base font-light leading-relaxed text-revival-charcoal/85 sm:text-lg"
                     >
-                      {p}
+                      <InlineMarkdown text={p} />
                     </p>
                   ))}
                 </div>
@@ -538,7 +543,7 @@ export default function BlogPostContent({ post }: { post: BlogPost }) {
                   <div className="relative aspect-[16/10]">
                     <Image
                       src={r.cover}
-                      alt=""
+                      alt={r.title}
                       fill
                       sizes="(max-width: 640px) 100vw, 33vw"
                       className="object-cover transition-transform duration-[900ms] group-hover:scale-105"
@@ -564,6 +569,27 @@ export default function BlogPostContent({ post }: { post: BlogPost }) {
           </div>
         </section>
       )}
+    </>
+  );
+}
+
+function InlineMarkdown({ text }: { text: string }) {
+  const parts = text.split(/(\[[^\]]+\]\([^)]+\))/g);
+  return (
+    <>
+      {parts.map((part, i) => {
+        const match = part.match(/^\[([^\]]+)\]\(([^)]+)\)$/);
+        if (!match) return <Fragment key={i}>{part}</Fragment>;
+        return (
+          <a
+            key={i}
+            href={match[2]}
+            className="font-medium text-revival-gold underline decoration-revival-gold/40 underline-offset-2 hover:text-revival-dark"
+          >
+            {match[1]}
+          </a>
+        );
+      })}
     </>
   );
 }

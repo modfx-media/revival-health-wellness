@@ -5,7 +5,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { motion, AnimatePresence } from "framer-motion";
 import { ArrowRight, Clock, Search, Sparkles } from "lucide-react";
-import { BLOG_POSTS, CATEGORIES, type BlogPost } from "@/lib/content/blog";
+import { CATEGORIES, type BlogPost } from "@/lib/content/blog";
 
 const EASE = [0.22, 1, 0.36, 1] as const;
 
@@ -30,18 +30,19 @@ function formatDate(iso: string) {
   });
 }
 
-export default function BlogsIndex() {
+export default function BlogsIndex({ posts }: { posts: BlogPost[] }) {
   const [category, setCategory] = useState<string>(ALL_TAB);
   const [query, setQuery] = useState("");
 
   const featured = useMemo(
-    () => BLOG_POSTS.find((p) => p.featured) ?? BLOG_POSTS[0],
-    [],
+    () => posts.find((p) => p.featured) ?? posts[0],
+    [posts],
   );
 
   const filtered = useMemo(() => {
+    if (!featured) return [];
     const q = query.trim().toLowerCase();
-    return BLOG_POSTS.filter((p) => p.slug !== featured.slug).filter((p) => {
+    return posts.filter((p) => p.slug !== featured.slug).filter((p) => {
       if (category !== ALL_TAB && p.category !== category) return false;
       if (!q) return true;
       return (
@@ -50,7 +51,7 @@ export default function BlogsIndex() {
         p.tags?.some((t) => t.toLowerCase().includes(q))
       );
     });
-  }, [category, query, featured.slug]);
+  }, [category, query, featured, posts]);
 
   return (
     <div className="relative overflow-hidden bg-revival-warm-white py-16 lg:py-24">
@@ -68,7 +69,7 @@ export default function BlogsIndex() {
 
       <div className="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         {/* Featured post */}
-        <FeaturedCard post={featured} />
+        {featured ? <FeaturedCard post={featured} /> : null}
 
         {/* Filter bar */}
         <motion.div
@@ -162,9 +163,9 @@ function FeaturedCard({ post }: { post: BlogPost }) {
         className="group relative grid gap-8 overflow-hidden rounded-[2.5rem] border border-revival-gold/20 bg-revival-dark p-6 shadow-2xl transition-transform duration-500 hover:-translate-y-1 sm:p-8 lg:grid-cols-[1.15fr_0.85fr] lg:gap-12 lg:p-10"
       >
         <div className="relative aspect-[16/10] overflow-hidden rounded-[1.75rem] bg-revival-charcoal">
-          <Image
+            <Image
             src={post.cover}
-            alt=""
+            alt={post.title}
             fill
             sizes="(max-width: 1024px) 100vw, 55vw"
             className="object-cover transition-transform duration-[900ms] group-hover:scale-105"
@@ -223,7 +224,7 @@ function PostCard({ post }: { post: BlogPost }) {
         <div className="relative aspect-[16/10] overflow-hidden bg-revival-cream">
           <Image
             src={post.cover}
-            alt=""
+            alt={post.title}
             fill
             sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
             className="object-cover transition-transform duration-[900ms] group-hover:scale-105"
