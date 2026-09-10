@@ -2,25 +2,22 @@ import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { SITE } from "@/lib/metadata";
 import { breadcrumbSchema, jsonLd } from "@/lib/schema";
-import type { BlogPost } from "@/lib/content/blog";
 import {
-  getPublishedBlogPost,
-  getPublishedBlogSlugs,
-  getRelatedPublishedPosts,
-} from "@/lib/ranked/posts";
+  BLOG_POSTS,
+  getPostBySlug,
+  getRelatedPosts,
+  type BlogPost,
+} from "@/lib/content/blog";
 import BlogPostContent from "@/components/blog/BlogPostContent";
-
-export const revalidate = 3600;
-export const dynamicParams = true;
 
 const LIVE_ORIGIN = "https://revivalhealthandwellnessgroup.com";
 const LOGO_URL = `${LIVE_ORIGIN}/wp-content/uploads/2025/08/66ce476cca1ded6cc6d21cdc_revival-dark-ver-2@3x-p-1080-3.png`;
 
 type Params = { slug: string };
 
-export async function generateStaticParams(): Promise<Params[]> {
-  const slugs = await getPublishedBlogSlugs().catch(() => []);
-  return slugs.map((slug) => ({ slug }));
+/** Pre-build a local detail page for every post. */
+export function generateStaticParams(): Params[] {
+  return BLOG_POSTS.map((p) => ({ slug: p.slug }));
 }
 
 /** Prefer live-site fields when available, fall back to sensible defaults. */
@@ -43,7 +40,7 @@ export async function generateMetadata({
   params: Promise<Params>;
 }): Promise<Metadata> {
   const { slug } = await params;
-  const post = await getPublishedBlogPost(slug);
+  const post = getPostBySlug(slug);
   if (!post) return { title: "Article not found" };
 
   const { canonical, ogImage, metaTitle, metaDescription, publishDate } =
@@ -83,10 +80,10 @@ export default async function BlogPostPage({
   params: Promise<Params>;
 }) {
   const { slug } = await params;
-  const post = await getPublishedBlogPost(slug);
+  const post = getPostBySlug(slug);
   if (!post) notFound();
 
-  const related = await getRelatedPublishedPosts(slug);
+  const related = getRelatedPosts(slug);
   const { canonical, ogImage, metaDescription, publishDate } =
     resolvePost(post);
 

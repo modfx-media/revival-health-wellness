@@ -5813,4 +5813,4 @@ export const CATEGORIES: BlogPost["category"][] = [
   "IV Hydration",
   "Wellness",
 ];
-// TOTAL POSTS: 43
+// TOTAL POSTS: 46

@@ -2,7 +2,7 @@ import type { MetadataRoute } from "next";
 import { SITE } from "@/lib/metadata";
 import { getAllGeoPages } from "@/lib/locations";
 import { getLiveCities, getLiveAreaPages } from "@/lib/areas";
-import { getPublishedBlogPosts } from "@/lib/ranked/posts";
+import { BLOG_POSTS } from "@/lib/content/blog";
 
 /** Primary service pillars, priority 0.9. */
 const PILLAR_SERVICES = [
@@ -74,9 +74,8 @@ function url(path: string): string {
   return new URL(p, SITE.url).toString();
 }
 
-export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
+export default function sitemap(): MetadataRoute.Sitemap {
   const now = new Date();
-  const publishedPosts = await getPublishedBlogPosts().catch(() => []);
 
   const home: MetadataRoute.Sitemap = [
     {
@@ -109,7 +108,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   }));
 
   // Include every blog post - all render locally.
-  const blogPosts: MetadataRoute.Sitemap = publishedPosts.map((post) => ({
+  const blogPosts: MetadataRoute.Sitemap = BLOG_POSTS.map((post) => ({
     url: url(`/blogs/${post.slug}/`),
     lastModified: new Date(post.publishDate ?? post.date),
     changeFrequency: "monthly",

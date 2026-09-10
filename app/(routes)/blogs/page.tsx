@@ -3,9 +3,7 @@ import { breadcrumbSchema, jsonLd } from "@/lib/schema";
 import PageHero from "@/components/ui/PageHero";
 import CTABanner from "@/components/ui/CTABanner";
 import BlogsIndex from "@/components/blog/BlogsIndex";
-import { getPublishedBlogPosts } from "@/lib/ranked/posts";
-
-export const revalidate = 3600;
+import { BLOG_POSTS } from "@/lib/content/blog";
 
 const LIVE_ORIGIN = "https://revivalhealthandwellnessgroup.com";
 const TITLE = "Blog";
@@ -20,9 +18,8 @@ export const metadata = buildMetadata({
   path: PATH,
 });
 
-export default async function BlogsPage() {
-  const posts = await getPublishedBlogPosts();
-  const sorted = [...posts].sort(
+export default function BlogsPage() {
+  const sorted = [...BLOG_POSTS].sort(
     (a, b) =>
       new Date(b.publishDate ?? b.date).getTime() -
       new Date(a.publishDate ?? a.date).getTime(),
