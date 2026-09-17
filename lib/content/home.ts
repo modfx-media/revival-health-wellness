@@ -308,6 +308,15 @@ export type BlogPost = {
 
 export const BLOGS: BlogPost[] = [
   {
+    title: "Migraine and TMJ Relief Options With Botox",
+    category: "Aesthetics",
+    date: "September 14, 2026",
+    href: "/blogs/migraine-and-tmj-relief-options-with-botox/",
+    excerpt:
+      "Discover how botox in Las Vegas may ease migraine and TMJ pain, what to expect from treatment, and who may benefit from this approach",
+    image: "/images/blog/migraine-and-tmj-relief-options-with-botox.png",
+  },
+  {
     title: "Break a Las Vegas Weight Loss Plateau: Lab Tests and What Results Mean",
     category: "Weight Loss",
     date: "June 21, 2026",
