@@ -55,17 +55,29 @@ export default function GoogleReviewsSection({
   limit = 5,
   bgClassName = "bg-white",
   treatment,
+  reviews: liveReviews,
+  meta,
 }: {
   limit?: number;
   bgClassName?: string;
   /** When set, only shows reviews tagged with this exact `treatment` instead of the sitewide featured mix. */
   treatment?: string;
+  /** Live Google reviews to show instead of the curated TESTIMONIALS set. */
+  reviews?: { name: string; quote: string; treatment?: string }[];
+  /** Live rating/count/url to show instead of the static REVIEWS constant. */
+  meta?: { rating: number; reviewCount: number; reviewsUrl: string };
 }) {
-  const reviews = treatment
-    ? TESTIMONIALS.filter((t) => t.treatment === treatment).slice(0, limit)
-    : FEATURED_NAMES.map((n) => TESTIMONIALS.find((t) => t.name === n))
-        .filter((t): t is Testimonial => Boolean(t))
-        .slice(0, limit);
+  const rating = meta?.rating ?? REVIEWS.rating;
+  const reviewCount = meta?.reviewCount ?? REVIEWS.count;
+  const reviewsUrl = meta?.reviewsUrl ?? REVIEWS.url;
+
+  const reviews = liveReviews
+    ? liveReviews.slice(0, limit)
+    : treatment
+      ? TESTIMONIALS.filter((t) => t.treatment === treatment).slice(0, limit)
+      : FEATURED_NAMES.map((n) => TESTIMONIALS.find((t) => t.name === n))
+          .filter((t): t is Testimonial => Boolean(t))
+          .slice(0, limit);
 
   return (
     <section className={`${bgClassName} py-16 lg:py-24`}>
@@ -76,13 +88,13 @@ export default function GoogleReviewsSection({
             style={{ "--reveal-delay": "0ms" } as React.CSSProperties}
           >
             <GoogleLogo className="h-4 w-4" />
-            {REVIEWS.badge} &middot; {REVIEWS.rating.toFixed(1)}&#9733;
+            {REVIEWS.badge} &middot; {rating.toFixed(1)}&#9733;
           </span>
           <h2
             className="lp-reveal mt-4 font-heading text-3xl leading-tight text-revival-dark sm:text-4xl"
             style={{ "--reveal-delay": "100ms" } as React.CSSProperties}
           >
-            Rated {REVIEWS.rating.toFixed(1)} on Google by {REVIEWS.count}+ Las
+            Rated {rating.toFixed(1)} on Google by {reviewCount}+ Las
             Vegas patients.
           </h2>
           <p
@@ -160,13 +172,13 @@ export default function GoogleReviewsSection({
           style={{ "--reveal-delay": "250ms" } as React.CSSProperties}
         >
           <a
-            href={REVIEWS.url}
+            href={reviewsUrl}
             target="_blank"
             rel="noopener noreferrer"
             className="inline-flex items-center gap-2 rounded-full border border-revival-gold/30 bg-revival-warm-white px-6 py-3 text-sm font-medium text-revival-dark shadow-sm transition-transform duration-300 hover:scale-105"
           >
             <GoogleLogo className="h-4 w-4" />
-            Read all {REVIEWS.count}+ Google reviews
+            Read all {reviewCount}+ Google reviews
           </a>
         </div>
       </div>

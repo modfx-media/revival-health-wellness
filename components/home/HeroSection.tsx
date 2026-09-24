@@ -26,7 +26,15 @@ const item = {
   visible: { opacity: 1, y: 0, transition: { duration: 0.9, ease: EASE } },
 };
 
-export default function HeroSection() {
+export default function HeroSection({
+  reviewRating = 5,
+  reviewCount = 500,
+  reviewsUrl,
+}: {
+  reviewRating?: number;
+  reviewCount?: number;
+  reviewsUrl?: string;
+}) {
   const ref = useRef<HTMLElement>(null);
   const { scrollYProgress } = useScroll({
     target: ref,
@@ -203,19 +211,40 @@ export default function HeroSection() {
             variants={item}
             className="mt-12 flex flex-wrap items-center justify-center gap-x-8 gap-y-4 lg:justify-start"
           >
-            <div className="flex items-center gap-2">
-              <span className="flex">
-                {Array.from({ length: 5 }).map((_, i) => (
-                  <Star
-                    key={i}
-                    className="h-4 w-4 fill-revival-gold text-revival-gold"
-                  />
-                ))}
-              </span>
-              <span className="text-sm font-light text-revival-cream/80">
-                Rated 5 star by 500+
-              </span>
-            </div>
+            {reviewsUrl ? (
+              <a
+                href={reviewsUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="flex items-center gap-2 transition-colors duration-300 hover:text-revival-gold"
+              >
+                <span className="flex">
+                  {Array.from({ length: 5 }).map((_, i) => (
+                    <Star
+                      key={i}
+                      className="h-4 w-4 fill-revival-gold text-revival-gold"
+                    />
+                  ))}
+                </span>
+                <span className="text-sm font-light text-revival-cream/80">
+                  Rated {reviewRating.toFixed(1)} star by {reviewCount}+
+                </span>
+              </a>
+            ) : (
+              <div className="flex items-center gap-2">
+                <span className="flex">
+                  {Array.from({ length: 5 }).map((_, i) => (
+                    <Star
+                      key={i}
+                      className="h-4 w-4 fill-revival-gold text-revival-gold"
+                    />
+                  ))}
+                </span>
+                <span className="text-sm font-light text-revival-cream/80">
+                  Rated {reviewRating.toFixed(1)} star by {reviewCount}+
+                </span>
+              </div>
+            )}
             <span className="inline-flex items-center gap-2 text-sm font-light text-revival-cream/80">
               <MapPin className="h-4 w-4 text-revival-gold" />2 Las Vegas
               Locations
@@ -508,10 +537,10 @@ export default function HeroSection() {
             </span>
             <div className="leading-tight">
               <p className="font-heading text-xl font-semibold text-white">
-                5.0
+                {reviewRating.toFixed(1)}
               </p>
               <p className="text-[0.6rem] font-light uppercase tracking-[0.2em] text-revival-cream/65">
-                500+ Reviews
+                {reviewCount}+ Reviews
               </p>
             </div>
           </motion.div>

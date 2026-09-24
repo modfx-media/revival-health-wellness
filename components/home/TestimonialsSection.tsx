@@ -16,7 +16,15 @@ const card = {
   visible: { opacity: 1, y: 0, transition: { duration: 0.6, ease: EASE } },
 };
 
-export default function TestimonialsSection() {
+export default function TestimonialsSection({
+  rating = REVIEWS.rating,
+  reviewCount = REVIEWS.count,
+  reviewsUrl = REVIEWS.url,
+}: {
+  rating?: number;
+  reviewCount?: number;
+  reviewsUrl?: string;
+}) {
   return (
     <section className="relative overflow-hidden bg-gradient-to-b from-revival-cream via-revival-warm-white to-revival-cream py-14 lg:py-32">
       {/* Animated gold ambiance */}
@@ -158,10 +166,10 @@ export default function TestimonialsSection() {
 
           <div className="relative flex flex-col items-center gap-8 text-center sm:flex-row sm:justify-between sm:text-left">
             <a
-              href={REVIEWS.url}
+              href={reviewsUrl}
               target="_blank"
               rel="noopener noreferrer"
-              aria-label={`Read our ${REVIEWS.count}+ Google reviews (rated ${REVIEWS.rating.toFixed(1)} out of 5)`}
+              aria-label={`Read our ${reviewCount}+ Google reviews (rated ${rating.toFixed(1)} out of 5)`}
               className="group/reviews flex items-center gap-5 rounded-2xl outline-none transition-transform duration-300 hover:scale-[1.02] focus-visible:ring-2 focus-visible:ring-revival-gold focus-visible:ring-offset-2 focus-visible:ring-offset-revival-dark"
             >
               <motion.div
@@ -177,7 +185,7 @@ export default function TestimonialsSection() {
                 </p>
                 <div className="mt-1 flex items-center justify-center gap-2 sm:justify-start">
                   <span className="font-heading text-4xl font-medium text-white">
-                    {REVIEWS.rating.toFixed(1)}
+                    {rating.toFixed(1)}
                   </span>
                   <span className="flex">
                     {Array.from({ length: 5 }).map((_, i) => (
@@ -194,7 +202,7 @@ export default function TestimonialsSection() {
                   </span>
                 </div>
                 <p className="mt-1 inline-flex items-center gap-1 text-sm font-light text-revival-cream/60 transition-colors duration-300 group-hover/reviews:text-revival-gold">
-                  Read our {REVIEWS.count}+ Google reviews
+                  Read our {reviewCount}+ Google reviews
                   <ArrowRight className="h-3.5 w-3.5 transition-transform duration-300 group-hover/reviews:translate-x-1" />
                 </p>
               </div>
@@ -202,10 +210,10 @@ export default function TestimonialsSection() {
 
             <div className="flex flex-col items-center gap-3 sm:flex-row">
               <a
-                href={REVIEWS.url}
+                href={reviewsUrl}
                 target="_blank"
                 rel="noopener noreferrer"
-                aria-label={`See all ${REVIEWS.count}+ Google reviews for Revival Health & Wellness`}
+                aria-label={`See all ${reviewCount}+ Google reviews for Revival Health & Wellness`}
                 className="group/gbtn relative inline-flex items-center gap-2 rounded-full border border-revival-gold/40 bg-white/5 px-6 py-3.5 text-sm font-medium text-white backdrop-blur-sm transition-all duration-300 hover:border-revival-gold hover:bg-white/10 hover:scale-105"
               >
                 <GoogleLogo className="h-4 w-4" />

@@ -3,6 +3,8 @@ import { Playfair_Display, Inter } from "next/font/google";
 import Script from "next/script";
 import "./globals.css";
 import { organizationSchema, websiteSchema, jsonLd } from "@/lib/schema";
+import { getDisplayedGoogleReviews } from "@/lib/google-reviews";
+import { isFiveStarReview } from "@/lib/reviews";
 import Header from "@/components/layout/Header";
 import Footer from "@/components/layout/Footer";
 import StickyBookBar from "@/components/layout/StickyBookBar";
@@ -13,14 +15,12 @@ import MainWrapper from "@/components/layout/MainWrapper";
 const playfair = Playfair_Display({
   variable: "--font-playfair",
   subsets: ["latin"],
-  weight: ["400", "500", "600", "700"],
   display: "swap",
 });
 
 const inter = Inter({
   variable: "--font-inter",
   subsets: ["latin"],
-  weight: ["300", "400", "500", "600"],
   display: "swap",
 });
 
@@ -52,11 +52,35 @@ export const metadata: Metadata = {
   alternates: { canonical: "https://revivalhealthandwellnessgroup.com" },
 };
 
-export default function RootLayout({
+export default async function RootLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+  const { reviews, meta } = await getDisplayedGoogleReviews();
+
+  const organization = organizationSchema();
+  organization.aggregateRating = {
+    "@type": "AggregateRating",
+    ratingValue: meta.rating.toString(),
+    reviewCount: meta.reviewCount.toString(),
+    bestRating: "5",
+  };
+
+  const fiveStarReviews = reviews.filter(isFiveStarReview);
+  if (fiveStarReviews.length > 0) {
+    organization.review = fiveStarReviews.map((r) => ({
+      "@type": "Review",
+      reviewRating: {
+        "@type": "Rating",
+        ratingValue: "5",
+        bestRating: "5",
+      },
+      author: { "@type": "Person", name: r.name },
+      reviewBody: r.quote,
+    }));
+  }
+
   return (
     <html
       lang="en"
@@ -87,7 +111,7 @@ export default function RootLayout({
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{
-            __html: jsonLd([organizationSchema(), websiteSchema()]),
+            __html: jsonLd([organization, websiteSchema()]),
           }}
         />
         <Header />

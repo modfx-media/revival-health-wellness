@@ -12,12 +12,14 @@ import WhyChooseSection from "@/components/home/WhyChooseSection";
 import GalleryCarousel from "@/components/home/GalleryCarousel";
 import BlogsSection from "@/components/home/BlogsSection";
 import TestimonialsSection from "@/components/home/TestimonialsSection";
+import GoogleReviewsSection from "@/components/lp/GoogleReviewsSection";
 import CTASection from "@/components/home/CTASection";
 import PlanOfferSection from "@/components/home/PlanOfferSection";
 import ProviderSnippetSection from "@/components/home/ProviderSnippetSection";
 import ContactFormSection from "@/components/home/ContactFormSection";
 import MapSection from "@/components/layout/MapSection";
 import { buildMetadata } from "@/lib/metadata";
+import { getDisplayedGoogleReviews } from "@/lib/google-reviews";
 
 export const metadata: Metadata = buildMetadata({
   title: "Las Vegas Medical Spa & Wellness",
@@ -26,10 +28,16 @@ export const metadata: Metadata = buildMetadata({
   path: "/",
 });
 
-export default function Home() {
+export default async function Home() {
+  const { reviews, meta } = await getDisplayedGoogleReviews();
+
   return (
     <>
-      <HeroSection />
+      <HeroSection
+        reviewRating={meta.rating}
+        reviewCount={meta.reviewCount}
+        reviewsUrl={meta.reviewsUrl}
+      />
       <MarqueeStrip />
       <ServicesGrid />
       <PhilosophySection />
@@ -42,7 +50,12 @@ export default function Home() {
       <GalleryCarousel />
       <PricingSection />
       <BlogsSection />
-      <TestimonialsSection />
+      <TestimonialsSection
+        rating={meta.rating}
+        reviewCount={meta.reviewCount}
+        reviewsUrl={meta.reviewsUrl}
+      />
+      <GoogleReviewsSection reviews={reviews} meta={meta} />
       <CTASection />
       <PlanOfferSection />
       <ContactFormSection />

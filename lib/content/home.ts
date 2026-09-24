@@ -102,7 +102,7 @@ export const APPROACH = {
       text: "We treat the whole person, physical, mental, and emotional, for lasting, meaningful results.",
     },
   ],
-  images: ["/images/home/approach-2.jpg"],
+  images: ["/images/home/approach-team.png"],
 };
 
 export const STATS = [
