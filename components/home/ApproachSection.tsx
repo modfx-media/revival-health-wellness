@@ -69,7 +69,8 @@ export default function ApproachSection() {
               src={APPROACH.images[0]}
               alt="Personalized care at Revival Health and Wellness"
               fill
-              sizes="(max-width: 1024px) 80vw, 40vw"
+              sizes="(max-width: 1024px) 90vw, 600px"
+              quality={100}
               className="object-contain"
             />
             <div className="absolute inset-0 bg-gradient-to-t from-revival-gold/15 to-transparent mix-blend-soft-light" />

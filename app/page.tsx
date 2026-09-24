@@ -11,7 +11,6 @@ import FinancingSection from "@/components/home/FinancingSection";
 import WhyChooseSection from "@/components/home/WhyChooseSection";
 import GalleryCarousel from "@/components/home/GalleryCarousel";
 import BlogsSection from "@/components/home/BlogsSection";
-import TestimonialsSection from "@/components/home/TestimonialsSection";
 import GoogleReviewsSection from "@/components/lp/GoogleReviewsSection";
 import CTASection from "@/components/home/CTASection";
 import PlanOfferSection from "@/components/home/PlanOfferSection";
@@ -50,11 +49,6 @@ export default async function Home() {
       <GalleryCarousel />
       <PricingSection />
       <BlogsSection />
-      <TestimonialsSection
-        rating={meta.rating}
-        reviewCount={meta.reviewCount}
-        reviewsUrl={meta.reviewsUrl}
-      />
       <GoogleReviewsSection reviews={reviews} meta={meta} />
       <CTASection />
       <PlanOfferSection />
