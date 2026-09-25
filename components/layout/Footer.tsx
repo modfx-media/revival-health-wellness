@@ -17,11 +17,6 @@ const QUICK_LINKS = [
   { label: "Sexual Wellness for Men", href: "/men/" },
   { label: "Sexual Wellness for Women", href: "/women/" },
   { label: "IV Hydration", href: "/iv-hydration/" },
-  {
-    label: "Lab Testing",
-    href: "https://labs.revivalhealthandwellnessgroup.com/",
-    external: true,
-  },
 ];
 
 const AESTHETIC_LINKS = [

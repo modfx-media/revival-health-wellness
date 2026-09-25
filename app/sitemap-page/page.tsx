@@ -64,11 +64,6 @@ const MAIN_PAGES: SitemapGroup = {
       href: "https://revivalhealth.zenoti.com/webstoreNew",
       external: true,
     },
-    {
-      label: "Lab Testing Portal",
-      href: "https://labs.revivalhealthandwellnessgroup.com/",
-      external: true,
-    },
   ],
 };
 

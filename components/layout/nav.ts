@@ -126,11 +126,6 @@ export const PRIMARY_NAV: NavItem[] = [
     children: [
       { label: "About Us", href: "/about-us/" },
       { label: "Blogs", href: "/blogs/" },
-      {
-        label: "Lab Testing",
-        href: "https://labs.revivalhealthandwellnessgroup.com/",
-        external: true,
-      },
       { label: "Patient Financing (Cherry)", href: "/cherry/" },
       { label: "Contact Us", href: "/contact-us/" },
       { label: "Areas We Serve", href: "/areas-we-serve/" },
