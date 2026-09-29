@@ -5,7 +5,7 @@ import LPHeader from "@/components/lp/LPHeader";
 import LPFooter from "@/components/lp/LPFooter";
 import PLongLanding from "@/components/lp/PLongLanding";
 
-const PHONE = "(702) 903-1168";
+const PHONE = "(725) 334-7214";
 const ADS_ID = "AW-18297295288";
 const FORM_ID = "BrLJnySJNxjzMUWlSrsB";
 const FORM_NAME = "🟢 Google Mens ED/ pshot/ gainswave Wellness 25-08-25";

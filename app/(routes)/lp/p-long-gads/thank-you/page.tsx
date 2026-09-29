@@ -6,7 +6,7 @@ import LPFooter from "@/components/lp/LPFooter";
 import ThankYouContent from "@/components/lp/ThankYouContent";
 import MapSection from "@/components/layout/MapSection";
 
-const PHONE = "(702) 903-1168";
+const PHONE = "(725) 334-7214";
 const ADS_ID = "AW-18297295288";
 
 export const metadata: Metadata = buildMetadata({
