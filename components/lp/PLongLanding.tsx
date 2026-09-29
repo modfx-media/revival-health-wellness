@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Image from "next/image";
 import { motion } from "framer-motion";
 import {
@@ -29,11 +29,12 @@ import {
   X,
 } from "lucide-react";
 import { telHref } from "@/lib/content/clinics";
+import { reportPhoneClickConversion } from "@/lib/adsConversion";
 import LeadFormModal from "@/components/lp/LeadFormModal";
 import MapSection from "@/components/layout/MapSection";
 
 const EASE = [0.22, 1, 0.36, 1] as const;
-const PHONE = "+1 725-334-7214";
+const DEFAULT_PHONE = "+1 725-334-7214";
 const YOUTUBE_ID = "ZiuqW8CYkuA";
 const CTA_LABEL = "Claim My Free Consultation";
 const CTA_SHORT = "Claim Free Consult";
@@ -277,7 +278,7 @@ const CREDENTIALS = [
   { title: "4.9★ patient rating", sub: "Across verified reviews" },
 ];
 
-const FAQS = [
+const buildFaqs = (phone: string) => [
   {
     q: "Is the consultation really free?",
     a: "Yes. There is zero cost and zero obligation. Your free consultation includes a private sit-down with our medical team, a physical evaluation, and a personalized protocol plan, a $500 value at no charge for new patients.",
@@ -301,7 +302,7 @@ const FAQS = [
   {
     q: "How do I get started?",
     a: "Click any “Claim My Free Consultation” button on this page or call " +
-      PHONE +
+      phone +
       ". A member of our medical team will reach out to schedule a time that works for you.",
   },
 ];
@@ -317,12 +318,40 @@ function OfferBadge({ className = "" }: { className?: string }) {
   );
 }
 
-export default function PLongLanding() {
+export default function PLongLanding({
+  thankYouPath,
+  phone = DEFAULT_PHONE,
+  trackCallConversion = false,
+  formId,
+  formName,
+}: {
+  thankYouPath?: string;
+  phone?: string;
+  trackCallConversion?: boolean;
+  formId?: string;
+  formName?: string;
+} = {}) {
+  const faqs = buildFaqs(phone);
   const [videoPlaying, setVideoPlaying] = useState(false);
   const [modalOpen, setModalOpen] = useState(false);
   const [openFaq, setOpenFaq] = useState<number | null>(0);
 
+  // Flag <body> so globals.css can lift the accessibility trigger and chat
+  // widget clear of this page's fixed mobile CTA bar (see globals.css).
+  useEffect(() => {
+    document.body.classList.add("rvw-plong-cta-visible");
+    return () => {
+      document.body.classList.remove("rvw-plong-cta-visible");
+    };
+  }, []);
+
   const openModal = () => setModalOpen(true);
+  const onCallClick = trackCallConversion
+    ? (e: React.MouseEvent<HTMLAnchorElement>) => {
+        e.preventDefault();
+        reportPhoneClickConversion(phone);
+      }
+    : undefined;
 
   return (
     <>
@@ -439,11 +468,12 @@ export default function PLongLanding() {
                 <ArrowRight className="h-4 w-4 transition-transform duration-300 group-hover:translate-x-0.5" />
               </button>
               <a
-                href={telHref(PHONE)}
+                href={telHref(phone)}
+                onClick={onCallClick}
                 className="inline-flex items-center gap-2 rounded-full border border-white/15 px-5 py-3.5 text-sm font-medium text-revival-cream/90 transition-colors hover:border-revival-gold hover:text-revival-gold"
               >
                 <Phone className="h-4 w-4 text-revival-gold" />
-                {PHONE}
+                {phone}
               </a>
             </div>
 
@@ -1101,11 +1131,12 @@ export default function PLongLanding() {
                   <ArrowRight className="h-4 w-4" />
                 </button>
                 <a
-                  href={telHref(PHONE)}
+                  href={telHref(phone)}
+                  onClick={onCallClick}
                   className="inline-flex items-center gap-2 text-xs font-semibold uppercase tracking-[0.14em] text-revival-charcoal/70 transition-colors hover:text-revival-gold"
                 >
                   <Phone className="h-4 w-4 text-revival-gold" />
-                  {PHONE}
+                  {phone}
                 </a>
               </motion.div>
             </motion.div>
@@ -1593,17 +1624,18 @@ export default function PLongLanding() {
               Everything you need to know before you claim your free
               consultation. Still have questions? Call us at{" "}
               <a
-                href={telHref(PHONE)}
+                href={telHref(phone)}
+                onClick={onCallClick}
                 className="font-semibold text-revival-dark underline decoration-revival-gold/60 underline-offset-4 hover:text-revival-gold"
               >
-                {PHONE}
+                {phone}
               </a>
               .
             </motion.p>
           </motion.div>
 
           <div className="mt-10 divide-y divide-revival-gold/15 rounded-2xl border border-revival-gold/15 bg-revival-warm-white">
-            {FAQS.map((f, i) => {
+            {faqs.map((f, i) => {
               const isOpen = openFaq === i;
               return (
                 <div key={f.q}>
@@ -1689,11 +1721,12 @@ export default function PLongLanding() {
               <ArrowRight className="h-4 w-4 transition-transform duration-300 group-hover:translate-x-0.5" />
             </button>
             <a
-              href={telHref(PHONE)}
+              href={telHref(phone)}
+              onClick={onCallClick}
               className="inline-flex items-center gap-2 text-sm font-medium text-revival-cream/90 transition-colors hover:text-revival-gold"
             >
               <Phone className="h-4 w-4 text-revival-gold" />
-              Or call {PHONE}
+              Or call {phone}
             </a>
           </div>
 
@@ -1707,9 +1740,10 @@ export default function PLongLanding() {
       {/* ═══════════════════════ STICKY MOBILE CTA ═══════════════════════ */}
       <div className="fixed inset-x-0 bottom-0 z-40 flex items-center gap-2 border-t border-revival-gold/25 bg-revival-dark/95 p-3 backdrop-blur-xl lg:hidden">
         <a
-          href={telHref(PHONE)}
+          href={telHref(phone)}
+          onClick={onCallClick}
           className="flex h-12 w-12 shrink-0 items-center justify-center rounded-full border border-white/15 text-revival-gold"
-          aria-label={`Call ${PHONE}`}
+          aria-label={`Call ${phone}`}
         >
           <Phone className="h-5 w-5" />
         </a>
@@ -1725,7 +1759,13 @@ export default function PLongLanding() {
       {/* Spacer so the sticky bar never covers content on mobile */}
       <div className="h-20 lg:hidden" aria-hidden />
 
-      <LeadFormModal open={modalOpen} onClose={() => setModalOpen(false)} />
+      <LeadFormModal
+        open={modalOpen}
+        onClose={() => setModalOpen(false)}
+        thankYouPath={thankYouPath}
+        formId={formId}
+        formName={formName}
+      />
     </>
   );
 }

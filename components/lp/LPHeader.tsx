@@ -3,6 +3,7 @@
 import Image from "next/image";
 import { Phone } from "lucide-react";
 import { telHref } from "@/lib/content/clinics";
+import { reportPhoneClickConversion } from "@/lib/adsConversion";
 
 const DEFAULT_PHONE = "+1 725-334-7214";
 
@@ -13,8 +14,10 @@ const DEFAULT_PHONE = "+1 725-334-7214";
  */
 export default function LPHeader({
   phone = DEFAULT_PHONE,
+  trackCallConversion = false,
 }: {
   phone?: string;
+  trackCallConversion?: boolean;
 }) {
   return (
     <header className="sticky top-0 z-50 border-b border-revival-gold/15 bg-revival-dark/95 backdrop-blur-xl">
@@ -32,6 +35,14 @@ export default function LPHeader({
 
         <a
           href={telHref(phone)}
+          onClick={
+            trackCallConversion
+              ? (e) => {
+                  e.preventDefault();
+                  reportPhoneClickConversion(phone);
+                }
+              : undefined
+          }
           className="group inline-flex h-10 items-center gap-2 rounded-full border border-revival-gold/40 px-4 text-sm font-semibold text-revival-cream transition-colors hover:border-revival-gold hover:text-revival-gold"
         >
           <Phone className="h-3.5 w-3.5 text-revival-gold" />

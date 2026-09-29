@@ -11,9 +11,10 @@ import {
   UserCheck,
 } from "lucide-react";
 import { telHref } from "@/lib/content/clinics";
+import { reportPhoneClickConversion } from "@/lib/adsConversion";
 
 const EASE = [0.22, 1, 0.36, 1] as const;
-const PHONE = "+1 725-334-7214";
+const DEFAULT_PHONE = "+1 725-334-7214";
 const BOOKING_URL =
   "https://revivalhealth.zenoti.com/webstoreNew/services/2227b344-503a-4b8c-bdcf-314448f38e2f";
 
@@ -63,7 +64,20 @@ const TESTIMONIALS = [
 ];
 
 /** Thank-you page shown after the P-Long lead form is submitted. */
-export default function ThankYouContent() {
+export default function ThankYouContent({
+  phone = DEFAULT_PHONE,
+  trackCallConversion = false,
+}: {
+  phone?: string;
+  trackCallConversion?: boolean;
+} = {}) {
+  const onCallClick = trackCallConversion
+    ? (e: React.MouseEvent<HTMLAnchorElement>) => {
+        e.preventDefault();
+        reportPhoneClickConversion(phone);
+      }
+    : undefined;
+
   return (
     <>
       {/* ═══════════════════════ CONFIRMATION HERO ═══════════════════════ */}
@@ -165,11 +179,12 @@ export default function ThankYouContent() {
               Need to reach us sooner? Call us directly:
             </p>
             <a
-              href={telHref(PHONE)}
+              href={telHref(phone)}
+              onClick={onCallClick}
               className="mt-3 inline-flex items-center gap-2 rounded-full border border-revival-gold/40 px-7 py-3.5 text-sm font-semibold uppercase tracking-[0.12em] text-revival-gold transition-colors hover:bg-revival-gold/10"
             >
               <Phone className="h-4 w-4" />
-              {PHONE}
+              {phone}
             </a>
           </motion.div>
         </div>

@@ -192,3 +192,23 @@ h6 {
   }
 }
 
+/* The P-Long Meta/Google Ads LPs (/lp/p-long, /lp/p-long-gads) render a
+   lg:hidden fixed mobile CTA bar (call button + "Claim Free Consult") along
+   the very bottom edge (see PLongLanding, which flags <body> with this
+   class while mounted). Below that same breakpoint, the accessibility
+   trigger (bottom-left) and the knock-knock chat widget (also enabled on
+   these two LPs, see ChatWidgetLoader) pin themselves to the bottom edge
+   too and end up stacked on top of - hiding - the CTA bar's call button.
+   Lift both clear of it. Scoped to this body class so other pages' mobile
+   views (without that CTA bar) are unaffected. */
+@media (max-width: 1023.98px) {
+  body.rvw-plong-cta-visible .a11y-trigger,
+  body.rvw-plong-cta-visible .a11y-back-top {
+    bottom: calc(clamp(16px, 3vw, 28px) + 4.75rem) !important;
+  }
+
+  body.rvw-plong-cta-visible #kka-chat-widget {
+    bottom: 5.5rem !important;
+  }
+}
+

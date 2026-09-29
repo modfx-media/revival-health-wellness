@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { createPortal } from "react-dom";
 import { useRouter } from "next/navigation";
 import Script from "next/script";
@@ -27,6 +27,11 @@ export default function XerfLeadFormModal({
   onClose: () => void;
 }) {
   const router = useRouter();
+  const [mounted, setMounted] = useState(false);
+
+  useEffect(() => {
+    setMounted(true);
+  }, []);
 
   useEffect(() => {
     if (!open) return;
@@ -70,7 +75,7 @@ export default function XerfLeadFormModal({
     return () => window.removeEventListener("message", onMessage);
   }, [open, onClose, router]);
 
-  if (typeof document === "undefined") return null;
+  if (!mounted) return null;
 
   return createPortal(
     <>

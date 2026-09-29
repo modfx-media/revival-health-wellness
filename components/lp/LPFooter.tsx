@@ -1,5 +1,8 @@
+"use client";
+
 import Link from "next/link";
 import { telHref } from "@/lib/content/clinics";
+import { reportPhoneClickConversion } from "@/lib/adsConversion";
 
 const DEFAULT_LP_PHONE = "+1 725-334-7214";
 
@@ -10,8 +13,10 @@ const DEFAULT_LP_PHONE = "+1 725-334-7214";
  */
 export default function LPFooter({
   phone = DEFAULT_LP_PHONE,
+  trackCallConversion = false,
 }: {
   phone?: string;
+  trackCallConversion?: boolean;
 }) {
   const year = new Date().getFullYear();
 
@@ -22,7 +27,18 @@ export default function LPFooter({
           Revival Health &amp; Wellness
         </p>
         <p>
-          <a href={telHref(phone)} className="hover:text-revival-gold">
+          <a
+            href={telHref(phone)}
+            onClick={
+              trackCallConversion
+                ? (e) => {
+                    e.preventDefault();
+                    reportPhoneClickConversion(phone);
+                  }
+                : undefined
+            }
+            className="hover:text-revival-gold"
+          >
             {phone}
           </a>
         </p>

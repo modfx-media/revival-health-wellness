@@ -1,13 +1,13 @@
 "use client";
 
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { createPortal } from "react-dom";
 import { useRouter } from "next/navigation";
 import Script from "next/script";
 import { X } from "lucide-react";
 
-const FORM_ID = "iPLYY5GXxkGzDUxN8bDa";
-const FORM_NAME = "\uD83D\uDD35 P-long LP( Vercel)  FORM ";
+const DEFAULT_FORM_ID = "iPLYY5GXxkGzDUxN8bDa";
+const DEFAULT_FORM_NAME = "\uD83D\uDD35 P-long LP( Vercel)  FORM ";
 
 /**
  * Popup dialog wrapping the LeadConnector (GoHighLevel) embedded lead
@@ -30,11 +30,22 @@ const FORM_NAME = "\uD83D\uDD35 P-long LP( Vercel)  FORM ";
 export default function LeadFormModal({
   open,
   onClose,
+  thankYouPath = "/lp/p-long/thank-you/",
+  formId = DEFAULT_FORM_ID,
+  formName = DEFAULT_FORM_NAME,
 }: {
   open: boolean;
   onClose: () => void;
+  thankYouPath?: string;
+  formId?: string;
+  formName?: string;
 }) {
   const router = useRouter();
+  const [mounted, setMounted] = useState(false);
+
+  useEffect(() => {
+    setMounted(true);
+  }, []);
 
   useEffect(() => {
     if (!open) return;
@@ -71,14 +82,14 @@ export default function LeadFormModal({
 
       if (isFormEvent && isSuccess) {
         onClose();
-        router.push("/lp/p-long/thank-you/");
+        router.push(thankYouPath);
       }
     };
     window.addEventListener("message", onMessage);
     return () => window.removeEventListener("message", onMessage);
-  }, [open, onClose, router]);
+  }, [open, onClose, router, thankYouPath]);
 
-  if (typeof document === "undefined") return null;
+  if (!mounted) return null;
 
   return createPortal(
     <>
@@ -133,7 +144,7 @@ export default function LeadFormModal({
               style={{ minHeight: 520 }}
             >
               <iframe
-                src={`https://api.leadconnectorhq.com/widget/form/${FORM_ID}`}
+                src={`https://api.leadconnectorhq.com/widget/form/${formId}`}
                 style={{
                   width: "100%",
                   height: "100%",
@@ -142,7 +153,7 @@ export default function LeadFormModal({
                   borderRadius: 12,
                   background: "#fff",
                 }}
-                id={`inline-${FORM_ID}`}
+                id={`inline-${formId}`}
                 data-layout="{'id':'INLINE'}"
                 data-trigger-type="alwaysShow"
                 data-trigger-value=""
@@ -150,11 +161,11 @@ export default function LeadFormModal({
                 data-activation-value=""
                 data-deactivation-type="neverDeactivate"
                 data-deactivation-value=""
-                data-form-name={FORM_NAME}
+                data-form-name={formName}
                 data-height="491"
-                data-layout-iframe-id={`inline-${FORM_ID}`}
-                data-form-id={FORM_ID}
-                title={FORM_NAME}
+                data-layout-iframe-id={`inline-${formId}`}
+                data-form-id={formId}
+                title={formName}
               />
             </div>
           </div>
