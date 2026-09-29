@@ -673,7 +673,7 @@ export default function PLongLanding({
                     className="group absolute inset-0 h-full w-full cursor-pointer"
                   >
                     <Image
-                      src="/images/lp-images/p-long-video-thumbnail.png"
+                      src="/images/lp-images/p-long-video-thumbnail-cropped.png"
                       alt="P-Long protocol at Revival Health & Wellness"
                       fill
                       sizes="(max-width: 1024px) 90vw, 40vw"
