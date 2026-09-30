@@ -96,14 +96,11 @@ export default function PricingSection() {
                   {c.items.map((item) => (
                     <li
                       key={item.name}
-                      className="flex items-center justify-between gap-4 border-b border-white/5 pb-3.5 last:border-0"
+                      className="flex items-center gap-4 border-b border-white/5 pb-3.5 last:border-0"
                     >
                       <span className="flex items-center gap-2.5 text-sm font-light text-revival-cream/85">
                         <Check className="h-4 w-4 shrink-0 text-revival-gold" />
                         {item.name}
-                      </span>
-                      <span className="shrink-0 text-tagline text-[0.7rem] text-revival-gold-light">
-                        {item.price}
                       </span>
                     </li>
                   ))}
