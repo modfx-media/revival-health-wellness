@@ -3,69 +3,19 @@ import { SITE } from "@/lib/metadata";
 import { getAllGeoPages } from "@/lib/locations";
 import { getLiveCities, getLiveAreaPages } from "@/lib/areas";
 import { BLOG_POSTS } from "@/lib/content/blog";
+import {
+  CONTENT_PAGES,
+  LOW_PRIORITY_PAGES,
+  PILLAR_SERVICES,
+  SUB_SERVICES,
+  UTILITY_PAGES,
+} from "@/lib/cms/site-paths";
+import { listPublishedForSitemap } from "@/lib/cms/queries";
+import { withCMS } from "@/lib/cms/safe";
+import { normalizePath } from "@/lib/cms/url";
 
-/** Primary service pillars, priority 0.9. */
-const PILLAR_SERVICES = [
-  "weight-loss",
-  "hormone-therapy",
-  "sexual-wellness",
-  "aesthetics",
-  "iv-hydration",
-  "telehealth",
-];
-
-/** Sub-service / treatment pages, priority 0.8. */
-const SUB_SERVICES = [
-  "aura-3d",
-  "botox",
-  "cherry",
-  "co2-laser-treatments",
-  "derma-filler",
-  "dysport",
-  "emsculpt-neo",
-  "emsella",
-  "emsella-2",
-  "everesse-rf-skin-tightening-and-rejuvenation",
-  "finasteride",
-  "gainswave-tm",
-  "gainswavetm-for-her",
-  "glp-1",
-  "growth-hormone-optimization",
-  "hair",
-  "kybella",
-  "men",
-  "mens-hormone-therapy",
-  "microneedling",
-  "o-shot-tm",
-  "onda-pro",
-  "p-long",
-  "p-shot-tm",
-  "pdo-thread-lifts",
-  "phentermine",
-  "priapus-toxin",
-  "prp-hair-restoration",
-  "scar-camouflage",
-  "sculptra",
-  "skin",
-  "tetra-pro-co2-laser",
-  "trimix",
-  "under-eye-treatment",
-  "viagra",
-  "vitamin-injections",
-  "women",
-  "womens-hormone-therapy",
-  "xeomin",
-  "xerf",
-];
-
-/** Editorial / company pages, priority 0.7. */
-const CONTENT_PAGES = ["about-us", "contact-us", "blogs", "sitemap-page"];
-
-/** Utility pages, priority 0.6. */
-const UTILITY_PAGES = ["quiz"];
-
-/** Low-priority legal pages, priority 0.3. */
-const LOW_PRIORITY_PAGES = ["privacy-policy"];
+/** Blog posts are boosted above general content pages. */
+const BLOG_PRIORITY = 0.85;
 
 function url(path: string): string {
   // Always append a trailing slash so sitemap URLs match the live site and the
@@ -74,8 +24,20 @@ function url(path: string): string {
   return new URL(p, SITE.url).toString();
 }
 
-export default function sitemap(): MetadataRoute.Sitemap {
+export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const now = new Date();
+  const published = await withCMS(() => listPublishedForSitemap(), []);
+  const hidden = new Set(
+    published
+      .filter((doc) => doc.meta?.noIndex || doc.meta?.excludeFromSitemap)
+      .map((doc) => (typeof doc.path === "string" ? normalizePath(doc.path) : ""))
+      .filter(Boolean),
+  );
+  const updatedAt = new Map(
+    published
+      .filter((doc) => typeof doc.path === "string" && doc.updatedAt)
+      .map((doc) => [normalizePath(doc.path as string), new Date(doc.updatedAt as string)]),
+  );
 
   const home: MetadataRoute.Sitemap = [
     {
@@ -110,9 +72,11 @@ export default function sitemap(): MetadataRoute.Sitemap {
   // Include every blog post - all render locally.
   const blogPosts: MetadataRoute.Sitemap = BLOG_POSTS.map((post) => ({
     url: url(`/blogs/${post.slug}/`),
-    lastModified: new Date(post.publishDate ?? post.date),
-    changeFrequency: "monthly",
-    priority: 0.7,
+    lastModified:
+      updatedAt.get(normalizePath(`/blogs/${post.slug}`)) ??
+      new Date(post.publishDate ?? post.date),
+    changeFrequency: "weekly",
+    priority: post.featured ? 0.9 : BLOG_PRIORITY,
   }));
 
   const geo: MetadataRoute.Sitemap = getAllGeoPages().map((page) => ({
@@ -176,5 +140,15 @@ export default function sitemap(): MetadataRoute.Sitemap {
     ...cityServiceLeaves,
     ...utility,
     ...lowPriority,
-  ];
+  ].flatMap((entry) => {
+    let pathname = "";
+    try {
+      pathname = normalizePath(new URL(entry.url).pathname);
+    } catch {
+      return [entry];
+    }
+    if (hidden.has(pathname)) return [];
+    const cmsUpdated = updatedAt.get(pathname);
+    return [cmsUpdated ? { ...entry, lastModified: cmsUpdated } : entry];
+  });
 }
