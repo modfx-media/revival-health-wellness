@@ -1,4 +1,7 @@
 import { cmsPageMetadata } from "@/lib/cms/generateMeta";
+import { mergeBlogPosts } from "@/lib/cms/blog-posts";
+import { listPublishedBlogPosts } from "@/lib/cms/posts";
+import { withCMS } from "@/lib/cms/safe";
 import { buildMetadata } from "@/lib/metadata";
 import { breadcrumbSchema, jsonLd } from "@/lib/schema";
 import PageHero from "@/components/ui/PageHero";
@@ -22,12 +25,18 @@ export async function generateMetadata() {
   return cmsPageMetadata(fallback);
 }
 
-export default function BlogsPage() {
-  const sorted = [...BLOG_POSTS].sort(
+export const revalidate = 60;
+
+export default async function BlogsPage() {
+  const designed = [...BLOG_POSTS].sort(
     (a, b) =>
       new Date(b.publishDate ?? b.date).getTime() -
       new Date(a.publishDate ?? a.date).getTime(),
   );
+  const sorted = await withCMS(async () => {
+    const published = await listPublishedBlogPosts();
+    return mergeBlogPosts(designed, published);
+  }, designed);
 
   const blogCollectionSchema = {
     "@context": "https://schema.org",

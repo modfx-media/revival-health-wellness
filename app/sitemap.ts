@@ -69,7 +69,11 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     priority: 0.7,
   }));
 
-  // Include every blog post - all render locally.
+  const designedBlogPaths = new Set(
+    BLOG_POSTS.map((post) => normalizePath(`/blogs/${post.slug}`)),
+  );
+
+  // Include every designed post, plus published CMS articles that are not in that list.
   const blogPosts: MetadataRoute.Sitemap = BLOG_POSTS.map((post) => ({
     url: url(`/blogs/${post.slug}/`),
     lastModified:
@@ -78,6 +82,17 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     changeFrequency: "weekly",
     priority: post.featured ? 0.9 : BLOG_PRIORITY,
   }));
+
+  const cmsOnlyPosts: MetadataRoute.Sitemap = published
+    .filter((doc) => typeof doc.path === "string")
+    .map((doc) => normalizePath(doc.path as string))
+    .filter((path) => path.startsWith("/blogs/") && !designedBlogPaths.has(path))
+    .map((path) => ({
+      url: url(path),
+      lastModified: updatedAt.get(path) ?? now,
+      changeFrequency: "weekly" as const,
+      priority: BLOG_PRIORITY,
+    }));
 
   const geo: MetadataRoute.Sitemap = getAllGeoPages().map((page) => ({
     url: url(`/${page.slug}/`),
@@ -134,6 +149,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     ...subServices,
     ...content,
     ...blogPosts,
+    ...cmsOnlyPosts,
     ...geo,
     ...areasHub,
     ...cityHubs,

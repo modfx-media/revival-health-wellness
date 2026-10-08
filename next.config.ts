@@ -14,6 +14,11 @@ const nextConfig: NextConfig = {
         pathname: "/wp-content/uploads/**",
       },
       { protocol: "https", hostname: "**.revivalhealthandwellnessgroup.com" },
+      {
+        protocol: "https",
+        hostname: "*.public.blob.vercel-storage.com",
+        pathname: "/**",
+      },
     ],
   },
   outputFileTracingExcludes: {

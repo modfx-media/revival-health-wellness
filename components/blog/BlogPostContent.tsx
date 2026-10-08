@@ -14,9 +14,10 @@ import {
   Copy,
   List,
 } from "lucide-react";
-import { useEffect, useMemo, useState, Fragment } from "react";
+import { useEffect, useMemo, useState, Fragment, type ReactNode } from "react";
 import type { BlogPost } from "@/lib/content/blog";
 import PortraitFrame from "@/components/ui/PortraitFrame";
+import CoverImage from "./CoverImage";
 import RichContent, { extractHeadings } from "./RichContent";
 
 const EASE = [0.22, 1, 0.36, 1] as const;
@@ -59,9 +60,12 @@ function categorySlug(category: BlogPost["category"]) {
 export default function BlogPostContent({
   post,
   related: relatedProp,
+  children,
 }: {
   post: BlogPost;
   related?: BlogPost[];
+  /** Published Lexical body. Rendered with the designed article colors. */
+  children?: ReactNode;
 }) {
   const related = relatedProp ?? [];
 
@@ -215,12 +219,10 @@ export default function BlogPostContent({
             transition={{ duration: 0.9, ease: EASE }}
             className="relative aspect-[16/9] overflow-hidden rounded-[2rem] shadow-[0_30px_80px_-30px_rgba(0,0,0,0.7)] ring-1 ring-revival-gold/20"
           >
-            <Image
+            <CoverImage
               src={post.cover}
               alt={post.title}
-              fill
               sizes="(max-width: 1024px) 100vw, 960px"
-              className="object-cover"
               priority
             />
           </motion.div>
@@ -235,24 +237,28 @@ export default function BlogPostContent({
             {toc.length > 0 && <MobileToc toc={toc} activeId={activeId} />}
 
             {/* Intro - falls back to the excerpt so every post shows real copy. */}
-            <motion.p
-              variants={fadeUp}
-              initial="hidden"
-              whileInView="visible"
-              viewport={{ once: true, margin: "-80px" }}
-              className="text-lg font-light leading-relaxed text-revival-charcoal/85 sm:text-xl"
-            >
-              {post.intro ?? post.excerpt}
-            </motion.p>
+            {(post.intro ?? post.excerpt) ? (
+              <motion.p
+                variants={fadeUp}
+                initial="hidden"
+                whileInView="visible"
+                viewport={{ once: true, margin: "-80px" }}
+                className="text-lg font-light leading-relaxed text-revival-charcoal/85 sm:text-xl"
+              >
+                {post.intro ?? post.excerpt}
+              </motion.p>
+            ) : null}
 
-            {/* Raw-text article body (takes precedence over structured body). */}
-            {post.content ? (
+            {/* CMS rich text, then raw article text, then structured sections. */}
+            {children ? <div className="mt-10">{children}</div> : null}
+
+            {!children && post.content ? (
               <div className="mt-10">
                 <RichContent content={post.content} />
               </div>
             ) : null}
 
-            {!post.content && post.body?.map((section, i) => (
+            {!children && !post.content && post.body?.map((section, i) => (
               <motion.div
                 key={i}
                 variants={fadeUp}
@@ -296,7 +302,7 @@ export default function BlogPostContent({
             ))}
 
             {/* Rich hub card for posts without a full-length local body. */}
-            {!post.content && (!post.body || post.body.length === 0) && (
+            {!children && !post.content && (!post.body || post.body.length === 0) && (
               <motion.div
                 variants={fadeUp}
                 initial="hidden"
@@ -541,10 +547,9 @@ export default function BlogPostContent({
                   className="group overflow-hidden rounded-[1.75rem] border border-revival-gold/15 bg-white shadow-sm transition-all duration-500 hover:-translate-y-1 hover:border-revival-gold/40 hover:shadow-xl"
                 >
                   <div className="relative aspect-[16/10]">
-                    <Image
+                    <CoverImage
                       src={r.cover}
                       alt={r.title}
-                      fill
                       sizes="(max-width: 640px) 100vw, 33vw"
                       className="object-cover transition-transform duration-[900ms] group-hover:scale-105"
                     />

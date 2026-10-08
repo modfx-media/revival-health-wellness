@@ -23,9 +23,16 @@ export type CmsDoc = {
   content?: unknown;
   legacyBody?: string | null;
   coverPath?: string | null;
+  cover?: unknown;
   boosted?: boolean | null;
   featured?: boolean | null;
   searchPriority?: number | null;
+  slug?: string | null;
+  publishDate?: string | null;
+  readMinutes?: number | null;
+  author?: unknown;
+  tags?: { tag?: string | null }[] | null;
+  createdAt?: string;
   updatedAt?: string;
   meta?: CmsMeta | null;
   category?: { title?: string | null } | string | number | null;
@@ -39,8 +46,12 @@ async function draftEnabled(): Promise<boolean> {
   }
 }
 
-async function payload() {
+export async function getCms() {
   return getPayload({ config });
+}
+
+async function payload() {
+  return getCms();
 }
 
 export const queryRoutedContentByPath = cache(async (path: string) => {
@@ -49,7 +60,8 @@ export const queryRoutedContentByPath = cache(async (path: string) => {
   const cms = await payload();
 
   const shared = {
-    depth: 1,
+    // Depth 2 populates the cover upload and images nested in rich text.
+    depth: 2,
     draft,
     overrideAccess: draft,
     limit: 1,
