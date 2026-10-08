@@ -1,11 +1,11 @@
 "use client";
 
 import { useMemo, useState } from "react";
-import Image from "next/image";
 import Link from "next/link";
 import { motion, AnimatePresence } from "framer-motion";
 import { ArrowRight, Clock, Search, Sparkles } from "lucide-react";
 import { CATEGORIES, type BlogPost } from "@/lib/content/blog";
+import CoverImage from "./CoverImage";
 
 const EASE = [0.22, 1, 0.36, 1] as const;
 
@@ -163,10 +163,9 @@ function FeaturedCard({ post }: { post: BlogPost }) {
         className="group relative grid gap-8 overflow-hidden rounded-[2.5rem] border border-revival-gold/20 bg-revival-dark p-6 shadow-2xl transition-transform duration-500 hover:-translate-y-1 sm:p-8 lg:grid-cols-[1.15fr_0.85fr] lg:gap-12 lg:p-10"
       >
         <div className="relative aspect-[16/10] overflow-hidden rounded-[1.75rem] bg-revival-charcoal">
-            <Image
+          <CoverImage
             src={post.cover}
             alt={post.title}
-            fill
             sizes="(max-width: 1024px) 100vw, 55vw"
             className="object-cover transition-transform duration-[900ms] group-hover:scale-105"
             priority
@@ -222,10 +221,9 @@ function PostCard({ post }: { post: BlogPost }) {
     >
       <Link href={`/blogs/${post.slug}/`} className="block">
         <div className="relative aspect-[16/10] overflow-hidden bg-revival-cream">
-          <Image
+          <CoverImage
             src={post.cover}
             alt={post.title}
-            fill
             sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
             className="object-cover transition-transform duration-[900ms] group-hover:scale-105"
           />

@@ -1,5 +1,7 @@
 import type { Metadata } from "next";
 import { cmsPageMetadata } from "@/lib/cms/generateMeta";
+import { loadPublishedBlog } from "@/lib/cms/posts";
+import { withCMS } from "@/lib/cms/safe";
 import { notFound } from "next/navigation";
 import { SITE } from "@/lib/metadata";
 import { breadcrumbSchema, jsonLd } from "@/lib/schema";
@@ -10,29 +12,41 @@ import {
   type BlogPost,
 } from "@/lib/content/blog";
 import BlogPostContent from "@/components/blog/BlogPostContent";
+import { DesignedCmsArticle } from "@/components/cms/DesignedCmsArticle";
 
 const LIVE_ORIGIN = "https://revivalhealthandwellnessgroup.com";
 const LOGO_URL = `${LIVE_ORIGIN}/wp-content/uploads/2025/08/66ce476cca1ded6cc6d21cdc_revival-dark-ver-2@3x-p-1080-3.png`;
 
 type Params = { slug: string };
 
-/** Pre-build a local detail page for every post. */
+/** Pre-build a local detail page for every designed post. */
 export function generateStaticParams(): Params[] {
   return BLOG_POSTS.map((p) => ({ slug: p.slug }));
 }
+
+/** Published CMS slugs that are not in the designed list still render. */
+export const dynamicParams = true;
+export const revalidate = 60;
 
 /** Prefer live-site fields when available, fall back to sensible defaults. */
 function resolvePost(post: BlogPost) {
   const canonical = post.canonical ?? `${LIVE_ORIGIN}/${post.slug}/`;
   const ogImage =
-    post.ogImage ??
-    (post.cover.startsWith("http")
-      ? post.cover
-      : new URL(post.cover, SITE.url).toString());
+    post.ogImage ||
+    (post.cover
+      ? post.cover.startsWith("http")
+        ? post.cover
+        : new URL(post.cover, SITE.url).toString()
+      : `${SITE.url}/images/home/approach-2.jpg`);
   const metaTitle = post.metaTitle ?? post.title;
   const metaDescription = post.metaDescription ?? post.excerpt;
   const publishDate = post.publishDate ?? post.date;
   return { canonical, ogImage, metaTitle, metaDescription, publishDate };
+}
+
+async function publishedOrDesigned(slug: string): Promise<BlogPost | undefined> {
+  const published = await withCMS(() => loadPublishedBlog(slug), null);
+  return published?.post ?? getPostBySlug(slug);
 }
 
 export async function generateMetadata({
@@ -41,8 +55,10 @@ export async function generateMetadata({
   params: Promise<Params>;
 }): Promise<Metadata> {
   const { slug } = await params;
-  const post = getPostBySlug(slug);
-  if (!post) return { title: "Article not found" };
+  const post = await publishedOrDesigned(slug);
+  if (!post) {
+    return { title: "Article not found", robots: { index: false, follow: true } };
+  }
 
   const { canonical, ogImage, metaTitle, metaDescription, publishDate } =
     resolvePost(post);
@@ -81,6 +97,11 @@ export default async function BlogPostPage({
   params: Promise<Params>;
 }) {
   const { slug } = await params;
+  const published = await withCMS(() => loadPublishedBlog(slug), null);
+  if (published) {
+    return <DesignedCmsArticle doc={published.doc} />;
+  }
+
   const post = getPostBySlug(slug);
   if (!post) notFound();
 

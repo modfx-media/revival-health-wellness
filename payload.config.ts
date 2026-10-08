@@ -137,9 +137,12 @@ export default buildConfig({
     vercelBlobStorage({
       enabled: Boolean(process.env.BLOB_READ_WRITE_TOKEN),
       collections: {
-        media: true,
+        // Public blob URLs (not /media). Payload only supports public stores.
+        media: { disablePayloadAccessControl: true },
       },
       token: process.env.BLOB_READ_WRITE_TOKEN,
+      // Browser uploads skip the 4.5MB serverless body limit.
+      clientUploads: true,
     }),
   ],
 });
