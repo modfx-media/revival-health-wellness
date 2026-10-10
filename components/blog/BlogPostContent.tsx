@@ -15,6 +15,7 @@ import {
   List,
 } from "lucide-react";
 import { useEffect, useMemo, useState, Fragment, type ReactNode } from "react";
+import { formatBlogDate } from "@/lib/cms/dates";
 import type { BlogPost } from "@/lib/content/blog";
 import PortraitFrame from "@/components/ui/PortraitFrame";
 import CoverImage from "./CoverImage";
@@ -26,14 +27,6 @@ const fadeUp = {
   hidden: { opacity: 0, y: 24 },
   visible: { opacity: 1, y: 0, transition: { duration: 0.7, ease: EASE } },
 };
-
-function formatDate(iso: string) {
-  return new Date(iso).toLocaleDateString("en-US", {
-    year: "numeric",
-    month: "long",
-    day: "numeric",
-  });
-}
 
 /** URL-safe slug for TOC anchors. */
 function slugifyHeading(text: string): string {
@@ -198,7 +191,7 @@ export default function BlogPostContent({
             <span aria-hidden className="hidden h-6 w-px bg-white/15 sm:block" />
             <span className="inline-flex items-center gap-1.5">
               <Calendar className="h-4 w-4 text-revival-gold" />
-              {formatDate(post.date)}
+              {formatBlogDate(post.date, "long")}
             </span>
             <span aria-hidden className="hidden h-6 w-px bg-white/15 sm:block" />
             <span className="inline-flex items-center gap-1.5">
@@ -559,7 +552,7 @@ export default function BlogPostContent({
                   </div>
                   <div className="p-5">
                     <p className="text-[0.65rem] uppercase tracking-[0.15em] text-revival-charcoal/50">
-                      {formatDate(r.date)} · {r.readMinutes} min
+                      {formatBlogDate(r.date)} · {r.readMinutes} min
                     </p>
                     <h3 className="mt-2 font-heading text-lg leading-tight text-revival-dark">
                       {r.title}

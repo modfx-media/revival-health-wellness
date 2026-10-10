@@ -4,6 +4,7 @@ import { useMemo, useState } from "react";
 import Link from "next/link";
 import { motion, AnimatePresence } from "framer-motion";
 import { ArrowRight, Clock, Search, Sparkles } from "lucide-react";
+import { formatBlogDate } from "@/lib/cms/dates";
 import { CATEGORIES, type BlogPost } from "@/lib/content/blog";
 import CoverImage from "./CoverImage";
 
@@ -20,15 +21,6 @@ const item = {
 };
 
 const ALL_TAB = "All";
-
-function formatDate(iso: string) {
-  const d = new Date(iso);
-  return d.toLocaleDateString("en-US", {
-    year: "numeric",
-    month: "short",
-    day: "numeric",
-  });
-}
 
 export default function BlogsIndex({ posts }: { posts: BlogPost[] }) {
   const [category, setCategory] = useState<string>(ALL_TAB);
@@ -192,7 +184,7 @@ function FeaturedCard({ post }: { post: BlogPost }) {
           </p>
 
           <div className="mt-6 flex flex-wrap items-center gap-4 text-xs text-revival-cream/70">
-            <span>{formatDate(post.date)}</span>
+            <span>{formatBlogDate(post.date)}</span>
             <span aria-hidden className="h-1 w-1 rounded-full bg-revival-gold/60" />
             <span className="inline-flex items-center gap-1.5">
               <Clock className="h-3.5 w-3.5 text-revival-gold" />
@@ -235,7 +227,7 @@ function PostCard({ post }: { post: BlogPost }) {
 
         <div className="p-6">
           <div className="flex items-center gap-3 text-[0.65rem] uppercase tracking-[0.15em] text-revival-charcoal/50">
-            <span>{formatDate(post.date)}</span>
+            <span>{formatBlogDate(post.date)}</span>
             <span aria-hidden className="h-1 w-1 rounded-full bg-revival-gold/60" />
             <span className="inline-flex items-center gap-1">
               <Clock className="h-3 w-3 text-revival-gold" />

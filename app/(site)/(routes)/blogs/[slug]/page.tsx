@@ -1,6 +1,9 @@
 import type { Metadata } from "next";
+import { draftMode } from "next/headers";
 import { cmsPageMetadata } from "@/lib/cms/generateMeta";
-import { loadPublishedBlog } from "@/lib/cms/posts";
+import { mergeBlogPosts } from "@/lib/cms/blog-posts";
+import { blogCalendarDay, isFutureBlogDate } from "@/lib/cms/dates";
+import { loadPublishedBlog, relatedJournalPosts } from "@/lib/cms/posts";
 import { withCMS } from "@/lib/cms/safe";
 import { notFound } from "next/navigation";
 import { SITE } from "@/lib/metadata";
@@ -8,7 +11,6 @@ import { breadcrumbSchema, jsonLd } from "@/lib/schema";
 import {
   BLOG_POSTS,
   getPostBySlug,
-  getRelatedPosts,
   type BlogPost,
 } from "@/lib/content/blog";
 import BlogPostContent from "@/components/blog/BlogPostContent";
@@ -28,25 +30,46 @@ export function generateStaticParams(): Params[] {
 export const dynamicParams = true;
 export const revalidate = 60;
 
-/** Prefer live-site fields when available, fall back to sensible defaults. */
+/** The post's own cover. A missing image stays empty instead of a shared default. */
 function resolvePost(post: BlogPost) {
   const canonical = post.canonical ?? `${LIVE_ORIGIN}/${post.slug}/`;
-  const ogImage =
-    post.ogImage ||
-    (post.cover
-      ? post.cover.startsWith("http")
-        ? post.cover
-        : new URL(post.cover, SITE.url).toString()
-      : `${SITE.url}/images/home/approach-2.jpg`);
+  const ownImage = post.ogImage || post.cover;
+  const ogImage = ownImage
+    ? ownImage.startsWith("http")
+      ? ownImage
+      : new URL(ownImage, SITE.url).toString()
+    : undefined;
   const metaTitle = post.metaTitle ?? post.title;
   const metaDescription = post.metaDescription ?? post.excerpt;
-  const publishDate = post.publishDate ?? post.date;
+  const publishDate =
+    blogCalendarDay(post.publishDate ?? post.date) ?? post.publishDate ?? post.date;
   return { canonical, ogImage, metaTitle, metaDescription, publishDate };
 }
 
+async function drafting(): Promise<boolean> {
+  try {
+    return (await draftMode()).isEnabled;
+  } catch {
+    return false;
+  }
+}
+
+/** CMS fields win on the same slug. A missing CMS cover keeps the designed image. */
 async function publishedOrDesigned(slug: string): Promise<BlogPost | undefined> {
   const published = await withCMS(() => loadPublishedBlog(slug), null);
-  return published?.post ?? getPostBySlug(slug);
+  const designed = getPostBySlug(slug);
+  if (published?.post && designed) {
+    return mergeBlogPosts([designed], [published.post])[0];
+  }
+  return published?.post ?? designed;
+}
+
+async function visiblePost(slug: string): Promise<BlogPost | undefined> {
+  const post = await publishedOrDesigned(slug);
+  if (!post) return undefined;
+  if (await drafting()) return post;
+  if (isFutureBlogDate(post.publishDate ?? post.date)) return undefined;
+  return post;
 }
 
 export async function generateMetadata({
@@ -55,7 +78,7 @@ export async function generateMetadata({
   params: Promise<Params>;
 }): Promise<Metadata> {
   const { slug } = await params;
-  const post = await publishedOrDesigned(slug);
+  const post = await visiblePost(slug);
   if (!post) {
     return { title: "Article not found", robots: { index: false, follow: true } };
   }
@@ -79,13 +102,13 @@ export async function generateMetadata({
       publishedTime: publishDate,
       authors: post.author?.name ? [post.author.name] : undefined,
       tags: post.tags,
-      images: [{ url: ogImage, width: 1200, height: 630 }],
+      ...(ogImage ? { images: [{ url: ogImage, width: 1200, height: 630 }] } : {}),
     },
     twitter: {
       card: "summary_large_image",
       title: fullTitle,
       description: metaDescription,
-      images: [ogImage],
+      ...(ogImage ? { images: [ogImage] } : {}),
       creator: SITE.twitter,
     },
   }, `/blogs/${slug}`);
@@ -97,15 +120,15 @@ export default async function BlogPostPage({
   params: Promise<Params>;
 }) {
   const { slug } = await params;
+  const post = await visiblePost(slug);
+  if (!post) notFound();
+
   const published = await withCMS(() => loadPublishedBlog(slug), null);
   if (published) {
     return <DesignedCmsArticle doc={published.doc} />;
   }
 
-  const post = getPostBySlug(slug);
-  if (!post) notFound();
-
-  const related = getRelatedPosts(slug);
+  const related = await relatedJournalPosts(post);
   const { canonical, ogImage, metaDescription, publishDate } =
     resolvePost(post);
 
@@ -114,7 +137,7 @@ export default async function BlogPostPage({
     "@type": "BlogPosting",
     headline: post.title,
     description: metaDescription,
-    image: ogImage,
+    ...(ogImage ? { image: ogImage } : {}),
     datePublished: publishDate,
     dateModified: publishDate,
     author: {

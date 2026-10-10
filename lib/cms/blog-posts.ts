@@ -1,7 +1,8 @@
 import type { BlogPost } from "@/lib/content/blog";
 import { CATEGORIES } from "@/lib/content/blog";
 
-import { mediaPublicURL } from "./media-url";
+import { blogCalendarDay, isFutureBlogDate } from "./dates";
+import { mediaPublicURL, publicImageSrc } from "./media-url";
 import { absoluteURL, normalizePath } from "./url";
 
 export type CmsBlogSource = {
@@ -118,8 +119,14 @@ function blogSlug(doc: CmsBlogSource): string | null {
 
 function safeCoverPath(coverPath: string | null | undefined): string {
   if (!coverPath) return "";
-  if (coverPath.startsWith("/media/") || coverPath.startsWith("media/")) return "";
-  return coverPath;
+  return publicImageSrc(coverPath);
+}
+
+/** Scheduled publish day only. Edit timestamps are not a publish date. */
+function scheduledPublishDate(value: string | null | undefined): string {
+  if (!value) return "";
+  const trimmed = value.trim();
+  return blogCalendarDay(trimmed) ? trimmed : "";
 }
 
 function readMinutesFor(doc: CmsBlogSource, plain: string): number {
@@ -133,13 +140,14 @@ export function cmsDocToBlogPost(doc: CmsBlogSource): BlogPost | null {
   if (!slug) return null;
 
   const plain = lexicalPlainText(doc.content) || doc.legacyBody || doc.excerpt || "";
-  const date = doc.publishDate || doc.updatedAt || doc.createdAt || new Date().toISOString();
+  const date = scheduledPublishDate(doc.publishDate);
   const excerpt = doc.excerpt || doc.meta?.description || "";
   const title = doc.title || "Journal";
   const headings = lexicalHeadings(doc.content);
   const tags = (doc.tags ?? [])
     .map((entry) => entry?.tag)
     .filter((tag): tag is string => Boolean(tag));
+  const cover = publicImageSrc(mediaPublicURL(doc.cover) || safeCoverPath(doc.coverPath));
 
   return {
     slug,
@@ -149,7 +157,7 @@ export function cmsDocToBlogPost(doc: CmsBlogSource): BlogPost | null {
     date,
     publishDate: date,
     readMinutes: readMinutesFor(doc, plain),
-    cover: mediaPublicURL(doc.cover) || safeCoverPath(doc.coverPath),
+    cover,
     author: authorFrom(doc.author),
     featured: Boolean(doc.featured),
     tags: tags.length ? tags : undefined,
@@ -158,18 +166,21 @@ export function cmsDocToBlogPost(doc: CmsBlogSource): BlogPost | null {
     canonical: absoluteURL(`/blogs/${slug}`),
     metaTitle: doc.meta?.title || undefined,
     metaDescription: doc.meta?.description || undefined,
-    ogImage: mediaPublicURL(doc.cover) || undefined,
+    ogImage: cover || undefined,
   };
 }
 
 function time(post: BlogPost): number {
-  const value = new Date(post.publishDate ?? post.date).getTime();
+  const day = blogCalendarDay(post.publishDate ?? post.date);
+  if (!day) return 0;
+  const value = Date.parse(`${day}T12:00:00.000Z`);
   return Number.isNaN(value) ? 0 : value;
 }
 
 /**
- * Published CMS posts join the designed list. Same slug keeps one card:
- * the published CMS fields win, and a missing CMS cover keeps the designed image.
+ * Published CMS posts join the designed list. Same slug keeps one card.
+ * A real CMS publish date wins. A missing CMS date keeps the designed date.
+ * A missing CMS cover keeps that post's own designed image.
  */
 export function mergeBlogPosts(designed: BlogPost[], cmsPosts: BlogPost[]): BlogPost[] {
   const bySlug = new Map<string, BlogPost>();
@@ -180,10 +191,14 @@ export function mergeBlogPosts(designed: BlogPost[], cmsPosts: BlogPost[]): Blog
       bySlug.set(post.slug, post);
       continue;
     }
+    const cmsDate = scheduledPublishDate(post.publishDate);
     bySlug.set(post.slug, {
       ...existing,
       ...post,
+      date: cmsDate || existing.date,
+      publishDate: cmsDate || existing.publishDate || existing.date,
       cover: post.cover || existing.cover,
+      ogImage: post.ogImage || existing.ogImage || existing.cover,
       author: post.author?.name ? post.author : existing.author,
       featured: Boolean(post.featured || existing.featured),
       content: post.content || existing.content,
@@ -194,4 +209,17 @@ export function mergeBlogPosts(designed: BlogPost[], cmsPosts: BlogPost[]): Blog
     });
   }
   return [...bySlug.values()].sort((a, b) => time(b) - time(a));
+}
+
+/** One card per slug, and nothing scheduled after today in Las Vegas. */
+export function publicBlogPosts(posts: BlogPost[], now = new Date()): BlogPost[] {
+  const seen = new Set<string>();
+  const visible: BlogPost[] = [];
+  for (const post of posts) {
+    if (!post.slug || seen.has(post.slug)) continue;
+    if (isFutureBlogDate(post.publishDate ?? post.date, now)) continue;
+    seen.add(post.slug);
+    visible.push(post);
+  }
+  return visible;
 }
