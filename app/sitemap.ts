@@ -12,6 +12,7 @@ import {
 } from "@/lib/cms/site-paths";
 import { listPublishedForSitemap } from "@/lib/cms/queries";
 import { withCMS } from "@/lib/cms/safe";
+import { blogCalendarDay, isFutureBlogDate } from "@/lib/cms/dates";
 import { normalizePath } from "@/lib/cms/url";
 
 /** Blog posts are boosted above general content pages. */
@@ -69,25 +70,41 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     priority: 0.7,
   }));
 
-  const designedBlogPaths = new Set(
-    BLOG_POSTS.map((post) => normalizePath(`/blogs/${post.slug}`)),
+  const designedByPath = new Map(
+    BLOG_POSTS.map((post) => [normalizePath(`/blogs/${post.slug}`), post]),
   );
+  const cmsPublishDate = new Map<string, string>();
+  for (const doc of published) {
+    const path = typeof doc.path === "string" ? normalizePath(doc.path) : "";
+    const scheduled = blogCalendarDay(doc.publishDate);
+    if (path.startsWith("/blogs/") && scheduled && doc.publishDate) {
+      cmsPublishDate.set(path, doc.publishDate);
+    }
+  }
 
-  // Include every designed post, plus published CMS articles that are not in that list.
-  const blogPosts: MetadataRoute.Sitemap = BLOG_POSTS.map((post) => ({
+  const blogIsListed = (path: string, designedDate?: string) => {
+    const scheduled = cmsPublishDate.get(path) ?? designedDate;
+    return !isFutureBlogDate(scheduled);
+  };
+
+  // One URL per article. A real CMS publish date hides the post until that day.
+  const blogPosts: MetadataRoute.Sitemap = BLOG_POSTS.filter((post) =>
+    blogIsListed(normalizePath(`/blogs/${post.slug}`), post.publishDate ?? post.date),
+  ).map((post) => ({
     url: url(`/blogs/${post.slug}/`),
     lastModified:
       updatedAt.get(normalizePath(`/blogs/${post.slug}`)) ??
       new Date(post.publishDate ?? post.date),
-    changeFrequency: "weekly",
+    changeFrequency: "weekly" as const,
     priority: post.featured ? 0.9 : BLOG_PRIORITY,
   }));
 
-  const cmsOnlyPosts: MetadataRoute.Sitemap = published
-    .filter((doc) => typeof doc.path === "string")
-    .map((doc) => normalizePath(doc.path as string))
-    .filter((path) => path.startsWith("/blogs/") && !designedBlogPaths.has(path))
-    .map((path) => ({
+  const cmsOnlyPosts: MetadataRoute.Sitemap = [...new Set(
+    published
+      .filter((doc) => typeof doc.path === "string")
+      .map((doc) => normalizePath(doc.path as string))
+      .filter((path) => path.startsWith("/blogs/") && !designedByPath.has(path) && blogIsListed(path)),
+  )].map((path) => ({
       url: url(path),
       lastModified: updatedAt.get(path) ?? now,
       changeFrequency: "weekly" as const,

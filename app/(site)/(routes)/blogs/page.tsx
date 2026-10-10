@@ -1,5 +1,6 @@
 import { cmsPageMetadata } from "@/lib/cms/generateMeta";
-import { mergeBlogPosts } from "@/lib/cms/blog-posts";
+import { mergeBlogPosts, publicBlogPosts } from "@/lib/cms/blog-posts";
+import { blogCalendarDay } from "@/lib/cms/dates";
 import { listPublishedBlogPosts } from "@/lib/cms/posts";
 import { withCMS } from "@/lib/cms/safe";
 import { buildMetadata } from "@/lib/metadata";
@@ -33,10 +34,12 @@ export default async function BlogsPage() {
       new Date(b.publishDate ?? b.date).getTime() -
       new Date(a.publishDate ?? a.date).getTime(),
   );
-  const sorted = await withCMS(async () => {
-    const published = await listPublishedBlogPosts();
-    return mergeBlogPosts(designed, published);
-  }, designed);
+  const sorted = publicBlogPosts(
+    await withCMS(async () => {
+      const published = await listPublishedBlogPosts();
+      return mergeBlogPosts(designed, published);
+    }, designed),
+  );
 
   const blogCollectionSchema = {
     "@context": "https://schema.org",
@@ -54,7 +57,7 @@ export default async function BlogsPage() {
       "@type": "BlogPosting",
       headline: p.title,
       url: p.canonical ?? `${LIVE_ORIGIN}/${p.slug}/`,
-      datePublished: p.publishDate ?? p.date,
+      datePublished: blogCalendarDay(p.publishDate ?? p.date) ?? p.publishDate ?? p.date,
       image: p.ogImage ?? p.cover,
     })),
   };

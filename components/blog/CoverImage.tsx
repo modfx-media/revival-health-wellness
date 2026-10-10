@@ -1,5 +1,7 @@
 import Image from "next/image";
 
+import { isLocalMediaURL } from "@/lib/cms/media-url";
+
 export default function CoverImage({
   src,
   alt,
@@ -13,7 +15,7 @@ export default function CoverImage({
   priority?: boolean;
   className?: string;
 }) {
-  if (!src) {
+  if (!src || isLocalMediaURL(src)) {
     return (
       <div
         aria-hidden

@@ -137,6 +137,7 @@ export async function listPublishedForSitemap(): Promise<CmsDoc[]> {
           meta: true,
           updatedAt: true,
           boosted: true,
+          ...(collection === "posts" ? { publishDate: true } : {}),
         },
       });
       docs.push(...(result.docs as CmsDoc[]));

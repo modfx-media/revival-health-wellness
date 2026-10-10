@@ -1,9 +1,10 @@
 import { cache } from "react";
 
-import type { BlogPost } from "@/lib/content/blog";
+import { BLOG_POSTS, type BlogPost } from "@/lib/content/blog";
 
-import { cmsDocToBlogPost, type CmsBlogSource } from "./blog-posts";
+import { cmsDocToBlogPost, mergeBlogPosts, publicBlogPosts, type CmsBlogSource } from "./blog-posts";
 import { getCms, queryRoutedContentByPath, type CmsDoc } from "./queries";
+import { withCMS } from "./safe";
 
 export const listPublishedBlogPosts = cache(async (): Promise<BlogPost[]> => {
   const cms = await getCms();
@@ -32,6 +33,16 @@ export const listPublishedBlogPosts = cache(async (): Promise<BlogPost[]> => {
     .map((doc) => cmsDocToBlogPost(doc as CmsBlogSource))
     .filter((post): post is BlogPost => Boolean(post));
 });
+
+export async function relatedJournalPosts(post: BlogPost, limit = 3): Promise<BlogPost[]> {
+  const cmsPosts = await withCMS(() => listPublishedBlogPosts(), []);
+  const pool = publicBlogPosts(mergeBlogPosts(BLOG_POSTS, cmsPosts)).filter(
+    (item) => item.slug !== post.slug,
+  );
+  const same = pool.filter((item) => item.category === post.category);
+  const rest = pool.filter((item) => item.category !== post.category);
+  return [...same, ...rest].slice(0, limit);
+}
 
 export const loadPublishedBlog = cache(async (slug: string) => {
   const routed = await queryRoutedContentByPath(`/blogs/${slug}`);
