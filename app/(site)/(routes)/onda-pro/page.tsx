@@ -8,6 +8,7 @@ import OndaProLeadForm from "@/components/onda-pro/OndaProLeadForm";
 import OndaProLocations from "@/components/onda-pro/OndaProLocations";
 import OndaProAdHeader from "@/components/onda-pro/OndaProAdHeader";
 import OndaProAdFooter from "@/components/onda-pro/OndaProAdFooter";
+import OndaProMobileCtaBar from "@/components/onda-pro/OndaProMobileCtaBar";
 
 const TITLE = "ONDA Pro Cellulite & Body Contouring in Las Vegas";
 const PATH = "/onda-pro/";
@@ -282,6 +283,7 @@ export default function OndaProLandingPage() {
 
       <OndaProLeadForm />
       <OndaProAdFooter />
+      <OndaProMobileCtaBar />
     </>
   );
 }
