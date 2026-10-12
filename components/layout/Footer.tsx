@@ -108,7 +108,7 @@ export default function Footer() {
 
   // Ads landing pages (/lp/*) render their own minimal footer (see
   // components/lp/LPFooter.tsx) instead of the full site footer.
-  if (pathname?.startsWith("/lp")) return null;
+  if (pathname?.startsWith("/lp") || pathname?.startsWith("/onda-pro")) return null;
 
   return (
     <footer id="site-footer" className="bg-revival-dark text-revival-warm-white">

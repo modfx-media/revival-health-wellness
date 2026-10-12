@@ -1,18 +1,18 @@
 import Image from "next/image";
 import { cmsPageMetadata } from "@/lib/cms/generateMeta";
 import { buildMetadata } from "@/lib/metadata";
-import { serviceSchema, breadcrumbSchema, jsonLd } from "@/lib/schema";
+import { serviceSchema, jsonLd } from "@/lib/schema";
 import PageHero from "@/components/ui/PageHero";
-import CTABanner from "@/components/ui/CTABanner";
 import { OctoProVideoShowcase } from "@/components/templates/OctoProVideoShowcase";
 import OndaProLeadForm from "@/components/onda-pro/OndaProLeadForm";
-import FacebookReels from "@/components/onda-pro/FacebookReels";
 import OndaProLocations from "@/components/onda-pro/OndaProLocations";
+import OndaProAdHeader from "@/components/onda-pro/OndaProAdHeader";
+import OndaProAdFooter from "@/components/onda-pro/OndaProAdFooter";
 
-const TITLE = "ONDA Pro Body Contouring in Las Vegas";
+const TITLE = "ONDA Pro Cellulite & Body Contouring in Las Vegas";
 const PATH = "/onda-pro/";
 const DESCRIPTION =
-  "Meet ONDA Pro at Revival Health & Wellness in Las Vegas. Explore a non-invasive approach to body contouring for the appearance of stubborn fat, loose skin, and cellulite. Book your free consultation.";
+  "Stubborn fat. Loose skin. The appearance of cellulite. Meet ONDA Pro at Revival Health & Wellness in Las Vegas—a non-invasive approach to body contouring. Book your free consultation.";
 
 export async function generateMetadata() {
   const fallback = buildMetadata({
@@ -21,24 +21,35 @@ export async function generateMetadata() {
     path: PATH,
     images: ["/images/octopro-onda/octopro-machine.webp"],
     keywords: [
+      "cellulite treatment Las Vegas",
       "ONDA Pro Las Vegas",
       "body contouring Las Vegas",
       "non-invasive body contouring",
-      "skin tightening Las Vegas",
-      "cellulite treatment Las Vegas",
+      "cellulite and body contouring",
       "Revival Health and Wellness",
     ],
   });
   return cmsPageMetadata(fallback);
 }
 
+function BookAnchor({
+  children,
+  className,
+}: {
+  children: React.ReactNode;
+  className?: string;
+}) {
+  return (
+    <a href="#book" className={className}>
+      {children}
+    </a>
+  );
+}
+
 function OfferBand() {
   return (
     <aside className="relative z-10 border-y border-revival-gold/25 bg-revival-dark">
-      <a
-        href="#book"
-        className="group mx-auto flex max-w-7xl items-center justify-center gap-3 px-4 py-4 text-center sm:px-6 sm:py-5 lg:px-8"
-      >
+      <BookAnchor className="group mx-auto flex max-w-7xl items-center justify-center gap-3 px-4 py-4 text-center sm:px-6 sm:py-5 lg:px-8">
         <span className="text-tagline text-[0.65rem] leading-relaxed text-revival-gold sm:text-xs">
           Limited Time New Patient Offer
         </span>
@@ -49,7 +60,7 @@ function OfferBand() {
         <span className="font-heading text-base text-revival-cream transition-colors group-hover:text-revival-gold sm:text-lg">
           Book Your FREE Consultation
         </span>
-      </a>
+      </BookAnchor>
     </aside>
   );
 }
@@ -71,12 +82,9 @@ function IntroBand() {
           Come meet our team, talk about your goals, and find out whether ONDA
           Pro is right for you.
         </p>
-        <a
-          href="#book"
-          className="mt-10 inline-flex items-center justify-center rounded-full bg-gradient-to-r from-revival-gold to-revival-gold-light px-8 py-4 text-base font-medium text-revival-dark shadow-[0_8px_30px_-8px_rgba(201,169,110,0.6)] transition-transform duration-300 hover:scale-[1.03]"
-        >
+        <BookAnchor className="mt-10 inline-flex items-center justify-center rounded-full bg-gradient-to-r from-revival-gold to-revival-gold-light px-8 py-4 text-base font-medium text-revival-dark shadow-[0_8px_30px_-8px_rgba(201,169,110,0.6)] transition-transform duration-300 hover:scale-[1.03]">
           Book Now
-        </a>
+        </BookAnchor>
       </div>
     </section>
   );
@@ -153,12 +161,9 @@ function ContentBlock({
               </p>
             ))}
           </div>
-          <a
-            href="#book"
-            className="mt-10 inline-flex items-center justify-center rounded-full border border-revival-gold bg-transparent px-7 py-3.5 text-sm font-medium text-revival-dark transition-colors hover:bg-revival-gold/10"
-          >
+          <BookAnchor className="mt-10 inline-flex items-center justify-center rounded-full border border-revival-gold bg-transparent px-7 py-3.5 text-sm font-medium text-revival-dark transition-colors hover:bg-revival-gold/10">
             Book Now
-          </a>
+          </BookAnchor>
         </div>
       </div>
     </section>
@@ -166,9 +171,8 @@ function ContentBlock({
 }
 
 /**
- * Designed ONDA Pro landing UI. Payload CMSRoute in the site layout will
- * replace this with published CMS content when a matching `/onda-pro` page
- * exists; otherwise this page is the public fallback.
+ * Standalone paid-ad landing for ONDA Pro. Site header/footer/nav are
+ * suppressed for this route; only on-page #book anchors remain.
  */
 export default function OndaProLandingPage() {
   return (
@@ -178,46 +182,40 @@ export default function OndaProLandingPage() {
         dangerouslySetInnerHTML={{
           __html: jsonLd([
             serviceSchema({
-              name: "ONDA Pro Body Contouring",
+              name: "ONDA Pro Cellulite & Body Contouring",
               description: DESCRIPTION,
               path: PATH,
             }),
-            breadcrumbSchema([
-              { name: "Home", path: "/" },
-              { name: "Aesthetics", path: "/aesthetics/" },
-              { name: "ONDA Pro", path: PATH },
-            ]),
           ]),
         }}
       />
 
+      <OndaProAdHeader />
+
       <PageHero
-        eyebrow="Aesthetics · Body Contouring"
-        breadcrumbs={[
-          { label: "Home", href: "/" },
-          { label: "Aesthetics", href: "/aesthetics/" },
-          { label: "ONDA Pro" },
-        ]}
+        eyebrow="Cellulite · Body Contouring"
         title={
           <>
-            Las Vegas Ladies—The Next Big Thing in{" "}
+            Stubborn Fat. Loose Skin. The Appearance of{" "}
             <span className="relative inline-block italic text-revival-gold">
-              Body Contouring
+              Cellulite
               <span
                 aria-hidden
                 className="absolute -bottom-2 left-0 h-[3px] w-full bg-gradient-to-r from-revival-gold to-transparent"
               />
-            </span>{" "}
-            Has Arrived.
+            </span>
+            .
           </>
         }
-        description="Meet ONDA Pro at Revival Health & Wellness."
+        description="Las Vegas ladies—the next big thing in body contouring has arrived. Meet ONDA Pro at Revival Health & Wellness."
         gallery={[
           "/images/octopro-onda/octopro-machine.webp",
           "/images/octopro-onda/octopro-onda-1.webp",
           "/images/octopro-onda/octopro-2.jpg",
         ]}
         primary={{ label: "Book Now", href: "#book" }}
+        showTrustBar={false}
+        words={[]}
         compact
       />
 
@@ -263,19 +261,27 @@ export default function OndaProLandingPage() {
       />
 
       <OctoProVideoShowcase />
-      <FacebookReels />
       <OndaProLocations />
 
       <div className="mx-auto max-w-7xl px-4 py-10 sm:px-6 lg:py-14 lg:px-8">
-        <CTABanner
-          title="Click Book Now and take the first step."
-          subtitle="Come meet our team, talk about your goals, and find out whether ONDA Pro is right for you."
-          primaryLabel="Book Now"
-          primaryHref="#book"
-        />
+        <section className="rounded-3xl bg-revival-dark px-8 py-14 text-center text-revival-warm-white md:px-16">
+          <h2 className="mx-auto max-w-2xl font-heading text-3xl md:text-4xl">
+            Click Book Now and take the first step.
+          </h2>
+          <p className="mx-auto mt-4 max-w-xl text-revival-warm-white/80">
+            Come meet our team, talk about your goals, and find out whether ONDA
+            Pro is right for you.
+          </p>
+          <div className="mt-8 flex justify-center">
+            <BookAnchor className="inline-flex items-center justify-center rounded-full bg-gradient-to-r from-revival-gold to-revival-gold-light px-8 py-4 text-lg font-medium text-revival-dark shadow-sm transition-transform hover:scale-[1.03]">
+              Book Now
+            </BookAnchor>
+          </div>
+        </section>
       </div>
 
       <OndaProLeadForm />
+      <OndaProAdFooter />
     </>
   );
 }

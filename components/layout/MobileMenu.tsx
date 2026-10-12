@@ -4,7 +4,6 @@ import { useEffect, useState } from "react";
 import { createPortal } from "react-dom";
 import Link from "next/link";
 import Image from "next/image";
-import { usePathname } from "next/navigation";
 import { motion, AnimatePresence, type Variants } from "framer-motion";
 import { Menu, X, ChevronDown, ExternalLink, CalendarCheck } from "lucide-react";
 import { PRIMARY_NAV, CTA } from "./nav";
@@ -46,9 +45,6 @@ export default function MobileMenu({
   onOpenChange,
   scrolled = false,
 }: MobileMenuProps) {
-  const pathname = usePathname();
-  const bookHref = pathname?.startsWith("/onda-pro") ? "#book" : CTA.href;
-  const bookExternal = !pathname?.startsWith("/onda-pro") && CTA.external;
   const [expanded, setExpanded] = useState<string | null>(null);
   const [mounted, setMounted] = useState(false);
 
@@ -192,10 +188,9 @@ export default function MobileMenu({
                               {/* Persistent Book Appointment CTA inside every dropdown */}
                               <li className="mt-2 pt-2">
                                 <a
-                                  href={bookHref}
-                                  {...(bookExternal
-                                    ? { target: "_blank", rel: "noopener noreferrer" }
-                                    : {})}
+                                  href={CTA.href}
+                                  target="_blank"
+                                  rel="noopener noreferrer"
                                   onClick={close}
                                   className="group flex items-center justify-between gap-2 rounded-xl bg-gradient-to-r from-revival-gold to-revival-gold-light px-3 py-2.5 text-sm font-semibold text-revival-dark shadow-[0_6px_16px_-6px_rgba(201,169,110,0.55)]"
                                 >
@@ -235,10 +230,9 @@ export default function MobileMenu({
 
               {/* CTA */}
               <a
-                href={bookHref}
-                {...(bookExternal
-                  ? { target: "_blank", rel: "noopener noreferrer" }
-                  : {})}
+                href={CTA.href}
+                target="_blank"
+                rel="noopener noreferrer"
                 onClick={close}
                 className="mt-8 inline-flex items-center justify-center rounded-full bg-revival-gold px-6 py-3.5 text-sm font-medium text-revival-dark transition-transform duration-200 hover:scale-105 hover:bg-revival-gold-light"
               >

@@ -1,12 +1,12 @@
 "use client";
 
 import { usePathname } from "next/navigation";
+import { isAdLanding } from "@/lib/isAdLanding";
 import { cn } from "@/lib/utils";
 
 /**
- * Wraps <main>. Ads landing pages (/lp/*) render their own minimal chrome
- * (see components/lp/LPHeader.tsx) instead of the fixed site <Header/>, so
- * they don't need the top padding reserved for it.
+ * Wraps <main>. Ads landing pages render their own minimal chrome instead of
+ * the fixed site <Header/>, so they don't need the top padding reserved for it.
  */
 export default function MainWrapper({
   children,
@@ -14,7 +14,7 @@ export default function MainWrapper({
   children: React.ReactNode;
 }) {
   const pathname = usePathname();
-  const isLandingPage = pathname?.startsWith("/lp");
+  const isLandingPage = isAdLanding(pathname);
 
   return (
     <main

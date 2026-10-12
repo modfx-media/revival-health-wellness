@@ -21,6 +21,7 @@ import {
   type NavLeaf,
 } from "./nav";
 import { useScrollPosition } from "@/lib/useScrollPosition";
+import { isAdLanding } from "@/lib/isAdLanding";
 import MobileMenu from "./MobileMenu";
 import { cn } from "@/lib/utils";
 
@@ -83,9 +84,8 @@ export default function Header() {
       ? pathname === "/"
       : pathname.startsWith(href.replace(/\/$/, ""));
 
-  // Ads landing pages (/lp/*) render their own minimal, distraction-free
-  // chrome (see components/lp/LPHeader.tsx) instead of the full site nav.
-  if (pathname?.startsWith("/lp")) return null;
+  // Ads landing pages render their own minimal chrome instead of site nav.
+  if (isAdLanding(pathname)) return null;
 
   return (
     <header className="fixed inset-x-0 top-0 z-50">
@@ -275,12 +275,10 @@ export default function Header() {
               </a>
 
               <Link
-                href={pathname?.startsWith("/onda-pro") ? "#book" : CTA.href}
-                {...(pathname?.startsWith("/onda-pro")
-                  ? {}
-                  : CTA.external
-                    ? { target: "_blank", rel: "noopener noreferrer" }
-                    : {})}
+                href={CTA.href}
+                {...(CTA.external
+                  ? { target: "_blank", rel: "noopener noreferrer" }
+                  : {})}
                 className="group relative inline-flex items-center gap-1.5 overflow-hidden rounded-full bg-gradient-to-r from-revival-gold to-revival-gold-light px-3.5 py-2 text-[0.65rem] font-semibold uppercase tracking-[0.1em] text-revival-dark shadow-[0_10px_28px_-10px_rgba(201,169,110,0.65)] transition-transform duration-300 hover:scale-[1.03] xl:px-5 xl:py-2.5 xl:text-[0.72rem] xl:tracking-[0.12em]"
               >
                 <span
@@ -549,15 +547,12 @@ function MegaMenu({ item, cols }: { item: NavItem; cols: number }) {
 /* ── Persistent "Book Appointment" CTA appended to every dropdown ─────── */
 
 function DropdownBookCta() {
-  const pathname = usePathname();
-  const onOndaPro = pathname?.startsWith("/onda-pro");
   return (
     <div className="mt-3 border-t border-revival-gold/15 pt-3">
       <a
-        href={onOndaPro ? "#book" : CTA.href}
-        {...(onOndaPro
-          ? {}
-          : { target: "_blank", rel: "noopener noreferrer" })}
+        href={CTA.href}
+        target="_blank"
+        rel="noopener noreferrer"
         className="group flex items-center justify-between gap-3 rounded-xl bg-gradient-to-r from-revival-gold to-revival-gold-light px-3.5 py-2.5 text-sm font-semibold text-revival-dark shadow-[0_6px_20px_-6px_rgba(201,169,110,0.6)] transition-transform hover:scale-[1.01]"
       >
         <span className="flex items-center gap-2">

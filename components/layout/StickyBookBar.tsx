@@ -46,9 +46,9 @@ export default function StickyBookBar() {
     };
   }, [visible, overFooter, dismissed]);
 
-  // Ads landing pages (/lp/*) have their own dedicated CTA/form - don't
-  // stack the site-wide booking bar on top of it.
-  if (dismissed || pathname?.startsWith("/lp")) return null;
+  // Ads landing pages have their own dedicated CTA/form - don't stack this bar.
+  if (dismissed || pathname?.startsWith("/lp") || pathname?.startsWith("/onda-pro"))
+    return null;
 
   return (
     <AnimatePresence>
@@ -86,10 +86,9 @@ export default function StickyBookBar() {
             </a>
 
             <a
-              href={pathname?.startsWith("/onda-pro") ? "#book" : CTA.href}
-              {...(pathname?.startsWith("/onda-pro")
-                ? {}
-                : { target: "_blank", rel: "noopener noreferrer" })}
+              href={CTA.href}
+              target="_blank"
+              rel="noopener noreferrer"
               className="group relative inline-flex h-11 items-center gap-2 overflow-hidden rounded-full bg-gradient-to-r from-revival-gold to-revival-gold-light px-4 text-sm font-semibold text-revival-dark shadow-[0_8px_24px_-8px_rgba(201,169,110,0.7)] transition-transform hover:scale-[1.03] sm:px-5"
             >
               <span

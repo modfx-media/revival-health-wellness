@@ -1,29 +1,15 @@
-import { MapPin, Navigation } from "lucide-react";
-import { CLINICS } from "@/lib/content/clinics";
-
-/** Client-provided display addresses for the ONDA Pro landing page. */
-const DISPLAY = [
-  {
-    label: "Southwest",
-    address: "7220 S. Cimarron Rd., Suite 140, Las Vegas, NV 89113",
-    match: "Southwest",
-  },
-  {
-    label: "Northwest",
-    address: "2585 Box Canyon Dr., Suite 150, Las Vegas, NV 89128",
-    match: "Northwest",
-  },
-] as const;
-
+/** Plain-text clinic addresses — no map or outbound links (ad LP). */
 export default function OndaProLocations() {
-  const locations = DISPLAY.map((d) => {
-    const clinic = CLINICS.find((c) => c.name.includes(d.match));
-    return {
-      ...d,
-      mapHref: clinic?.mapHref ?? "#",
-      phone: clinic?.phones[0],
-    };
-  });
+  const locations = [
+    {
+      label: "Southwest",
+      address: "7220 S. Cimarron Rd., Suite 140, Las Vegas, NV 89113",
+    },
+    {
+      label: "Northwest",
+      address: "2585 Box Canyon Dr., Suite 150, Las Vegas, NV 89128",
+    },
+  ] as const;
 
   return (
     <section className="relative overflow-hidden bg-revival-warm-white py-14 sm:py-20 lg:py-28">
@@ -57,26 +43,9 @@ export default function OndaProLocations() {
               <h3 className="mt-2 font-heading text-xl text-revival-dark sm:text-2xl">
                 Revival Health &amp; Wellness
               </h3>
-              <a
-                href={loc.mapHref}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="mt-4 inline-flex items-start gap-2 text-sm font-light leading-relaxed text-revival-charcoal/80 transition-colors hover:text-revival-gold"
-              >
-                <MapPin className="mt-0.5 h-4 w-4 shrink-0 text-revival-gold" />
+              <p className="mt-4 text-sm font-light leading-relaxed text-revival-charcoal/80">
                 {loc.address}
-              </a>
-              <div className="mt-6">
-                <a
-                  href={loc.mapHref}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="inline-flex items-center gap-2 rounded-full border border-revival-gold/35 bg-revival-cream/60 px-5 py-2.5 text-sm font-medium text-revival-dark transition-colors hover:border-revival-gold hover:bg-revival-gold/10"
-                >
-                  <Navigation className="h-4 w-4 text-revival-gold" />
-                  Open in Maps
-                </a>
-              </div>
+              </p>
             </article>
           ))}
         </div>
