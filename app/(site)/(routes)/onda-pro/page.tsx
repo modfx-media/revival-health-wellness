@@ -1,106 +1,100 @@
-import { cmsPageMetadata } from "@/lib/cms/generateMeta";
 import Image from "next/image";
+import { cmsPageMetadata } from "@/lib/cms/generateMeta";
 import { buildMetadata } from "@/lib/metadata";
-import {
-  serviceSchema,
-  breadcrumbSchema,
-  faqSchema,
-  jsonLd,
-} from "@/lib/schema";
+import { serviceSchema, jsonLd } from "@/lib/schema";
 import PageHero from "@/components/ui/PageHero";
-import CTABanner from "@/components/ui/CTABanner";
-import {
-  PillarsGrid,
-  FAQSection,
-  RelatedServices,
-} from "@/components/templates/HormoneSections";
 import { OctoProVideoShowcase } from "@/components/templates/OctoProVideoShowcase";
+import OndaProLeadForm from "@/components/onda-pro/OndaProLeadForm";
+import OndaProLocations from "@/components/onda-pro/OndaProLocations";
+import OndaProAdHeader from "@/components/onda-pro/OndaProAdHeader";
+import OndaProAdFooter from "@/components/onda-pro/OndaProAdFooter";
+import OndaProMobileCtaBar from "@/components/onda-pro/OndaProMobileCtaBar";
 
-const TITLE = "ONDA Pro Body Contouring";
+const TITLE = "ONDA Pro Cellulite & Body Contouring in Las Vegas";
 const PATH = "/onda-pro/";
 const DESCRIPTION =
-  "Non-invasive body contouring with the ONDA Pro system in Las Vegas. Revival Health and Wellness uses microwave-based Coolwaves technology to reduce fat, tighten skin, and smooth cellulite.";
+  "Stubborn fat. Loose skin. The appearance of cellulite. Meet ONDA Pro at Revival Health & Wellness in Las Vegas—a non-invasive approach to body contouring. Book your free consultation.";
 
 export async function generateMetadata() {
   const fallback = buildMetadata({
-  title: TITLE,
-  description: DESCRIPTION,
-  path: PATH,
-  images: ["/images/octopro-onda/octopro-machine.webp"],
-});
+    title: TITLE,
+    description: DESCRIPTION,
+    path: PATH,
+    images: ["/images/octopro-onda/octopro-machine.webp"],
+    keywords: [
+      "cellulite treatment Las Vegas",
+      "ONDA Pro Las Vegas",
+      "body contouring Las Vegas",
+      "non-invasive body contouring",
+      "cellulite and body contouring",
+      "Revival Health and Wellness",
+    ],
+  });
   return cmsPageMetadata(fallback);
 }
 
-const KEY_BENEFITS = [
-  "Non-invasive fat reduction on abdomen, love handles, thighs, arms",
-  "Simultaneous skin tightening in the treated area",
-  "Visible cellulite improvement",
-  "No incisions, no needles, no anesthesia",
-  "Zero downtime - return to normal activity immediately",
-  "Comfortable, well-tolerated sessions",
-];
+function BookAnchor({
+  children,
+  className,
+}: {
+  children: React.ReactNode;
+  className?: string;
+}) {
+  return (
+    <a href="#book" className={className}>
+      {children}
+    </a>
+  );
+}
 
-const TREATMENT_AREAS = [
-  {
-    title: "Abdomen & Flanks",
-    text: "The most-requested zone - target stubborn belly fat and love handles that resist diet and exercise. ONDA Pro’s Coolwaves reach subcutaneous adipose tissue while protecting the skin.",
-    icon: "target" as const,
-  },
-  {
-    title: "Thighs & Buttocks",
-    text: "Smooth cellulite, reduce localized fat, and tighten the overlying skin - a combination few devices deliver in one session.",
-    icon: "sparkles" as const,
-  },
-  {
-    title: "Arms & Bra Line",
-    text: "Refine the upper arms and bra-line area with the same technology, calibrated for smaller, more delicate treatment zones.",
-    icon: "timer" as const,
-  },
-];
+function OfferBand() {
+  return (
+    <aside className="relative z-10 border-y border-revival-gold/25 bg-revival-dark">
+      <BookAnchor className="group mx-auto flex max-w-7xl items-center justify-center gap-3 px-4 py-4 text-center sm:px-6 sm:py-5 lg:px-8">
+        <span className="text-tagline text-[0.65rem] leading-relaxed text-revival-gold sm:text-xs">
+          Limited Time New Patient Offer
+        </span>
+        <span
+          aria-hidden
+          className="hidden h-4 w-px bg-revival-gold/35 sm:block"
+        />
+        <span className="font-heading text-base text-revival-cream transition-colors group-hover:text-revival-gold sm:text-lg">
+          Book Your FREE Consultation
+        </span>
+      </BookAnchor>
+    </aside>
+  );
+}
 
-const FAQS = [
-  {
-    question: "What is ONDA Pro?",
-    answer:
-      "ONDA Pro is a non-invasive body-contouring device by DEKA that uses Coolwaves - a proprietary microwave technology - to selectively heat subcutaneous fat cells while protecting the surface of the skin. In the same treatment, the residual thermal action stimulates dermal remodeling for skin tightening and cellulite improvement.",
-  },
-  {
-    question: "What can ONDA Pro treat?",
-    answer:
-      "ONDA Pro is cleared for localized fat reduction, skin laxity, and cellulite - across the abdomen, flanks, thighs, buttocks, arms, and bra-line area. It’s particularly well-suited to patients seeking a non-surgical alternative to liposuction who also want a mild skin-tightening benefit.",
-  },
-  {
-    question: "How many sessions will I need?",
-    answer:
-      "Most patients see meaningful results after a series of 3–4 sessions spaced 2–4 weeks apart. Your provider will build a personalized protocol during your consultation based on your goals and the treatment area.",
-  },
-  {
-    question: "What does a session feel like?",
-    answer:
-      "Sessions are comfortable - you’ll feel a warm, massage-like sensation as the handpiece is moved across the treatment area. There’s no numbing required and no post-treatment soreness. Sessions typically run 20–40 minutes depending on the area.",
-  },
-  {
-    question: "Is there downtime?",
-    answer:
-      "None. You may see mild pinkness in the treated area for a few hours, but you can return to work, exercise, and normal activities immediately.",
-  },
-  {
-    question: "When will I see results?",
-    answer:
-      "Initial changes are visible within a few weeks. Optimal results build gradually over 3–6 months as the body naturally metabolizes the treated fat cells and new collagen forms.",
-  },
-];
+function IntroBand() {
+  return (
+    <section className="relative overflow-hidden bg-revival-cream py-12 sm:py-16 lg:py-20">
+      <div className="relative mx-auto max-w-3xl px-4 text-center sm:px-6 lg:px-8">
+        <p className="text-lg font-light leading-relaxed text-revival-charcoal/90 sm:text-xl sm:leading-[1.65]">
+          Stubborn fat. Loose skin. The appearance of cellulite. Different
+          concerns—and a treatment designed to address them together.
+        </p>
+        <p className="mt-6 text-base font-light leading-relaxed text-revival-charcoal/80 sm:text-lg">
+          ONDA Pro offers a non-invasive approach to body contouring, so
+          exploring smoother-looking skin doesn&apos;t have to start with
+          surgery.
+        </p>
+        <p className="mt-6 text-base font-light leading-relaxed text-revival-charcoal/80 sm:text-lg">
+          Come meet our team, talk about your goals, and find out whether ONDA
+          Pro is right for you.
+        </p>
+        <BookAnchor className="mt-10 inline-flex items-center justify-center rounded-full bg-gradient-to-r from-revival-gold to-revival-gold-light px-8 py-4 text-base font-medium text-revival-dark shadow-[0_8px_30px_-8px_rgba(201,169,110,0.6)] transition-transform duration-300 hover:scale-[1.03]">
+          Book Now
+        </BookAnchor>
+      </div>
+    </section>
+  );
+}
 
-/**
- * Full-bleed uncropped image block - two-column layout that renders the source
- * image at its native aspect ratio via `object-contain`, so device shots and
- * treatment photos display in full without any cropping.
- */
-function FullImageBlock({
+function ContentBlock({
   eyebrow,
   heading,
   paragraphs,
-  bullets,
   image,
   imageAlt,
   imageWidth,
@@ -111,7 +105,6 @@ function FullImageBlock({
   eyebrow: string;
   heading: string;
   paragraphs: string[];
-  bullets?: string[];
   image: string;
   imageAlt: string;
   imageWidth: number;
@@ -169,173 +162,128 @@ function FullImageBlock({
               </p>
             ))}
           </div>
-          {bullets && bullets.length > 0 && (
-            <ul className="mt-10 grid gap-3 sm:grid-cols-2">
-              {bullets.map((b, i) => (
-                <li
-                  key={b}
-                  className="flex items-start gap-3 text-sm text-revival-charcoal/80 sm:text-[0.95rem]"
-                >
-                  <span
-                    aria-hidden
-                    className="mt-1 font-heading text-xs italic text-revival-gold"
-                  >
-                    {String(i + 1).padStart(2, "0")}
-                  </span>
-                  <span>{b}</span>
-                </li>
-              ))}
-            </ul>
-          )}
+          <BookAnchor className="mt-10 inline-flex items-center justify-center rounded-full border border-revival-gold bg-transparent px-7 py-3.5 text-sm font-medium text-revival-dark transition-colors hover:bg-revival-gold/10">
+            Book Now
+          </BookAnchor>
         </div>
       </div>
     </section>
   );
 }
 
-export default function OctoProOndaPage() {
+/**
+ * Standalone paid-ad landing for ONDA Pro. Site header/footer/nav are
+ * suppressed for this route; only on-page #book anchors remain.
+ */
+export default function OndaProLandingPage() {
   return (
     <>
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{
           __html: jsonLd([
-            serviceSchema({ name: TITLE, description: DESCRIPTION, path: PATH }),
-            breadcrumbSchema([
-              { name: "Home", path: "/" },
-              { name: "Aesthetics", path: "/aesthetics/" },
-              { name: "ONDA Pro", path: PATH },
-            ]),
-            faqSchema(FAQS),
+            serviceSchema({
+              name: "ONDA Pro Cellulite & Body Contouring",
+              description: DESCRIPTION,
+              path: PATH,
+            }),
           ]),
         }}
       />
 
+      <OndaProAdHeader />
+
       <PageHero
-        eyebrow={"Aesthetics · Body Contouring"}
-        breadcrumbs={[
-          { label: "Home", href: "/" },
-          { label: "Aesthetics", href: "/aesthetics/" },
-          { label: "ONDA Pro" },
-        ]}
+        eyebrow="Cellulite · Body Contouring"
         title={
           <>
+            Stubborn Fat. Loose Skin. The Appearance of{" "}
             <span className="relative inline-block italic text-revival-gold">
-              ONDA
+              Cellulite
               <span
                 aria-hidden
                 className="absolute -bottom-2 left-0 h-[3px] w-full bg-gradient-to-r from-revival-gold to-transparent"
               />
-            </span>{" "}
-            Pro
+            </span>
+            .
           </>
         }
-        description="Non-invasive fat reduction, skin tightening, and cellulite improvement - in one treatment. Powered by DEKA’s proprietary Coolwaves microwave technology."
+        description="Las Vegas ladies—the next big thing in body contouring has arrived. Meet ONDA Pro at Revival Health & Wellness."
         gallery={[
           "/images/octopro-onda/octopro-machine.webp",
           "/images/octopro-onda/octopro-onda-1.webp",
           "/images/octopro-onda/octopro-2.jpg",
         ]}
+        primary={{ label: "Book Now", href: "#book" }}
+        showTrustBar={false}
+        words={[]}
         compact
       />
 
-      <FullImageBlock
-        eyebrow="Introducing the ONDA Pro Platform"
-        heading="Fat reduction. Skin tightening. Cellulite smoothing. In one session."
-        paragraphs={[
-          "ONDA Pro is DEKA’s next-generation body-contouring platform, now available at Revival Health and Wellness. Using proprietary Coolwaves technology, it selectively heats subcutaneous adipose tissue while protecting the surface of the skin - a combination that’s difficult to achieve with laser or radiofrequency alone.",
-          "The result: measurable reduction in localized fat, visible skin tightening, and improvement in the appearance of cellulite - without incisions, anesthesia, or downtime.",
-        ]}
-        image="/images/octopro-onda/octopro-machine.webp"
-        imageAlt="ONDA Pro body contouring device"
-        imageWidth={3840}
-        imageHeight={5760}
-      />
+      <OfferBand />
+      <IntroBand />
 
-      <FullImageBlock
-        tone="cream"
-        reverse
-        eyebrow="How ONDA Pro Works"
-        heading="Coolwaves - microwave energy, precisely delivered"
+      <ContentBlock
+        eyebrow="Under the Chin"
+        heading="A more defined profile doesn’t have to begin with surgery"
         paragraphs={[
-          "ONDA Pro delivers 2.45 GHz microwave energy through a proprietary handpiece designed to preferentially target adipose tissue. Fat cells absorb the energy and undergo apoptosis (natural cell death); the body then clears them through normal metabolic processes over the following weeks.",
-          "Because the same thermal action gently heats the dermis, patients also see collagen remodeling in the treated area - which is why ONDA Pro tightens skin and improves cellulite in the same session it reduces fat.",
+          "For women interested in the appearance of the area beneath the chin, the next step starts with a conversation—not a commitment. Our team will assess your goals and explain whether ONDA Pro is a suitable option. You deserve clear answers before choosing a treatment.",
         ]}
         image="/images/octopro-onda/octopro-onda-1.webp"
-        imageAlt="ONDA Pro treatment in progress"
+        imageAlt="ONDA Pro treatment for the area beneath the chin"
         imageWidth={2706}
         imageHeight={3607}
       />
 
-      <FullImageBlock
-        eyebrow="Key Benefits"
-        heading="Everything ONDA Pro delivers in one platform"
+      <ContentBlock
+        tone="cream"
+        reverse
+        eyebrow="Targeted Contouring"
+        heading="Body contouring should have a target. And a plan."
         paragraphs={[
-          "One versatile handpiece system, calibrated to each treatment zone - abdomen, love handles, thighs, buttocks, arms, and bra-line. Every session is comfortable, quick, and downtime-free.",
+          "For women near their goal weight who want to explore targeted contouring, the right treatment starts with understanding the specific area—not promising a number on a measuring tape. Our team will assess your goals and explain whether ONDA Pro is a suitable choice for your upper arms or other treatment areas. Make your next step an informed one.",
         ]}
-        bullets={KEY_BENEFITS}
         image="/images/octopro-onda/octopro-2.jpg"
-        imageAlt="ONDA Pro treatment session"
+        imageAlt="ONDA Pro targeted body contouring"
         imageWidth={650}
         imageHeight={530}
       />
 
-      <PillarsGrid
-        tone="cream"
-        eyebrow="Where ONDA Pro Treats"
-        heading="One device. Multiple body zones."
-        intro="The ONDA Pro handpiece adjusts to the treatment area, letting your provider address stubborn fat across a wide range of body zones."
-        pillars={TREATMENT_AREAS}
+      <ContentBlock
+        eyebrow="Skin Tightening"
+        heading="Put non-surgical skin tightening on your radar"
+        paragraphs={[
+          "For women exploring treatment for the appearance of loose upper-arm skin, ONDA Pro offers a non-invasive option worth discussing. Come tell us what you’d like to address. Our team will assess the area, explain what treatment involves, and help set realistic expectations. Your goals deserve more than a one-size-fits-all recommendation.",
+        ]}
+        image="/images/octopro-onda/octopro-4.jpeg"
+        imageAlt="ONDA Pro non-surgical skin tightening"
+        imageWidth={452}
+        imageHeight={678}
       />
 
       <OctoProVideoShowcase />
-
-      <FullImageBlock
-        eyebrow="Who is a good candidate?"
-        heading="For patients seeking a non-surgical alternative to liposuction"
-        paragraphs={[
-          "ONDA Pro is ideal for patients close to their goal weight who want to address localized pockets of stubborn fat, mild-to-moderate skin laxity, or cellulite - without the recovery of surgical liposuction.",
-          "During your complimentary consultation, our medical team will assess your goals, review your health history, and design a customized ONDA Pro protocol - or recommend the best combination of body-contouring options across our platform.",
-          "For patients seeking maximum transformation, our providers often layer ONDA Pro with Emsculpt NEO (to build muscle in the treated area) and Everesse RF (for deeper skin tightening). We’ll design the right combination for your goals.",
-        ]}
-        image="/images/octopro-onda/octopro-4.jpeg"
-        imageAlt="ONDA Pro non-surgical body contouring candidate"
-        imageWidth={452}
-        imageHeight={678}
-        reverse
-      />
-
-      <FAQSection faqs={FAQS} />
-
-      <RelatedServices
-        items={[
-          {
-            label: "Emsculpt NEO",
-            href: "/emsculpt-neo/",
-            blurb:
-              "Build muscle and burn fat with HIFEM + RF - the perfect complement to ONDA Pro’s fat-reduction focus.",
-          },
-          {
-            label: "Everesse RF Skin Tightening",
-            href: "/everesse-rf-skin-tightening-and-rejuvenation/",
-            blurb:
-              "Deeper monopolar RF tightening for the same treatment areas - layer for compound results.",
-          },
-          {
-            label: "Weight Loss Program",
-            href: "/weight-loss/",
-            blurb:
-              "Medical weight-loss (GLP-1s, phentermine, coaching) that pairs beautifully with body contouring.",
-          },
-        ]}
-      />
+      <OndaProLocations />
 
       <div className="mx-auto max-w-7xl px-4 py-10 sm:px-6 lg:py-14 lg:px-8">
-        <CTABanner
-          title="Reduce fat. Tighten skin. Smooth cellulite. Without surgery."
-          subtitle="Book a complimentary ONDA Pro consultation. Our medical team will assess your goals and design a personalized protocol."
-        />
+        <section className="rounded-3xl bg-revival-dark px-8 py-14 text-center text-revival-warm-white md:px-16">
+          <h2 className="mx-auto max-w-2xl font-heading text-3xl md:text-4xl">
+            Click Book Now and take the first step.
+          </h2>
+          <p className="mx-auto mt-4 max-w-xl text-revival-warm-white/80">
+            Come meet our team, talk about your goals, and find out whether ONDA
+            Pro is right for you.
+          </p>
+          <div className="mt-8 flex justify-center">
+            <BookAnchor className="inline-flex items-center justify-center rounded-full bg-gradient-to-r from-revival-gold to-revival-gold-light px-8 py-4 text-lg font-medium text-revival-dark shadow-sm transition-transform hover:scale-[1.03]">
+              Book Now
+            </BookAnchor>
+          </div>
+        </section>
       </div>
+
+      <OndaProLeadForm />
+      <OndaProAdFooter />
+      <OndaProMobileCtaBar />
     </>
   );
 }

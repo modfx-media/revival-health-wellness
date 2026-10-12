@@ -90,7 +90,6 @@ export const PRIMARY_NAV: NavItem[] = [
         href: "/skin/",
         children: [
           { label: "Skin Overview", href: "/skin/" },
-          { label: "ONDA Pro Cellulite Removal", href: "/onda-pro/" },
           {
             label: "Everesse RF Skin Tightening",
             href: "/everesse-rf-skin-tightening-and-rejuvenation/",
