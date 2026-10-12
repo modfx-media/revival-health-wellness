@@ -15,6 +15,8 @@ import { withCMS } from "@/lib/cms/safe";
 import { blogCalendarDay, isFutureBlogDate } from "@/lib/cms/dates";
 import { normalizePath } from "@/lib/cms/url";
 
+
+export const revalidate = 300;
 /** Blog posts are boosted above general content pages. */
 const BLOG_PRIORITY = 0.85;
 

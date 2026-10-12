@@ -23,6 +23,8 @@ import CTABanner from "@/components/ui/CTABanner";
 import { CLINICS } from "@/lib/content/clinics";
 import { getLiveCities, getLiveServices, areaPath } from "@/lib/areas";
 
+
+export const revalidate = 300;
 const TITLE = "Sitemap";
 const PATH = "/sitemap-page/";
 const DESCRIPTION =
