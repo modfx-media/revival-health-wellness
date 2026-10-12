@@ -275,10 +275,12 @@ export default function Header() {
               </a>
 
               <Link
-                href={CTA.href}
-                {...(CTA.external
-                  ? { target: "_blank", rel: "noopener noreferrer" }
-                  : {})}
+                href={pathname?.startsWith("/onda-pro") ? "#book" : CTA.href}
+                {...(pathname?.startsWith("/onda-pro")
+                  ? {}
+                  : CTA.external
+                    ? { target: "_blank", rel: "noopener noreferrer" }
+                    : {})}
                 className="group relative inline-flex items-center gap-1.5 overflow-hidden rounded-full bg-gradient-to-r from-revival-gold to-revival-gold-light px-3.5 py-2 text-[0.65rem] font-semibold uppercase tracking-[0.1em] text-revival-dark shadow-[0_10px_28px_-10px_rgba(201,169,110,0.65)] transition-transform duration-300 hover:scale-[1.03] xl:px-5 xl:py-2.5 xl:text-[0.72rem] xl:tracking-[0.12em]"
               >
                 <span

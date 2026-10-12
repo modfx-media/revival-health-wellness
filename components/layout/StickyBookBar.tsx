@@ -86,9 +86,10 @@ export default function StickyBookBar() {
             </a>
 
             <a
-              href={CTA.href}
-              target="_blank"
-              rel="noopener noreferrer"
+              href={pathname?.startsWith("/onda-pro") ? "#book" : CTA.href}
+              {...(pathname?.startsWith("/onda-pro")
+                ? {}
+                : { target: "_blank", rel: "noopener noreferrer" })}
               className="group relative inline-flex h-11 items-center gap-2 overflow-hidden rounded-full bg-gradient-to-r from-revival-gold to-revival-gold-light px-4 text-sm font-semibold text-revival-dark shadow-[0_8px_24px_-8px_rgba(201,169,110,0.7)] transition-transform hover:scale-[1.03] sm:px-5"
             >
               <span
