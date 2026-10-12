@@ -549,12 +549,15 @@ function MegaMenu({ item, cols }: { item: NavItem; cols: number }) {
 /* ── Persistent "Book Appointment" CTA appended to every dropdown ─────── */
 
 function DropdownBookCta() {
+  const pathname = usePathname();
+  const onOndaPro = pathname?.startsWith("/onda-pro");
   return (
     <div className="mt-3 border-t border-revival-gold/15 pt-3">
       <a
-        href={CTA.href}
-        target="_blank"
-        rel="noopener noreferrer"
+        href={onOndaPro ? "#book" : CTA.href}
+        {...(onOndaPro
+          ? {}
+          : { target: "_blank", rel: "noopener noreferrer" })}
         className="group flex items-center justify-between gap-3 rounded-xl bg-gradient-to-r from-revival-gold to-revival-gold-light px-3.5 py-2.5 text-sm font-semibold text-revival-dark shadow-[0_6px_20px_-6px_rgba(201,169,110,0.6)] transition-transform hover:scale-[1.01]"
       >
         <span className="flex items-center gap-2">
