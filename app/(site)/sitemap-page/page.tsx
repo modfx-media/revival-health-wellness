@@ -157,6 +157,7 @@ const BODY_SKIN: SitemapGroup = {
   links: [
     { label: "Skin Overview", href: "/skin/" },
     { label: "Emsculpt NEO", href: "/emsculpt-neo/" },
+    { label: "ONDA Pro", href: "/onda-pro/" },
     {
       label: "Everesse RF Skin Tightening",
       href: "/everesse-rf-skin-tightening-and-rejuvenation/",

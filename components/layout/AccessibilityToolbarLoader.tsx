@@ -1,21 +1,18 @@
 "use client";
 
 import { useEffect } from "react";
-import { usePathname } from "next/navigation";
 
 /**
  * Lazy-loads the vanilla accessibility toolbar (public/accessibility/*)
  * after the page has finished its initial paint. The toolbar renders its
  * own DOM, so this component intentionally returns null.
- * Skipped on /onda-pro ad LP (no off-page or chrome links).
  */
 export default function AccessibilityToolbarLoader() {
-  const pathname = usePathname();
-
   useEffect(() => {
     if (typeof window === "undefined") return;
-    if (pathname?.startsWith("/onda-pro")) return;
 
+    // Guard against React Strict Mode / route changes double-mounting.
+    // The script itself is also idempotent via window.__revivalA11yLoaded.
     const CSS_ID = "revival-a11y-css";
     const JS_ID = "revival-a11y-js";
 
@@ -36,6 +33,7 @@ export default function AccessibilityToolbarLoader() {
       }
     };
 
+    // Wait for the page to be idle so the toolbar never competes with LCP.
     const idle =
       (window as unknown as { requestIdleCallback?: (cb: () => void) => number })
         .requestIdleCallback;
@@ -44,7 +42,7 @@ export default function AccessibilityToolbarLoader() {
     } else {
       window.setTimeout(mount, 1200);
     }
-  }, [pathname]);
+  }, []);
 
   return null;
 }

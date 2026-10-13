@@ -46,9 +46,9 @@ export default function StickyBookBar() {
     };
   }, [visible, overFooter, dismissed]);
 
-  // Ads landing pages have their own dedicated CTA/form - don't stack this bar.
-  if (dismissed || pathname?.startsWith("/lp") || pathname?.startsWith("/onda-pro"))
-    return null;
+  // Ads landing pages (/lp/*) have their own dedicated CTA/form - don't
+  // stack the site-wide booking bar on top of it.
+  if (dismissed || pathname?.startsWith("/lp")) return null;
 
   return (
     <AnimatePresence>
