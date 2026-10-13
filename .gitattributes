@@ -10,3 +10,5 @@ public/videos/xerf-offer-symptoms.mp4 !filter !diff !merge -text
 public/videos/xerf-offer-treatment-1.mp4 !filter !diff !merge -text
 public/videos/xerf-offer-treatment-2.mp4 !filter !diff !merge -text
 public/videos/emsella-2.mp4 !filter !diff !merge -text
+public/videos/octopro-onda-1.mp4 !filter !diff !merge -text
+public/videos/octopro-onda-2.mp4 !filter !diff !merge -text
