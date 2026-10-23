@@ -13,6 +13,27 @@ type Block =
   | { type: "list"; items: string[] };
 
 /** URL-safe slug for anchor IDs (matches the TOC helper in BlogPostContent). */
+function InlineText({ text }: { text: string }) {
+  const parts = text.split(/(\[[^\]]+\]\([^)]+\))/g);
+  return (
+    <>
+      {parts.map((part, i) => {
+        const match = part.match(/^\[([^\]]+)\]\(([^)]+)\)$/);
+        if (!match) return <Fragment key={i}>{part}</Fragment>;
+        return (
+          <a
+            key={i}
+            href={match[2]}
+            className="font-medium text-revival-gold underline decoration-revival-gold/40 underline-offset-2 hover:text-revival-dark"
+          >
+            {match[1]}
+          </a>
+        );
+      })}
+    </>
+  );
+}
+
 function slugify(text: string): string {
   return text
     .toLowerCase()
@@ -158,7 +179,7 @@ export default function RichContent({ content }: { content: string }) {
               viewport={{ once: true, margin: "-80px" }}
               className="text-base font-light leading-relaxed text-revival-charcoal/85 sm:text-lg"
             >
-              {block.text}
+              <InlineText text={block.text} />
             </motion.p>
           )}
 
@@ -176,7 +197,9 @@ export default function RichContent({ content }: { content: string }) {
                   className="flex items-start gap-3 rounded-2xl border border-revival-gold/15 bg-white px-4 py-3 text-sm text-revival-charcoal/85 shadow-sm sm:text-base"
                 >
                   <CheckCircle2 className="mt-0.5 h-4.5 w-4.5 shrink-0 text-revival-gold" />
-                  <span>{item}</span>
+                  <span>
+                    <InlineText text={item} />
+                  </span>
                 </li>
               ))}
             </motion.ul>
