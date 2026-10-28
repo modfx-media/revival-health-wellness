@@ -1,6 +1,5 @@
 import { cmsPageMetadata } from "@/lib/cms/generateMeta";
 import type { Metadata } from "next";
-import Script from "next/script";
 import { buildMetadata } from "@/lib/metadata";
 import LPHeader from "@/components/lp/LPHeader";
 import LPFooter from "@/components/lp/LPFooter";
@@ -20,33 +19,6 @@ export async function generateMetadata() {
 export default function WeightlossOfferThankYouPage() {
   return (
     <>
-      {/* Meta Pixel Code */}
-      <Script id="meta-pixel" strategy="afterInteractive">
-        {`!function(f,b,e,v,n,t,s)
-{if(f.fbq)return;n=f.fbq=function(){n.callMethod?
-n.callMethod.apply(n,arguments):n.queue.push(arguments)};
-if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
-n.queue=[];t=b.createElement(e);t.async=!0;
-t.src=v;s=b.getElementsByTagName(e)[0];
-s.parentNode.insertBefore(t,s)}(window, document,'script',
-'https://connect.facebook.net/en_US/fbevents.js');
-fbq('init', '1295203984837670');
-fbq('track', 'PageView');`}
-      </Script>
-      <noscript>
-        {/* eslint-disable-next-line @next/next/no-img-element */}
-        <img
-          height="1"
-          width="1"
-          style={{ display: "none" }}
-          src="https://www.facebook.com/tr?id=1295203984837670&ev=PageView&noscript=1"
-          alt=""
-        />
-      </noscript>
-      {/* End Meta Pixel Code */}
-      <Script id="meta-pixel-lead" strategy="afterInteractive">
-        {`fbq('track', 'Lead');`}
-      </Script>
       <LPHeader phone="+1 725-241-0010" />
       <WeightlossThankYouContent />
       <MapSection hidePhone />
