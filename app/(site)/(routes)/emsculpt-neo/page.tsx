@@ -17,10 +17,10 @@ import {
   RelatedServices,
 } from "@/components/templates/HormoneSections";
 
-const TITLE = "Emsculpt NEO Body Contouring";
+const TITLE = "Emsculpt NEO in Las Vegas";
 const PATH = "/emsculpt-neo/";
 const DESCRIPTION =
-  "Build muscle and reduce fat with Emsculpt NEO in Las Vegas. Revival Health and Wellness helps you tone your body using this advanced, non-surgical technology.";
+  "Emsculpt NEO in Las Vegas and Henderson builds muscle and reduces fat without surgery. Revival offers this body contouring at both clinics.";
 
 export async function generateMetadata() {
   const fallback = buildMetadata({
@@ -93,6 +93,16 @@ const FAQS = [
     answer:
       "The original Emsculpt uses HIFEM alone to build muscle. Emsculpt NEO adds Radiofrequency heating simultaneously, which allows it to reduce fat AND build muscle in the same session. It’s also FDA-cleared for a wider range of treatment areas including thighs, calves, arms, glutes, and abdomen.",
   },
+  {
+    question: "Where can I get Emsculpt NEO in Las Vegas?",
+    answer:
+      "At Revival's Henderson / Southwest clinic, 7220 S. Cimarron Road, Suite 140, Las Vegas, NV 89113, and the Summerlin / Northwest clinic, 2585 Box Canyon Drive, Suite 150, Las Vegas, NV 89128.",
+  },
+  {
+    question: "What should I expect at the consultation?",
+    answer:
+      "A provider reviews the area you want treated and whether Emsculpt NEO fits. Sessions on this page are 30 minutes, with no incisions and no anesthesia, for patients up to BMI 35.",
+  },
 ];
 
 const YOUTUBE_ID = "mA7WVaUUAws";
@@ -139,6 +149,10 @@ export default function EmsculptNeoPage() {
           "/images/emsculpt-neo/emsculpt-neo-female-model.jpg",
           "/images/emsculpt-neo/neobum.webp",
         ]}
+        galleryAlts={[
+          "Emsculpt NEO body contouring model at Revival Health and Wellness",
+          "Emsculpt NEO applicators placed across the abdomen",
+        ]}
         compact
       />
 
@@ -151,6 +165,7 @@ export default function EmsculptNeoPage() {
             "It combines Radiofrequency (RF) heating with the HIFEM (High-Intensity Focused Electromagnetic) procedure to reduce fat and build muscle at the same time. Clinical studies show an average 30% reduction in subcutaneous fat and a 25% increase in muscle thickness.",
           ],
           image: "/images/emsculpt-neo/emsculpt-neo-female-model.jpg",
+          imageAlt: "Emsculpt NEO body contouring model showing the abdomen and hip",
           imageAspect: "landscape",
         }}
       />
@@ -167,6 +182,7 @@ export default function EmsculptNeoPage() {
             "The end result is less fat and more muscle, in less time. Best of all, Emsculpt NEO has broad appeal because it can treat patients up to BMI 35.",
           ],
           image: "/images/emsculpt-neo/neobum.webp",
+          imageAlt: "Emsculpt NEO applicators strapped across the abdomen during treatment",
           imageAspect: "landscape",
         }}
       />
@@ -308,6 +324,17 @@ export default function EmsculptNeoPage() {
           paragraphs: [
             "There’s essentially no downtime with Emsculpt NEO. Many patients start to notice tangible results right after their initial treatments.",
             "Optimal results are typically observed 90 days after the final session and can continue improving for several weeks after treatment - as your body responds to the newly-built muscle and reduced fat.",
+          ],
+        }}
+      />
+
+      <OverviewBlock
+        section={{
+          eyebrow: "Las Vegas and Henderson",
+          heading: "Emsculpt NEO at both Revival clinics",
+          paragraphs: [
+            "Emsculpt NEO sessions are 30 minutes, with no incisions and no anesthesia. Revival uses it for the abdomen, buttocks, thighs, arms, and calves, including patients up to BMI 35.",
+            "Book Henderson / Southwest at 7220 S. Cimarron Road, Suite 140, Las Vegas, NV 89113, or Summerlin / Northwest at 2585 Box Canyon Drive, Suite 150, Las Vegas, NV 89128. A consultation confirms the treatment area before the first session.",
           ],
         }}
       />

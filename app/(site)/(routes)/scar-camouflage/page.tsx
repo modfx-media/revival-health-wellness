@@ -17,7 +17,7 @@ import {
 const TITLE = "Professional Scar Camouflage";
 const PATH = "/scar-camouflage/";
 const DESCRIPTION =
-  "Blend scars and skin imperfections with scar camouflage in Las Vegas. Revival Health and Wellness uses medical tattooing and advanced treatments to help you feel confident in your skin again.";
+  "Scar camouflage in Las Vegas at Revival Health and Wellness blends scars and skin tone with medical tattooing. Book a consultation.";
 
 export async function generateMetadata() {
   const fallback = buildMetadata({

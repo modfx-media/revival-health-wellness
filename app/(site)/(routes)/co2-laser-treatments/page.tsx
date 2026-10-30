@@ -20,7 +20,7 @@ import {
 const TITLE = "CO₂ Laser Skin Resurfacing – CoolPeel® & DEKA Tetra Pro";
 const PATH = "/co2-laser-treatments/";
 const DESCRIPTION =
-  "Advanced CO₂ laser resurfacing in Las Vegas on the Cartessa SmartXide Tetra Pro platform. CoolPeel® for a gentle refresh, DEKA Tetra Pro for deeper resurfacing – tailored to your skin, downtime, and goals.";
+  "CO2 laser resurfacing in Las Vegas on the Cartessa SmartXide Tetra Pro. CoolPeel refreshes skin and DEKA Tetra Pro goes deeper.";
 
 export async function generateMetadata() {
   const fallback = buildMetadata({

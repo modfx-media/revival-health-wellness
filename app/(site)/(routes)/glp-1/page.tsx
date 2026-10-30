@@ -21,9 +21,9 @@ import {
 
 const TITLE = "GLP-1";
 const PATH = "/glp-1/";
-const META_TITLE = "GLP-1 Medications for Weight Loss";
+const META_TITLE = "GLP-1 Weight Loss in Las Vegas";
 const DESCRIPTION =
-  "Manage your weight and improve your health with GLP-1 medications. Revival Health and Wellness offers medical guidance to help you see real, lasting results.";
+  "GLP-1 weight loss in Las Vegas and Henderson, with medical guidance from Revival Health and Wellness at the Summerlin and Cimarron clinics.";
 
 export async function generateMetadata() {
   const fallback = buildMetadata({
@@ -86,6 +86,16 @@ const FAQS = [
     answer:
       "Adults with a BMI of 30+ (or 27+ with weight-related conditions), those who have struggled with diet-and-exercise-only approaches, and anyone looking for an appetite-focused, non-stimulant option under medical supervision.",
   },
+  {
+    question: "Where is GLP-1 care offered?",
+    answer:
+      "At both Revival clinics in Las Vegas: Henderson / Southwest at 7220 S. Cimarron Road, Suite 140, and Summerlin / Northwest at 2585 Box Canyon Drive, Suite 150. Patients from Henderson are seen at those same clinics.",
+  },
+  {
+    question: "What happens at the consultation?",
+    answer:
+      "The visit is a free consultation with lab review, then a personalized dose plan, nutrition guidance, and weekly progress tracking. Every visit includes a STYKU body scan so changes in muscle, water, and fat are visible.",
+  },
 ];
 
 export default function GLP1Page() {
@@ -134,6 +144,10 @@ export default function GLP1Page() {
           "/images/page-banners/glp-banner-1.webp",
           "/images/page-banners/glp-banner-2.jpg",
         ]}
+        galleryAlts={[
+          "GLP-1 weight loss care at Revival Health and Wellness in Las Vegas",
+          "Clinician-guided weight loss visit at Revival Health and Wellness",
+        ]}
       />
 
       <OverviewBlock
@@ -144,7 +158,9 @@ export default function GLP1Page() {
             "GLP-1 (glucagon-like peptide-1) is a hormone your body naturally releases after eating. It tells the brain you're full, slows how quickly the stomach empties, and helps regulate insulin.",
             "GLP-1 medications amplify that natural signal-so appetite calms down, cravings ease up, and eating in a healthy calorie balance stops feeling like a fight against your own biology.",
           ],
-        image: "/images/weight-loss/glp1-weightloss.jpg",
+          image: "/images/weight-loss/glp1-weightloss.jpg",
+          imageAlt:
+            "Smiling woman holding out jeans that are now too large after weight loss",
           imageAspect: "landscape",
         }}
       />
@@ -190,6 +206,8 @@ export default function GLP1Page() {
             "That combination-medication plus monitoring plus habit support-is what turns a prescription into durable, real-world results.",
           ],
           image: "/images/weight-loss/glp-1-before-after.jpg",
+          imageAlt:
+            "Side-by-side illustration of a man before and after weight loss",
           bullets: [
             "Baseline labs and medical consultation",
             "Personalized dose titration",
@@ -213,6 +231,17 @@ export default function GLP1Page() {
         poster="/videos/styku-poster.jpg"
         aspect="portrait"
         tone="cream"
+      />
+
+      <OverviewBlock
+        section={{
+          eyebrow: "Las Vegas and Henderson",
+          heading: "Where GLP-1 visits happen",
+          paragraphs: [
+            "GLP-1 care is part of Revival's medical weight loss program for adults in Las Vegas and Henderson. The plan pairs the medication with labs, dose changes, nutrition guidance, and weekly tracking.",
+            "The Henderson / Southwest clinic is at 7220 S. Cimarron Road, Suite 140, Las Vegas, NV 89113. The Summerlin / Northwest clinic is at 2585 Box Canyon Drive, Suite 150, Las Vegas, NV 89128. Hours differ by location and are listed on the contact page. The first step is a free consultation.",
+          ],
+        }}
       />
 
       <FAQSection faqs={FAQS} />

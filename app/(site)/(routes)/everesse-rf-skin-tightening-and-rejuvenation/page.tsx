@@ -21,7 +21,7 @@ import {
 const TITLE = "RF Skin Tightening & Rejuvenation";
 const PATH = "/everesse-rf-skin-tightening-and-rejuvenation/";
 const DESCRIPTION =
-  "Tighten and lift your skin with Everesse by Volnewmer in Las Vegas. Revival Health and Wellness uses radiofrequency to help you achieve smoother, firmer, more radiant skin - no needles, no downtime.";
+  "Everesse radiofrequency skin tightening in Las Vegas at Revival Health and Wellness for smoother, firmer skin. Book a consultation.";
 
 export async function generateMetadata() {
   const fallback = buildMetadata({

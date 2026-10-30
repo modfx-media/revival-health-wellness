@@ -860,7 +860,7 @@ function QuoteSection({
             <div className="relative aspect-[4/5] overflow-hidden rounded-[2rem] shadow-2xl">
               <Image
                 src={section.image}
-                alt=""
+                alt={section.heading || section.attribution || "Revival Health and Wellness"}
                 fill
                 sizes="(min-width: 1024px) 40vw, 100vw"
                 className="object-cover"
@@ -1224,14 +1224,31 @@ function RelatedTreatments({
    FINAL CTA  - dark hero-esque closer
    ═══════════════════════════════════════════════════════════════════════ */
 
+const TEAM_PORTRAITS = [
+  {
+    src: "/images/about/team/sanaz-salmani.png",
+    alt: "Sanaz Salmani, Clinic Director at Revival Health and Wellness",
+  },
+  {
+    src: "/images/about/team/radford-raquedan.png",
+    alt: "Radford Raquedan, Nurse Practitioner at Revival Health and Wellness",
+  },
+  {
+    src: "/images/about/team/carola-villasenor.png",
+    alt: "Carola Villasenor, Lead Medical Assistant at Revival Health and Wellness",
+  },
+] as const;
+
 function FinalCta({
   title,
   subtitle,
   image,
+  imageAlt,
 }: {
   title: string;
   subtitle: string;
   image: string;
+  imageAlt: string;
 }) {
   const ref = useRef<HTMLDivElement>(null);
   const { scrollYProgress } = useScroll({
@@ -1302,17 +1319,13 @@ function FinalCta({
             className="mt-10 flex items-center gap-3"
           >
             <div className="flex -space-x-2">
-              {[
-                "/images/about/team/sanaz-salmani.png",
-                "/images/about/team/radford-raquedan.png",
-                "/images/about/team/carola-villasenor.png",
-              ].map((src, i) => (
+              {TEAM_PORTRAITS.map((person, i) => (
                 <span
-                  key={src}
+                  key={person.src}
                   className="relative inline-block h-9 w-9 overflow-hidden rounded-full border-2 border-revival-dark"
                   style={{ zIndex: 3 - i }}
                 >
-                  <Image src={src} alt="" fill sizes="36px" className="object-cover" />
+                  <Image src={person.src} alt={person.alt} fill sizes="36px" className="object-cover" />
                 </span>
               ))}
             </div>
@@ -1332,7 +1345,7 @@ function FinalCta({
           >
             <Image
               src={image}
-              alt=""
+              alt={imageAlt}
               fill
               sizes="(min-width: 1024px) 40vw, 100vw"
               className="object-cover"
@@ -1625,6 +1638,7 @@ export default function SexualWellnessPage({
         }
         description={data.description}
         gallery={data.gallery}
+        galleryAlts={data.galleryAlts}
       />
 
       <ValueStrip data={data} />
@@ -1640,6 +1654,10 @@ export default function SexualWellnessPage({
           title={data.ctaTitle}
           subtitle={data.ctaSubtitle ?? ""}
           image={data.gallery[data.gallery.length - 1]}
+          imageAlt={
+            data.galleryAlts?.[data.gallery.length - 1] ??
+            `${data.title} at Revival Health and Wellness`
+          }
         />
       ) : null}
 
@@ -1658,6 +1676,10 @@ export default function SexualWellnessPage({
           title={data.ctaTitle}
           subtitle={data.ctaSubtitle ?? ""}
           image={data.gallery[data.gallery.length - 1]}
+          imageAlt={
+            data.galleryAlts?.[data.gallery.length - 1] ??
+            `${data.title} at Revival Health and Wellness`
+          }
         />
       ) : null}
     </>
@@ -1690,7 +1712,47 @@ function SectionRenderer({
       return <OptionsSection section={section} />;
     case "video":
       return <VideoSection section={section} />;
+    case "faq":
+      return <FaqSection section={section} />;
   }
+}
+
+function FaqSection({
+  section,
+}: {
+  section: Extract<SWSection, { kind: "faq" }>;
+}) {
+  return (
+    <section className="bg-revival-warm-white py-16 lg:py-24">
+      <div className="mx-auto max-w-3xl px-4 sm:px-6 lg:px-8">
+        {section.eyebrow ? (
+          <p className="text-[0.68rem] font-semibold uppercase tracking-[0.28em] text-revival-gold">
+            {section.eyebrow}
+          </p>
+        ) : null}
+        <h2 className="mt-3 font-heading text-3xl text-revival-dark sm:text-4xl">
+          {section.heading}
+        </h2>
+        {section.intro ? (
+          <p className="mt-4 text-base font-light leading-relaxed text-revival-charcoal/80">
+            {section.intro}
+          </p>
+        ) : null}
+        <div className="mt-8 divide-y divide-revival-gold/15 border-y border-revival-gold/15">
+          {section.items.map((item) => (
+            <details key={item.question} className="group py-5">
+              <summary className="cursor-pointer list-none font-heading text-xl text-revival-dark">
+                {item.question}
+              </summary>
+              <p className="mt-3 text-base font-light leading-relaxed text-revival-charcoal/80">
+                {item.answer}
+              </p>
+            </details>
+          ))}
+        </div>
+      </div>
+    </section>
+  );
 }
 
 // keep AnimatePresence import used (future accordion hover reveals could use it)

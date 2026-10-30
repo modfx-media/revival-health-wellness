@@ -18,7 +18,7 @@ import {
 const TITLE = "Botox Injections for Wrinkles";
 const PATH = "/botox/";
 const DESCRIPTION =
-  "Smooth away fine lines and wrinkles with Botox in Las Vegas. Revival Health and Wellness offers professional injections for a refreshed and youthful appearance.";
+  "Botox in Las Vegas for fine lines and wrinkles at Revival Health and Wellness. Injections are planned for a refreshed appearance.";
 
 export async function generateMetadata() {
   const fallback = buildMetadata({

@@ -1,6 +1,6 @@
 import { cmsPageMetadata } from "@/lib/cms/generateMeta";
 import { notFound } from "next/navigation";
-import { buildMetadata } from "@/lib/metadata";
+import { buildMetadata, geoLeafDescription, geoLeafTitle } from "@/lib/metadata";
 import { geoBusinessSchema, breadcrumbSchema, jsonLd } from "@/lib/schema";
 import { getAllGeoPages, getGeoPage, geoHighlights } from "@/lib/locations";
 import ServicePage from "@/components/templates/ServicePage";
@@ -20,12 +20,13 @@ export async function generateMetadata({ params }: GeoRouteProps) {
   const geo = getGeoPage(slug.join("/"));
   if (!geo) return buildMetadata({ title: "Not Found", noIndex: true });
 
-  // Title carries the city; canonical points at the parent service page so
-  // ranking signal consolidates onto the pillar URL.
+  // Title carries the city. Canonical stays on the parent service page so
+  // ranking signal consolidates onto that URL. This is intentional for every
+  // service × city page built in lib/locations.ts (14 cities × 8 services).
   return cmsPageMetadata(
     buildMetadata({
-      title: geo.title,
-      description: geo.description,
+      title: geoLeafTitle(geo.service.name, geo.city.name),
+      description: geoLeafDescription(geo.service.name, geo.city.name),
       path: geo.canonical,
     }),
     `/${geo.slug}`,

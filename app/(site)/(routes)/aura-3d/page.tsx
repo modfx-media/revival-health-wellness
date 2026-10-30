@@ -18,7 +18,7 @@ import {
 const TITLE = "Aura 3D Facial Imaging";
 const PATH = "/aura-3d/";
 const DESCRIPTION =
-  "Swiss-made Aura 3D facial imaging at Revival Health and Wellness in Las Vegas. AI-powered 3D facial modeling for precision treatment planning and objective progress tracking.";
+  "Aura 3D facial imaging in Las Vegas at Revival Health and Wellness supports treatment planning and progress photos. Book a consultation.";
 
 export async function generateMetadata() {
   const fallback = buildMetadata({

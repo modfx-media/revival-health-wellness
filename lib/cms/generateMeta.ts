@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 
 import { withCMS } from "./safe";
 import { queryPublishedMeta, type CmsDoc } from "./queries";
+import { composeTitle } from "@/lib/metadata";
 import { absoluteURL, normalizePath } from "./url";
 
 function pathFromMetadata(meta: Metadata): string | null {
@@ -33,11 +34,7 @@ export function mergeCmsMeta(fallback: Metadata, doc: CmsDoc): Metadata {
     (typeof meta.canonicalUrl === "string" && meta.canonicalUrl) ||
     absoluteURL(path);
 
-  const fullTitle = title
-    ? title.includes("|")
-      ? title
-      : `${title} | Revival Health & Wellness`
-    : undefined;
+  const fullTitle = title ? composeTitle(title) : undefined;
 
   return {
     ...fallback,

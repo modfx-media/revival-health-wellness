@@ -155,7 +155,10 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     priority: 0.6,
   }));
 
-  const lowPriority: MetadataRoute.Sitemap = LOW_PRIORITY_PAGES.map((slug) => ({
+  // /privacy-policy/ is noindex, so it stays out of the sitemap.
+  const lowPriority: MetadataRoute.Sitemap = LOW_PRIORITY_PAGES.filter(
+    (slug) => slug !== "privacy-policy",
+  ).map((slug) => ({
     url: url(`/${slug}/`),
     lastModified: now,
     changeFrequency: "yearly",

@@ -14,7 +14,7 @@ import {
 const TITLE = "Aesthetic Services and Treatments";
 const PATH = "/aesthetics/";
 const DESCRIPTION =
-  "Enhance your natural beauty with aesthetic services in Las Vegas. Revival Health and Wellness provides custom skin & body care to help you look and feel great.";
+  "Aesthetic services in Las Vegas for skin and body at Revival Health and Wellness. Plans are built around the look you want.";
 
 export async function generateMetadata() {
   const fallback = buildMetadata({

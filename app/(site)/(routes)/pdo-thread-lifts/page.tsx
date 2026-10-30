@@ -19,7 +19,7 @@ import {
 const TITLE = "PDO Thread Lift Treatments";
 const PATH = "/pdo-thread-lifts/";
 const DESCRIPTION =
-  "Lift, tighten, and redefine your facial contours with PDO thread lifts in Las Vegas. Revival Health and Wellness offers minimally invasive lifts that stimulate collagen without surgery.";
+  "PDO thread lifts in Las Vegas at Revival Health and Wellness lift facial contours and support collagen without surgery. Book a consultation.";
 
 export async function generateMetadata() {
   const fallback = buildMetadata({

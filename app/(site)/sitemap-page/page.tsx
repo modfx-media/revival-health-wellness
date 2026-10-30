@@ -28,7 +28,7 @@ export const revalidate = 300;
 const TITLE = "Sitemap";
 const PATH = "/sitemap-page/";
 const DESCRIPTION =
-  "The complete Revival Health and Wellness sitemap. Every service page, hormone therapy, medical weight loss, sexual wellness, aesthetics, and every local city page we serve across the Las Vegas valley, in one place.";
+  "Browse every Revival Health and Wellness page, from services and blog posts to local city pages across the Las Vegas valley.";
 
 export async function generateMetadata() {
   const fallback = buildMetadata({

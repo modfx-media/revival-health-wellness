@@ -19,7 +19,7 @@ import { OctoProVideoShowcase } from "@/components/templates/OctoProVideoShowcas
 const TITLE = "ONDA Pro Body Contouring";
 const PATH = "/onda-pro/";
 const DESCRIPTION =
-  "Non-invasive body contouring with the ONDA Pro system in Las Vegas. Revival Health and Wellness uses microwave-based Coolwaves technology to reduce fat, tighten skin, and smooth cellulite.";
+  "ONDA Pro body contouring in Las Vegas uses Coolwaves technology to reduce fat and tighten skin at Revival Health and Wellness.";
 
 export async function generateMetadata() {
   const fallback = buildMetadata({

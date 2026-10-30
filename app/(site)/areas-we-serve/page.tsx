@@ -15,7 +15,7 @@ import {
 const TITLE = "Areas We Serve";
 const PATH = "/areas-we-serve/";
 const DESCRIPTION =
-  "Revival Health and Wellness serves the entire Las Vegas valley from two clinic locations. Explore the cities and neighborhoods where our concierge medical team delivers hormone therapy, medical weight loss, sexual wellness, and aesthetic care.";
+  "Revival Health and Wellness serves the Las Vegas valley from two clinics. Find hormone therapy, weight loss, sexual wellness, and aesthetic care near you.";
 
 export async function generateMetadata() {
   const fallback = buildMetadata({

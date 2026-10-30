@@ -97,7 +97,14 @@ export default function HeroSection({
           >
             <Image
               src={HERO.gallery[active]}
-              alt=""
+              alt={
+                [
+                  "Close-up portrait with gold leaf makeup in the homepage hero",
+                  "Revival Health and Wellness homepage hero portrait",
+                  "Warm-toned portrait in the homepage hero slideshow",
+                  "Portrait with gold body paint in the homepage hero",
+                ][active] ?? "Revival Health and Wellness homepage hero"
+              }
               fill
               priority
               sizes="100vw"
@@ -340,7 +347,7 @@ export default function HeroSection({
             >
               <Image
                 src="/images/services/aesthetics-2.jpg"
-                alt=""
+                alt="Smiling couple embracing, representing wellness and confidence"
                 fill
                 sizes="200px"
                 className="object-cover"
@@ -486,7 +493,7 @@ export default function HeroSection({
                   >
                     <Image
                       src={src}
-                      alt=""
+                      alt={SHOWCASE_LABELS[i]}
                       fill
                       sizes="48px"
                       className="object-cover"

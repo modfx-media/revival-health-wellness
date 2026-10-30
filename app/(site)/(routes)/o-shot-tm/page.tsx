@@ -7,7 +7,7 @@ import OShotPageContent from "@/components/sexual-wellness/OShotPageContent";
 const SLUG = "o-shot-tm";
 const TITLE = "O-Shot® (Orgasm Shot®) PRP Therapy";
 const DESCRIPTION =
-  "Improve your sensitivity & health w/ O-Shot treatment in Las Vegas. Revival Health and Wellness offers the O-Shot™ to enhance pleasure, function, and confidence.";
+  "O-Shot treatment in Las Vegas uses platelet-rich plasma at Revival Health and Wellness for sensitivity, function, and confidence.";
 
 export async function generateMetadata() {
   const fallback = buildMetadata({
