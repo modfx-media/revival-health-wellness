@@ -243,7 +243,7 @@ export const wpLegacyRedirects: LegacyRedirect[] = [
   },
   {
     source: '/category/p-long',
-    destination: '/blogs/',
+    destination: '/p-long/',
     permanent: true,
   },
   {
@@ -423,7 +423,7 @@ export const wpLegacyRedirects: LegacyRedirect[] = [
   },
   {
     source: '/sexual-wellness/women/emsella-for-women',
-    destination: '/emsella/',
+    destination: '/emsella-2/',
     permanent: true,
   },
   {
@@ -600,7 +600,7 @@ export const wpLegacyRedirectNotes: { source: string; destination: string; reaso
   { source: '/blog/', destination: '/blogs/', reason: 'Legacy blog index' },
   { source: '/boost-your-health-and-energy-how-emsculpt-neo-improves-circulation-and-functional-wellness/', destination: '/blogs/boost-your-health-and-energy-how-emsculpt-neo-improves-circulation-and-functional-wellness/', reason: 'Exact blog slug' },
   { source: '/category/health-wellness/', destination: '/blogs/', reason: 'WordPress category archive' },
-  { source: '/category/p-long/', destination: '/blogs/', reason: 'Audit: WordPress category archive' },
+  { source: '/category/p-long/', destination: '/p-long/', reason: 'P-Long category now has a service page' },
   { source: '/category/uncategorized/', destination: '/blogs/', reason: 'WordPress category archive' },
   { source: '/category/weight-loss/', destination: '/blogs/', reason: 'WordPress category archive' },
   { source: '/ed-red-flags-and-medical-causes/', destination: '/blogs/ed-red-flags-and-medical-causes/', reason: 'Exact blog slug' },
@@ -636,7 +636,7 @@ export const wpLegacyRedirectNotes: { source: string; destination: string; reaso
   { source: '/sexual-wellness/men/viagra-revival-health-and-wellness/', destination: '/viagra/', reason: 'Nested Viagra page' },
   { source: '/sexual-wellness/sexual-wellness-for-men/', destination: '/men/', reason: "Old men's hub" },
   { source: '/sexual-wellness/sexual-wellness-for-women/', destination: '/women/', reason: "Old women's hub" },
-  { source: '/sexual-wellness/women/emsella-for-women/', destination: '/emsella/', reason: 'Nested Emsella page' },
+  { source: '/sexual-wellness/women/emsella-for-women/', destination: '/emsella-2/', reason: "Women's Emsella page" },
   { source: '/sexual-wellness/women/gainswave-for-her/', destination: '/gainswavetm-for-her/', reason: 'Nested GAINSWave For Her page' },
   { source: '/sexual-wellness/women/o-shot/', destination: '/o-shot-tm/', reason: 'Nested O-Shot page' },
   { source: '/shockwave-therapy-the-secret-to-a-rock-solid-you/', destination: '/blogs/shockwave-therapy-the-secret-to-a-rock-solid-you/', reason: 'Exact blog slug' },

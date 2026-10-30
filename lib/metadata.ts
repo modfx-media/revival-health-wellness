@@ -149,7 +149,7 @@ export function areaLeafDescription(input: {
   driveTime: string;
 }): string {
   const { serviceName, shortDescription, cityName, county, driveTime } = input;
-  return pickDescription([
+  const rich = pickDescription([
     [`${serviceName} in ${cityName}, Nevada`, shortDescription],
     [shortDescription, `Serving ${cityName} and ${county}`],
     [`${serviceName} in ${cityName}, Nevada`, `Serving ${cityName} and ${county}`, driveTime],
@@ -163,8 +163,24 @@ export function areaLeafDescription(input: {
       driveTime,
     ],
     [`${serviceName} in ${cityName}, Nevada`, "Book a consultation at Revival Health and Wellness"],
-    [shortDescription],
   ]);
+  if (rich.includes(cityName) && rich.length >= 120 && rich.length <= 158) return rich;
+
+  // Short service blurbs used to be reused verbatim. Always name the city.
+  const parts = [
+    `${serviceName} in ${cityName}, Nevada`,
+    "Book a consultation at Revival Health and Wellness",
+    "Care is available at both Las Vegas clinics",
+    driveTime,
+  ];
+  let text = "";
+  for (const part of parts) {
+    const sentence = /[.!?]$/.test(part.trim()) ? part.trim() : `${part.trim()}.`;
+    const next = text ? `${text} ${sentence}` : sentence;
+    if (next.length <= 158) text = next;
+    if (text.length >= 120) break;
+  }
+  return text;
 }
 
 export function cityHubTitle(cityName: string): string {
@@ -205,20 +221,20 @@ export function cityHubDescription(input: {
 
 export function geoLeafTitle(serviceName: string, cityName: string): string {
   return bestTitle([
-    `${serviceName} in ${cityName}, NV`,
-    `${serviceName} in ${cityName}`,
+    `${serviceName} near ${cityName}, NV`,
+    `${serviceName} near ${cityName}`,
   ]);
 }
 
 export function geoLeafDescription(serviceName: string, cityName: string): string {
   return pickDescription([
     [
-      `${serviceName} in ${cityName}, NV`,
+      `${serviceName} near ${cityName}, NV`,
       "Physician-guided care at Revival Health and Wellness for Las Vegas valley patients",
       "Book a consultation",
     ],
     [
-      `${serviceName} in ${cityName}, NV`,
+      `${serviceName} near ${cityName}, NV`,
       "Physician-guided care at Revival Health and Wellness for Las Vegas valley patients",
     ],
     [

@@ -14,6 +14,7 @@ import { listPublishedForSitemap } from "@/lib/cms/queries";
 import { withCMS } from "@/lib/cms/safe";
 import { blogCalendarDay, isFutureBlogDate } from "@/lib/cms/dates";
 import { normalizePath } from "@/lib/cms/url";
+import { redirectedBlogPaths } from "@/lib/seo/duplicate-blog-redirects";
 
 
 export const revalidate = 300;
@@ -105,7 +106,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     published
       .filter((doc) => typeof doc.path === "string")
       .map((doc) => normalizePath(doc.path as string))
-      .filter((path) => path.startsWith("/blogs/") && !designedByPath.has(path) && blogIsListed(path)),
+      .filter((path) => path.startsWith("/blogs/") && !designedByPath.has(path) && !redirectedBlogPaths.has(path) && blogIsListed(path)),
   )].map((path) => ({
       url: url(path),
       lastModified: updatedAt.get(path) ?? now,
