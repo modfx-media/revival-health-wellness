@@ -66,12 +66,6 @@ export function organizationSchema(): Json {
       "https://www.instagram.com/revival.healthandwellness/",
       "https://www.tiktok.com/@revival.lv",
     ],
-    aggregateRating: {
-      "@type": "AggregateRating",
-      ratingValue: "5",
-      reviewCount: "243",
-      bestRating: "5",
-    },
   };
 }
 
@@ -128,12 +122,6 @@ export function geoBusinessSchema(input: {
     areaServed: {
       "@type": "City",
       name: `${city}, ${state}`,
-    },
-    aggregateRating: {
-      "@type": "AggregateRating",
-      ratingValue: "5",
-      reviewCount: "243",
-      bestRating: "5",
     },
   };
 }

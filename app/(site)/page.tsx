@@ -18,6 +18,7 @@ import ProviderSnippetSection from "@/components/home/ProviderSnippetSection";
 import ContactFormSection from "@/components/home/ContactFormSection";
 import MapSection from "@/components/layout/MapSection";
 import { buildMetadata } from "@/lib/metadata";
+import { breadcrumbSchema, jsonLd } from "@/lib/schema";
 import { getDisplayedGoogleReviews } from "@/lib/google-reviews";
 
 export async function generateMetadata() {
@@ -35,6 +36,14 @@ export default async function Home() {
 
   return (
     <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: jsonLd(
+            breadcrumbSchema([{ name: "Home", path: "/" }]),
+          ),
+        }}
+      />
       <HeroSection
         reviewRating={meta.rating}
         reviewCount={meta.reviewCount}

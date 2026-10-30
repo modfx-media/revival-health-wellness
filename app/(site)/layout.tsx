@@ -6,8 +6,6 @@ import { headers } from "next/headers";
 import { CMSRoute } from "@/components/cms/CMSRoute";
 import { normalizePath } from "@/lib/cms/url";
 import { organizationSchema, websiteSchema, jsonLd } from "@/lib/schema";
-import { getDisplayedGoogleReviews } from "@/lib/google-reviews";
-import { isFiveStarReview } from "@/lib/reviews";
 import Header from "@/components/layout/Header";
 import Footer from "@/components/layout/Footer";
 import StickyBookBar from "@/components/layout/StickyBookBar";
@@ -66,29 +64,7 @@ export default async function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-  const { reviews, meta } = await getDisplayedGoogleReviews();
-
   const organization = organizationSchema();
-  organization.aggregateRating = {
-    "@type": "AggregateRating",
-    ratingValue: meta.rating.toString(),
-    reviewCount: meta.reviewCount.toString(),
-    bestRating: "5",
-  };
-
-  const fiveStarReviews = reviews.filter(isFiveStarReview);
-  if (fiveStarReviews.length > 0) {
-    organization.review = fiveStarReviews.map((r) => ({
-      "@type": "Review",
-      reviewRating: {
-        "@type": "Rating",
-        ratingValue: "5",
-        bestRating: "5",
-      },
-      author: { "@type": "Person", name: r.name },
-      reviewBody: r.quote,
-    }));
-  }
 
   return (
     <html

@@ -1,11 +1,15 @@
 import { withPayload } from "@payloadcms/next/withPayload";
 import type { NextConfig } from "next";
 
+import { duplicateBlogRedirects } from "./lib/seo/duplicate-blog-redirects";
 import { wpLegacyRedirects } from "./lib/seo/wp-legacy-redirects";
 
 const nextConfig: NextConfig = {
   // Mirror the live site: every URL ends with a trailing slash.
   trailingSlash: true,
+  // Streamed metadata lands in the body for some browsers and flips SEO
+  // scores. Blocking metadata puts title, description, and canonical in <head>.
+  htmlLimitedBots: /.*/,
   images: {
     formats: ["image/avif", "image/webp"],
     qualities: [75, 90, 100],
@@ -72,6 +76,7 @@ const nextConfig: NextConfig = {
         permanent: true,
       })),
       ...wpLegacyRedirects,
+      ...duplicateBlogRedirects,
     ];
   },
 };

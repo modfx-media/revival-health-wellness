@@ -67,7 +67,7 @@ Rules: one hop to a URL that already returns 200. No catch-all. No source is its
 | `/blog/` | `/blogs/` | Legacy blog index |
 | `/boost-your-health-and-energy-how-emsculpt-neo-improves-circulation-and-functional-wellness/` | `/blogs/boost-your-health-and-energy-how-emsculpt-neo-improves-circulation-and-functional-wellness/` | Exact blog slug |
 | `/category/health-wellness/` | `/blogs/` | WordPress category archive |
-| `/category/p-long/` | `/blogs/` | Audit: WordPress category archive |
+| `/category/p-long/` | `/p-long/` | P-Long category now has a service page |
 | `/category/uncategorized/` | `/blogs/` | WordPress category archive |
 | `/category/weight-loss/` | `/blogs/` | WordPress category archive |
 | `/ed-red-flags-and-medical-causes/` | `/blogs/ed-red-flags-and-medical-causes/` | Exact blog slug |
@@ -103,7 +103,7 @@ Rules: one hop to a URL that already returns 200. No catch-all. No source is its
 | `/sexual-wellness/men/viagra-revival-health-and-wellness/` | `/viagra/` | Nested Viagra page |
 | `/sexual-wellness/sexual-wellness-for-men/` | `/men/` | Old men's hub |
 | `/sexual-wellness/sexual-wellness-for-women/` | `/women/` | Old women's hub |
-| `/sexual-wellness/women/emsella-for-women/` | `/emsella/` | Nested Emsella page |
+| `/sexual-wellness/women/emsella-for-women/` | `/emsella-2/` | Women's Emsella page |
 | `/sexual-wellness/women/gainswave-for-her/` | `/gainswavetm-for-her/` | Nested GAINSWave For Her page |
 | `/sexual-wellness/women/o-shot/` | `/o-shot-tm/` | Nested O-Shot page |
 | `/shockwave-therapy-the-secret-to-a-rock-solid-you/` | `/blogs/shockwave-therapy-the-secret-to-a-rock-solid-you/` | Exact blog slug |
@@ -125,7 +125,7 @@ Rules: one hop to a URL that already returns 200. No catch-all. No source is its
 | `/why-there-are-so-many-horrific-manhood-enlargement-horror-stories/` | `/blogs/why-there-are-so-many-horrific-manhood-enlargement-horror-stories/` | Exact blog slug |
 | `/why-your-belly-fat-wont-budge-even-when-you-lose-weight-everywhere-else/` | `/blogs/why-your-belly-fat-wont-budge-even-when-you-lose-weight-everywhere-else/` | Exact blog slug |
 | `/youre-working-out-harder-than-ever-so-why-isnt-the-weight-coming-off-the-truth-about-sluggish-metabolism-and-metabolic-resistance/` | `/blogs/youre-working-out-harder-than-ever-so-why-isnt-the-weight-coming-off-the-truth-about-sluggish-metabolism-and-metabolic-resistance/` | Exact blog slug |
-| `/zenoti-privacy-policy/` | `/privacy-policy/` | Legacy booking privacy policy |
+| `/zenoti-privacy-policy/` | `/privacy-policy/` | Closest privacy page. It is noindex; no other privacy URL exists. |
 | `/ed-treatment-roadmap-guide/` | `/blogs/ed-treatment-roadmap-guide/` | Exact blog slug |
 | `/iv-hydration-therapy-does-beyond-hangovers/` | `/blogs/iv-hydration-therapy-does-beyond-hangovers/` | Exact blog slug |
 | `/unlocking-hormone-therapy-for-stubborn-weight/` | `/blogs/unlocking-hormone-therapy-for-stubborn-weight/` | Exact blog slug |
