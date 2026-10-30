@@ -18,7 +18,7 @@ const TITLE = "Growth Hormone Optimization";
 const PATH = "/growth-hormone-optimization/";
 const META_TITLE = "Growth Hormone Optimization";
 const DESCRIPTION =
-  "Support your recovery and vitality with growth hormone optimization in Las Vegas. Revival Health and Wellness offers safe ways to boost your physical performance.";
+  "Growth hormone optimization in Las Vegas at Revival Health and Wellness supports recovery, sleep, and vitality. Book a consultation.";
 
 export async function generateMetadata() {
   const fallback = buildMetadata({

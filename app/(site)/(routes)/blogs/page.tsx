@@ -12,10 +12,10 @@ import { BLOG_POSTS } from "@/lib/content/blog";
 
 const LIVE_ORIGIN = "https://revivalhealthandwellnessgroup.com";
 const TITLE = "Blog";
-const META_TITLE = "Blog | Treatment Tips, Advice, and Wellness Insights";
+const META_TITLE = "Treatment Tips and Insights";
 const PATH = "/blogs/";
 const DESCRIPTION =
-  "Visit our blog for the latest treatment tips and wellness insights. Revival Health and Wellness shares helpful guides to support your health and beauty journey.";
+  "Treatment tips and wellness guides from Revival Health and Wellness in Las Vegas, covering weight loss, hormones, and aesthetics.";
 
 export async function generateMetadata() {
   const fallback = buildMetadata({
@@ -56,7 +56,7 @@ export default async function BlogsPage() {
     blogPost: sorted.map((p) => ({
       "@type": "BlogPosting",
       headline: p.title,
-      url: p.canonical ?? `${LIVE_ORIGIN}/${p.slug}/`,
+      url: `${LIVE_ORIGIN}/blogs/${p.slug}/`,
       datePublished: blogCalendarDay(p.publishDate ?? p.date) ?? p.publishDate ?? p.date,
       image: p.ogImage ?? p.cover,
     })),

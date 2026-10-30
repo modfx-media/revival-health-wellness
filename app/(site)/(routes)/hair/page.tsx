@@ -11,7 +11,7 @@ import HairIntroSection from "@/components/hair/HairIntroSection";
 const TITLE = "Medical Hair Care & Restoration";
 const PATH = "/hair/";
 const DESCRIPTION =
-  "Restore your confidence with medical hair care & restoration services in Las Vegas. Revival Health and Wellness offers proven ways to help your hair grow back.";
+  "Medical hair care and restoration in Las Vegas at Revival Health and Wellness, with options aimed at helping hair look fuller.";
 
 export async function generateMetadata() {
   const fallback = buildMetadata({

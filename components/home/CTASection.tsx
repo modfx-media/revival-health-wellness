@@ -22,7 +22,7 @@ export default function CTASection() {
       {/* Background image */}
       <Image
         src="/images/hero/hero-2.png"
-        alt=""
+        alt="Portrait with gold body paint behind the homepage consultation form"
         fill
         sizes="100vw"
         className="object-cover"

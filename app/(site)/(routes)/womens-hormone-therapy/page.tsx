@@ -18,7 +18,7 @@ const TITLE = "Women's Hormone Therapy";
 const PATH = "/womens-hormone-therapy/";
 const META_TITLE = "Women's Hormone Replacement Therapy";
 const DESCRIPTION =
-  "Relieve symptoms of menopause & imbalance with women's hormone therapy in Las Vegas. Revival Health and Wellness creates custom plans to help you feel like you.";
+  "Women's hormone therapy in Las Vegas at Revival Health and Wellness, with plans for menopause symptoms and hormone imbalance.";
 
 export async function generateMetadata() {
   const fallback = buildMetadata({

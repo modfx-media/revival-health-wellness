@@ -4,7 +4,7 @@ import { notFound } from "next/navigation";
 import Link from "next/link";
 import Image from "next/image";
 import { MapPin, ArrowRight, Clock, Phone } from "lucide-react";
-import { buildMetadata } from "@/lib/metadata";
+import { buildMetadata, cityHubDescription, cityHubTitle } from "@/lib/metadata";
 import { breadcrumbSchema, jsonLd } from "@/lib/schema";
 import PageHero from "@/components/ui/PageHero";
 import CTABanner from "@/components/ui/CTABanner";
@@ -35,8 +35,12 @@ export async function generateMetadata({
   if (!city || !city.live) {
     return { title: "Not Found" };
   }
-  const title = `${city.name}, NV Medical Wellness Clinic Serving Local Residents`;
-  const description = `Concierge medical wellness in ${city.name}, NV. Revival Health and Wellness delivers hormone therapy, medical weight loss, sexual wellness, and aesthetic care to ${city.name} and surrounding ${city.county} communities.`;
+  const title = cityHubTitle(city.name);
+  const description = cityHubDescription({
+    cityName: city.name,
+    county: city.county,
+    driveTime: city.driveTimeFromClinic,
+  });
   return cmsPageMetadata(
     buildMetadata({
       title,

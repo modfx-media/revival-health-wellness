@@ -19,7 +19,7 @@ import {
 const TITLE = "Xeomin Treatments for Smooth Skin";
 const PATH = "/xeomin/";
 const DESCRIPTION =
-  "Reveal smoother skin with Xeomin injections in Las Vegas. Revival Health and Wellness offers precise treatments for a naturally youthful, refreshed appearance.";
+  "Xeomin injections in Las Vegas at Revival Health and Wellness, used for a smoother, refreshed look with precise dosing. Book a consultation.";
 
 export async function generateMetadata() {
   const fallback = buildMetadata({

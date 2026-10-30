@@ -38,6 +38,8 @@ export type PageHeroProps = {
   breadcrumbs?: Crumb[];
   /** Cinematic background gallery images (looped slideshow). Defaults to the homepage set. */
   gallery?: string[];
+  /** Descriptive alt text aligned with `gallery`. Falls back to a clinic alt. */
+  galleryAlts?: string[];
   /** Primary CTA (defaults to booking). */
   primary?: PrimaryCta;
   /** Optional secondary CTA. */
@@ -56,6 +58,7 @@ export default function PageHero({
   description,
   breadcrumbs,
   gallery = HERO.gallery,
+  galleryAlts,
   primary = { label: "Book Your Free Consultation", href: ZENOTI, external: true },
   secondary,
   showTrustBar = true,
@@ -107,7 +110,11 @@ export default function PageHero({
           >
             <Image
               src={gallery[active]}
-              alt=""
+              alt={
+                galleryAlts?.[active] ||
+                galleryAlts?.[0] ||
+                "Revival Health and Wellness clinic in Las Vegas"
+              }
               fill
               priority
               sizes="100vw"

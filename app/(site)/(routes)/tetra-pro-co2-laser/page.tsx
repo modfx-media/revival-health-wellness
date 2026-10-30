@@ -18,7 +18,7 @@ import {
 const TITLE = "Deka Tetra Pro CO2 Laser Treatments";
 const PATH = "/tetra-pro-co2-laser/";
 const DESCRIPTION =
-  "Smooth your skin with the Deka Tetra Pro CO2 laser. Revival Health and Wellness uses this precise technology to treat aging skin and large pores with total customization.";
+  "Deka Tetra Pro CO2 laser treatments in Las Vegas at Revival Health and Wellness, used for aging skin, pores, and resurfacing.";
 
 export async function generateMetadata() {
   const fallback = buildMetadata({

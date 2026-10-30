@@ -6,7 +6,8 @@ import { blogCalendarDay, isFutureBlogDate } from "@/lib/cms/dates";
 import { loadPublishedBlog, relatedJournalPosts } from "@/lib/cms/posts";
 import { withCMS } from "@/lib/cms/safe";
 import { notFound } from "next/navigation";
-import { SITE } from "@/lib/metadata";
+import { composeTitle, SITE } from "@/lib/metadata";
+import { absoluteURL } from "@/lib/cms/url";
 import { breadcrumbSchema, jsonLd } from "@/lib/schema";
 import {
   BLOG_POSTS,
@@ -32,7 +33,7 @@ export const revalidate = 60;
 
 /** The post's own cover. A missing image stays empty instead of a shared default. */
 function resolvePost(post: BlogPost) {
-  const canonical = post.canonical ?? `${LIVE_ORIGIN}/${post.slug}/`;
+  const canonical = absoluteURL(`/blogs/${post.slug}`);
   const ownImage = post.ogImage || post.cover;
   const ogImage = ownImage
     ? ownImage.startsWith("http")
@@ -85,9 +86,9 @@ export async function generateMetadata({
 
   const { canonical, ogImage, metaTitle, metaDescription, publishDate } =
     resolvePost(post);
-  const fullTitle = `${metaTitle} | ${SITE.name}`;
+  const fullTitle = composeTitle(metaTitle);
 
-  return cmsPageMetadata({
+  const meta = await cmsPageMetadata({
     title: { absolute: fullTitle },
     description: metaDescription,
     metadataBase: new URL(SITE.url),
@@ -111,7 +112,19 @@ export async function generateMetadata({
       ...(ogImage ? { images: [ogImage] } : {}),
       creator: SITE.twitter,
     },
-  }, `/blogs/${slug}`);
+    }, `/blogs/${slug}`);
+  // Self-canonical even if a CMS field still points at the old /<slug>/ URL.
+  const self = absoluteURL(`/blogs/${slug}`);
+  return {
+    ...meta,
+    title: { absolute: composeTitle(fullTitle) },
+    alternates: { canonical: self },
+    openGraph: {
+      ...(typeof meta.openGraph === "object" ? meta.openGraph : {}),
+      title: composeTitle(fullTitle),
+      url: self,
+    },
+  };
 }
 
 export default async function BlogPostPage({

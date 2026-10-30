@@ -101,6 +101,7 @@ export type OverviewSection = {
   /** When true, renders the image with object-contain so the full source is visible (no cropping). Defaults to cover. */
   imageContain?: boolean;
   bullets?: string[];
+  imageAlt?: string;
 };
 
 export type PillarBlock = {
@@ -296,6 +297,7 @@ export function OverviewBlock({
             >
               <AnimatedPortraitFrame
                 src={section.image}
+                alt={section.imageAlt || section.heading}
                 aspect={section.imageAspectClass ?? aspectClass(section.imageAspect)}
                 cover={!section.imageContain}
               />
@@ -304,6 +306,7 @@ export function OverviewBlock({
             <ParallaxFrame className={reverse ? "lg:order-2" : ""}>
               <AnimatedPortraitFrame
                 src={section.image}
+                alt={section.imageAlt || section.heading}
                 aspect={section.imageAspectClass ?? aspectClass(section.imageAspect)}
                 cover={!section.imageContain}
               />

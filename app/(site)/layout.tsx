@@ -30,11 +30,11 @@ const inter = Inter({
 export const metadata: Metadata = {
   metadataBase: new URL("https://revivalhealthandwellnessgroup.com"),
   title: {
-    default: "Revival Health & Wellness | Weight Loss & Aesthetic Solutions",
+    default: "Revival Health & Wellness | Las Vegas Weight & Aesthetics",
     template: "%s | Revival Health & Wellness",
   },
   description:
-    "Revival Health and Wellness is a premier center specializing in weight loss, hormone replacement therapy, body contouring, and aesthetics in Las Vegas, NV.",
+    "Revival Health and Wellness offers weight loss, hormone therapy, sexual wellness, and aesthetics in Las Vegas, with clinics serving Henderson.",
   keywords: [
     "weight loss Las Vegas",
     "hormone therapy Las Vegas",

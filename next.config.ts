@@ -1,6 +1,8 @@
 import { withPayload } from "@payloadcms/next/withPayload";
 import type { NextConfig } from "next";
 
+import { wpLegacyRedirects } from "./lib/seo/wp-legacy-redirects";
+
 const nextConfig: NextConfig = {
   // Mirror the live site: every URL ends with a trailing slash.
   trailingSlash: true,
@@ -58,6 +60,18 @@ const nextConfig: NextConfig = {
         destination: "/onda-pro/",
         permanent: true,
       },
+      // WordPress sitemaps still submitted in Search Console.
+      ...[
+        "/sitemap_index.xml",
+        "/page-sitemap.xml",
+        "/wp-sitemap.xml",
+        "/post-sitemap.xml",
+      ].map((source) => ({
+        source,
+        destination: "/sitemap.xml",
+        permanent: true,
+      })),
+      ...wpLegacyRedirects,
     ];
   },
 };

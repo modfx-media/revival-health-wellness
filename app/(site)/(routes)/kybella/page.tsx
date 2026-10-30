@@ -18,7 +18,7 @@ import {
 const TITLE = "Kybella Treatment for Under Chin Fat";
 const PATH = "/kybella/";
 const DESCRIPTION =
-  "Dissolve fat under the chin with Kybella treatment in Las Vegas. Revival Health and Wellness offers this injectable to help you achieve a more sculpted jawline.";
+  "Kybella treatment in Las Vegas at Revival Health and Wellness reduces fullness under the chin for a more defined jawline.";
 
 export async function generateMetadata() {
   const fallback = buildMetadata({

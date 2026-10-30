@@ -19,7 +19,7 @@ const TITLE = "Men's Hormone Therapy";
 const PATH = "/mens-hormone-therapy/";
 const META_TITLE = "Men's Hormone Replacement Therapy";
 const DESCRIPTION =
-  "Improve your drive and muscle tone with men's hormone therapy in Las Vegas. Revival Health and Wellness provides expert care to help men optimize their health.";
+  "Men's hormone therapy in Las Vegas at Revival Health and Wellness, focused on energy, drive, and a plan built from your labs.";
 
 export async function generateMetadata() {
   const fallback = buildMetadata({

@@ -78,6 +78,13 @@ export type SWSection =
       }[];
     }
   | {
+      kind: "faq";
+      eyebrow?: string;
+      heading: string;
+      intro?: string;
+      items: { question: string; answer: string }[];
+    }
+  | {
       kind: "video";
       eyebrow?: string;
       heading?: string;
@@ -120,6 +127,7 @@ export type SWPage = {
   titleNode?: { pre?: string; accent: string; post?: string }; // for animated hero
   description: string;
   gallery: string[]; // hero rotating images
+  galleryAlts?: string[];
   breadcrumbs: { label: string; href?: string }[];
   sections: SWSection[];
   ctaTitle?: string;
@@ -233,10 +241,9 @@ export const SW_CONTENT: Record<string, SWPage> = {
       "Book a free, private consultation. We will walk through your goals, answer every question, and design a plan that fits your body and lifestyle.",
     relatedSlugs: ["men", "women"],
     meta: {
-      title:
-        "Sexual Wellness for Men & Women | Revival Health & Wellness",
+      title: "Sexual Wellness for Men & Women",
       description:
-        "Improve your confidence w/ sexual wellness solutions for men and women in Las Vegas. Revival Health and Wellness offers private care to help you feel your best.",
+        "Sexual wellness for men and women in Las Vegas. Revival Health and Wellness offers private, physician-supervised care at its Henderson and Summerlin clinics.",
       canonical:
         "https://revivalhealthandwellnessgroup.com/sexual-wellness/",
       ogImage:
@@ -343,10 +350,112 @@ export const SW_CONTENT: Record<string, SWPage> = {
           },
         ],
       },
+      {
+        kind: "overview",
+        eyebrow: "Las Vegas and Henderson",
+        heading: "Men's sexual wellness at both Revival clinics",
+        paragraphs: [
+          "Men come to Revival Health and Wellness for erectile function, performance, and pelvic floor strength. Visits are private and handled by the clinic's licensed providers.",
+          "The Henderson / Southwest clinic is at 7220 S. Cimarron Road, Suite 140, Las Vegas, NV 89113. The Summerlin / Northwest clinic is at 2585 Box Canyon Drive, Suite 150, Las Vegas, NV 89128. Hours differ by location and are listed on the contact page.",
+        ],
+        image: "/images/sexual-wellness/live/hub-men.png",
+        imageAlt: "Men's sexual wellness care at Revival Health and Wellness",
+      },
+      {
+        kind: "features",
+        eyebrow: "Who it's for",
+        heading: "Men comparing a plan, not a single product",
+        intro:
+          "This hub is for adults looking at the men's treatments Revival already offers. A provider helps you decide which option, or which combination, fits your history and goals.",
+        items: [
+          {
+            title: "Erectile function",
+            text: "P-Shot, GAINSWave, TriMix, Priapus Toxin, and Viagra are the men's options when a pill is not the whole plan.",
+            icon: "heart",
+          },
+          {
+            title: "Pelvic floor strength",
+            text: "Emsella is the non-invasive, fully clothed HIFEM option for pelvic floor strengthening and bladder control.",
+            icon: "activity",
+          },
+          {
+            title: "A structured protocol",
+            text: "P-Long sits alongside the visit-by-visit treatments for men who want a longer program.",
+            icon: "target",
+          },
+          {
+            title: "Either Las Vegas clinic",
+            text: "Henderson / Southwest and Summerlin / Northwest both see men's sexual wellness patients.",
+            icon: "user",
+          },
+        ],
+        tone: "cream",
+      },
+      {
+        kind: "process",
+        eyebrow: "What to expect",
+        heading: "How a men's consultation works",
+        intro:
+          "The first step is the same free consultation used across Revival. The provider explains the specific treatment after that visit.",
+        steps: [
+          {
+            title: "Book the free consultation",
+            text: "Use the booking link or call the clinic you want. Henderson / Southwest is (702) 963-1154. Summerlin / Northwest is (702) 725-1588.",
+            icon: "handshake",
+          },
+          {
+            title: "Review history and goals",
+            text: "A licensed Revival provider meets with you and talks through what you want to change.",
+            icon: "user",
+          },
+          {
+            title: "Match a treatment path",
+            text: "Most men build a plan combining two or three of the treatments on this page, when that fits the visit.",
+            icon: "check",
+          },
+          {
+            title: "Follow that treatment's protocol",
+            text: "Scheduling, what the session feels like, and follow-up are covered on the page for the option you choose.",
+            icon: "timer",
+          },
+        ],
+      },
+      {
+        kind: "faq",
+        eyebrow: "Questions",
+        heading: "Men's sexual wellness questions",
+        items: [
+          {
+            question: "Which men's treatments does Revival offer?",
+            answer:
+              "The men's pages cover the P-Shot, GAINSWave, Viagra, TriMix, Priapus Toxin, Emsella, and P-Long. Each treatment has its own page describing how it works.",
+          },
+          {
+            question: "Where are the Las Vegas clinics?",
+            answer:
+              "Henderson / Southwest is 7220 S. Cimarron Road, Suite 140, Las Vegas, NV 89113. Summerlin / Northwest is 2585 Box Canyon Drive, Suite 150, Las Vegas, NV 89128. Both serve patients from Las Vegas and Henderson.",
+          },
+          {
+            question: "Is the first visit a free consultation?",
+            answer:
+              "Yes. You can book a free consultation so a provider can build a private plan around your goals.",
+          },
+          {
+            question: "Can treatments be combined?",
+            answer:
+              "The clinic notes that most men build a plan combining two or three of these options, when that makes sense after the consultation.",
+          },
+        ],
+      },
     ],
     ctaTitle: "Take back control of your performance.",
     ctaSubtitle:
       "Book a free consultation with a Revival provider. We will build a discreet, personalized plan around your goals.",
+    galleryAlts: [
+      "Men's sexual wellness consultation at Revival Health and Wellness",
+      "Man outdoors, representing confidence and men's health",
+      "Man training, representing men's fitness and sexual wellness",
+    ],
     relatedSlugs: [
       "p-shot-tm",
       "gainswave-tm",
@@ -357,10 +466,9 @@ export const SW_CONTENT: Record<string, SWPage> = {
       "p-long",
     ],
     meta: {
-      title:
-        "Sexual Wellness Solutions for Men | Revival Health & Wellness",
+      title: "Men's Sexual Wellness, Las Vegas",
       description:
-        "Rediscover your peak performance w/ sexual wellness for men in Las Vegas. Revival Health and Wellness offers private, effective treatments for ED, low T & more.",
+        "Men's sexual wellness in Las Vegas for ED, performance, and pelvic floor care. Private visits at Revival's Henderson and Summerlin clinics.",
       canonical: "https://revivalhealthandwellnessgroup.com/men/",
     },
     schema: { medicalTherapyName: "Men's Sexual Wellness Therapy" },
@@ -514,8 +622,7 @@ export const SW_CONTENT: Record<string, SWPage> = {
       "Book a free consultation with a Revival provider. Everything discussed stays between you and our medical team.",
     relatedSlugs: ["o-shot-tm", "gainswavetm-for-her", "emsella-2"],
     meta: {
-      title:
-        "Sexual Wellness Solutions for Women | Revival Health & Wellness",
+      title: "Women's Wellness in Las Vegas",
       description:
         "Enhance your intimacy & comfort w/ sexual wellness for women in Las Vegas. Revival Health and Wellness provides personalized care for women's intimate health.",
       canonical: "https://revivalhealthandwellnessgroup.com/women/",
@@ -615,7 +722,7 @@ export const SW_CONTENT: Record<string, SWPage> = {
     meta: {
       title: "P-Shot Treatment for Men | Revival Health & Wellness",
       description:
-        "Enhance your health naturally with P-shot treatment in Las Vegas. Revival Health and Wellness offers the P-Shot™ to improve performance, sensitivity, and function.",
+        "P-Shot treatment in Las Vegas uses platelet-rich plasma. Revival Health and Wellness offers it to support performance and sensitivity.",
       canonical: "https://revivalhealthandwellnessgroup.com/p-shot-tm/",
     },
     schema: { medicalTherapyName: "P-Shot® (Priapus Shot®) PRP Therapy" },
@@ -724,16 +831,87 @@ export const SW_CONTENT: Record<string, SWPage> = {
         ],
         tone: "cream",
       },
+      {
+        kind: "overview",
+        eyebrow: "Las Vegas and Henderson",
+        heading: "GAINSWave at both Revival clinics",
+        paragraphs: [
+          "GAINSWave is the acoustic wave option for men who want a non-invasive approach to erectile function and performance. Revival offers it to patients in Las Vegas and Henderson.",
+          "You can be seen at the Henderson / Southwest clinic, 7220 S. Cimarron Road, Suite 140, Las Vegas, NV 89113, or the Summerlin / Northwest clinic, 2585 Box Canyon Drive, Suite 150, Las Vegas, NV 89128.",
+        ],
+        image: "/images/sexual-wellness/gainswave-tm/gainswave-tm-men-2.jpg",
+        imageAlt: "GAINSWave acoustic wave therapy for men in Las Vegas",
+      },
+      {
+        kind: "process",
+        eyebrow: "Consultation",
+        heading: "What a GAINSWave visit includes",
+        intro:
+          "The visit starts with a free consultation. The provider uses your history and goals to decide whether acoustic wave therapy belongs in the plan.",
+        steps: [
+          {
+            title: "Free consultation",
+            text: "A Revival provider reviews your history and goals before recommending GAINSWave.",
+            icon: "handshake",
+          },
+          {
+            title: "Acoustic wave session",
+            text: "High-frequency acoustic waves are applied to the penis to address blood flow, as described on this page.",
+            icon: "wave",
+          },
+          {
+            title: "Same-day activity",
+            text: "The treatment is described as having no downtime, with a return to normal activity the same day.",
+            icon: "timer",
+          },
+          {
+            title: "Either Las Vegas clinic",
+            text: "Book Henderson / Southwest at (702) 963-1154 or Summerlin / Northwest at (702) 725-1588.",
+            icon: "user",
+          },
+        ],
+      },
+      {
+        kind: "faq",
+        eyebrow: "Questions",
+        heading: "GAINSWave questions",
+        items: [
+          {
+            question: "Who is GAINSWave for?",
+            answer:
+              "The page describes it for men over 30, including men with erectile dysfunction, men focused on performance, men who want to avoid a daily medication, and men combining it with other Revival treatments.",
+          },
+          {
+            question: "What happens during a session?",
+            answer:
+              "High-frequency acoustic waves are applied to the penis. Revival describes this as a way to address micro-plaque and blood flow. No downtime is listed for the session.",
+          },
+          {
+            question: "Where is GAINSWave offered?",
+            answer:
+              "At both Revival clinics: Henderson / Southwest on S. Cimarron Road and Summerlin / Northwest on Box Canyon Drive, both in Las Vegas and serving Henderson as well.",
+          },
+          {
+            question: "How do I start?",
+            answer:
+              "Book a free consultation. The provider reviews your history and goals and tells you whether GAINSWave belongs in the plan.",
+          },
+        ],
+      },
     ],
     ctaTitle: "Is GAINSWave™ right for you?",
     ctaSubtitle:
       "A free consultation is the fastest way to find out. We will review your history and goals with you.",
+    galleryAlts: [
+      "Man seated during GAINSWave acoustic wave therapy",
+      "GAINSWave treatment room for men's sexual wellness",
+      "Close view of GAINSWave therapy for men",
+    ],
     relatedSlugs: ["p-shot-tm", "priapus-toxin", "trimix", "men"],
     meta: {
-      title:
-        "GAINSWave Therapy for Performance | Revival Health & Wellness",
+      title: "GAINSWave Therapy in Las Vegas",
       description:
-        "Experience better blood flow with GAINSWave therapy in Las Vegas. Revival Health and Wellness uses acoustic wave therapy to improve erectile function naturally.",
+        "GAINSWave acoustic wave therapy in Las Vegas for erectile function. Revival Health and Wellness offers this non-invasive option at both clinics.",
       canonical: "https://revivalhealthandwellnessgroup.com/gainswave-tm/",
     },
     schema: { medicalTherapyName: "GAINSWave™ Acoustic Wave Therapy" },
@@ -925,7 +1103,7 @@ export const SW_CONTENT: Record<string, SWPage> = {
     meta: {
       title: "P-Long Protocol for Men | Revival Health & Wellness",
       description:
-        "Look into the P-Long in Las Vegas for a proven way to improve your size and function. Revival Health and Wellness helps you reach your goals with medical care.",
+        "The P-Long protocol in Las Vegas is a structured men's program at Revival Health and Wellness. A consultation covers whether it fits your goals.",
       canonical: "https://revivalhealthandwellnessgroup.com/p-long/",
     },
     schema: { medicalTherapyName: "P-Long® Protocol" },
@@ -1206,7 +1384,7 @@ export const SW_CONTENT: Record<string, SWPage> = {
     meta: {
       title: "Priapus Toxin™ Treatments | Revival Health & Wellness",
       description:
-        "Boost your performance with Priapus Toxin™ in Las Vegas. Revival Health and Wellness offers this innovative treatment to enhance blood flow and erectile function.",
+        "Priapus Toxin in Las Vegas is a non-surgical men's treatment at Revival Health and Wellness, aimed at blood flow and erectile function.",
       canonical: "https://revivalhealthandwellnessgroup.com/priapus-toxin/",
     },
     schema: { medicalTherapyName: "Priapus Toxin™ Therapy" },
@@ -1323,7 +1501,7 @@ export const SW_CONTENT: Record<string, SWPage> = {
       title:
         "Emsella™ Pelvic Floor Treatment | Revival Health & Wellness",
       description:
-        "Improve your bladder control and intimacy with Emsella™ in Las Vegas. Revival Health and Wellness offers this comfortable, fully-clothed treatment for everyone.",
+        "Emsella in Las Vegas is a fully clothed pelvic floor treatment at Revival Health and Wellness for bladder control and intimacy.",
       canonical: "https://revivalhealthandwellnessgroup.com/emsella/",
     },
     schema: { medicalTherapyName: "EMSELLA™ HIFEM Pelvic Floor Therapy (Men)" },
@@ -1431,7 +1609,7 @@ export const SW_CONTENT: Record<string, SWPage> = {
     meta: {
       title: "O-Shot Treatment for Women | Revival Health & Wellness",
       description:
-        "Improve your sensitivity & health w/ O-Shot treatment in Las Vegas. Revival Health and Wellness offers the O-Shot™ to enhance pleasure, function, and confidence.",
+        "O-Shot treatment in Las Vegas uses platelet-rich plasma. Revival Health and Wellness offers it for women's sensitivity, function, and confidence.",
       canonical: "https://revivalhealthandwellnessgroup.com/o-shot-tm/",
     },
     schema: { medicalTherapyName: "O-Shot® (Orgasm Shot®) PRP Therapy" },
@@ -1680,7 +1858,7 @@ export const SW_CONTENT: Record<string, SWPage> = {
       title:
         "EMSELLA Pelvic Floor Therapy | Revival Health & Wellness",
       description:
-        "Strengthen your pelvic floor and stop leaks with EMSELLA in Las Vegas. Revival Health and Wellness offers this FDA-cleared treatment for women's pelvic health.",
+        "EMSELLA in Las Vegas is an FDA-cleared pelvic floor treatment at Revival Health and Wellness for bladder leaks and strength.",
       canonical: "https://revivalhealthandwellnessgroup.com/emsella-2/",
     },
     schema: {

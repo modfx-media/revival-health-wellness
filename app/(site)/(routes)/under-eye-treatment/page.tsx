@@ -19,7 +19,7 @@ import {
 const TITLE = "Under Eye & Tear Trough Care";
 const PATH = "/under-eye-treatment/";
 const DESCRIPTION =
-  "Brighten and rejuvenate the under-eye area with tear trough treatments in Las Vegas. Revival Health and Wellness targets dark circles, puffiness, and fine lines for a refreshed, well-rested look.";
+  "Under-eye treatment in Las Vegas at Revival Health and Wellness for dark circles, puffiness, and fine lines. Book a consultation.";
 
 export async function generateMetadata() {
   const fallback = buildMetadata({

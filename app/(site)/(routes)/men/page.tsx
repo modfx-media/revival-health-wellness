@@ -1,7 +1,6 @@
 import { cmsPageMetadata } from "@/lib/cms/generateMeta";
-import type { Metadata } from "next";
 import { buildMetadata } from "@/lib/metadata";
-import { serviceSchema, breadcrumbSchema, jsonLd } from "@/lib/schema";
+import { serviceSchema, breadcrumbSchema, faqSchema, jsonLd } from "@/lib/schema";
 import SexualWellnessPage from "@/components/sexual-wellness/SexualWellnessPage";
 import { SW_CONTENT } from "@/lib/content/sexual-wellness";
 
@@ -29,6 +28,11 @@ export default function Page() {
               description: data.meta.description,
               path: `/${SLUG}/`,
             }),
+            faqSchema(
+              data.sections.flatMap((section) =>
+                section.kind === "faq" ? section.items : [],
+              ),
+            ),
             breadcrumbSchema(
               data.breadcrumbs.map((b) => ({
                 name: b.label,

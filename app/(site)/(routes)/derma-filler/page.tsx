@@ -21,7 +21,7 @@ import {
 const TITLE = "Dermal Filler Treatments";
 const PATH = "/derma-filler/";
 const DESCRIPTION =
-  "Restore volume and enhance your features with dermal filler treatments in Las Vegas. Revival Health and Wellness offers Juvéderm® and the Galderma Restylane® collection.";
+  "Dermal fillers in Las Vegas at Revival Health and Wellness, including Juvéderm and the Galderma Restylane collection. Book a consultation.";
 
 export async function generateMetadata() {
   const fallback = buildMetadata({

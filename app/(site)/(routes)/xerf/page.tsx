@@ -18,7 +18,7 @@ import {
 const TITLE = "Xerf Skin Tightening & Rejuvenation";
 const PATH = "/xerf/";
 const DESCRIPTION =
-  "Non-invasive skin tightening and rejuvenation for face and body with Xerf in Las Vegas. Revival Health and Wellness delivers lift, firmness, and glow - without downtime.";
+  "Xerf skin tightening in Las Vegas for face and body at Revival Health and Wellness, with no downtime after treatment. Book a consultation.";
 
 export async function generateMetadata() {
   const fallback = buildMetadata({

@@ -39,6 +39,52 @@ const FEATURES = [
   },
 ];
 
+function FatToSlimLoop() {
+  const wrapRef = useRef<HTMLDivElement>(null);
+  const [play, setPlay] = useState(false);
+
+  useEffect(() => {
+    const node = wrapRef.current;
+    if (!node) return;
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry?.isIntersecting) setPlay(true);
+      },
+      { rootMargin: "240px" },
+    );
+    observer.observe(node);
+    return () => observer.disconnect();
+  }, []);
+
+  return (
+    <div ref={wrapRef} className="relative h-[32rem] w-[20rem]">
+      {play ? (
+        <video
+          className="h-full w-full object-contain object-bottom"
+          poster="/images/services/fat-to-slim-poster.webp"
+          autoPlay
+          muted
+          loop
+          playsInline
+          preload="none"
+          aria-label="Animation of body fat decreasing over time"
+        >
+          <source src="/videos/fat-to-slim.webm" type="video/webm" />
+          <source src="/videos/fat-to-slim.mp4" type="video/mp4" />
+        </video>
+      ) : (
+        <Image
+          src="/images/services/fat-to-slim-poster.webp"
+          alt="Still frame of a body fat-loss animation"
+          fill
+          sizes="320px"
+          className="object-contain object-bottom"
+        />
+      )}
+    </div>
+  );
+}
+
 export default function BodyTransformSection() {
   // 0 = before (fat) · 1 = after (lean)
   const progress = useMotionValue(0);
@@ -188,7 +234,8 @@ export default function BodyTransformSection() {
             />
           ))}
 
-          {/* Animated fat → slim GIF */}
+          {/* Animated fat → slim loop. Poster is the lightweight stand-in;
+              the video itself loads only once the graphic is near the viewport. */}
           <motion.div
             initial={{ opacity: 0, scale: 0.95 }}
             whileInView={{ opacity: 1, scale: 1 }}
@@ -197,19 +244,9 @@ export default function BodyTransformSection() {
             style={{ filter: glow }}
             className="relative z-10"
           >
-            <div className="relative h-[32rem] w-[20rem]">
-              <Image
-                src="/images/services/fat-to-slim.gif"
-                alt="Body fat-loss transformation animation"
-                fill
-                sizes="320px"
-                priority
-                unoptimized
-                className="object-contain object-bottom"
-              />
-              {/* warm gold tint to match the palette */}
-              <div className="pointer-events-none absolute inset-0 bg-gradient-to-b from-revival-gold/10 via-transparent to-[#8a5a2b]/15 mix-blend-overlay" />
-            </div>
+            <FatToSlimLoop />
+            {/* warm gold tint to match the palette */}
+            <div className="pointer-events-none absolute inset-0 bg-gradient-to-b from-revival-gold/10 via-transparent to-[#8a5a2b]/15 mix-blend-overlay" />
           </motion.div>
 
           {/* Floating "live metric" glass chips */}

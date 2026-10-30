@@ -7,7 +7,7 @@ import WeightLossPageContent from "@/components/weight-loss/WeightLossPageConten
 const TITLE = "Medical Weight Loss Clinic";
 const PATH = "/weight-loss/";
 const DESCRIPTION =
-  "Reach your goals at our weight loss clinic in Summerlin and Henderson. Revival Health and Wellness provides the support you need to lose weight and keep it off.";
+  "Reach your goals at our weight loss clinic in Summerlin and Henderson. Revival Health and Wellness helps you lose weight and keep it off.";
 const CANONICAL = new URL(PATH, SITE.url).toString();
 const FULL_TITLE = `${TITLE} | ${SITE.name}`;
 

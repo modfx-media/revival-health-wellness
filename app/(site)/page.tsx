@@ -1,5 +1,4 @@
 import { cmsPageMetadata } from "@/lib/cms/generateMeta";
-import type { Metadata } from "next";
 import HeroSection from "@/components/home/HeroSection";
 import MarqueeStrip from "@/components/home/MarqueeStrip";
 import ServicesGrid from "@/components/home/ServicesGrid";
@@ -23,9 +22,9 @@ import { getDisplayedGoogleReviews } from "@/lib/google-reviews";
 
 export async function generateMetadata() {
   const fallback = buildMetadata({
-  title: "Las Vegas Medical Spa & Wellness",
+  title: "Las Vegas Weight & Aesthetics",
   description:
-    "Revival Health and Wellness offers weight loss, hormone therapy, sexual wellness, and aesthetics in Las Vegas. Revitalize, rebalance, and reveal your best self.",
+    "Revival Health and Wellness offers weight loss, hormone therapy, sexual wellness, and aesthetics in Las Vegas, with clinics serving Henderson.",
   path: "/",
 });
   return cmsPageMetadata(fallback);

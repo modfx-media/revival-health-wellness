@@ -11,7 +11,12 @@ import {
   CheckCircle2,
   Sparkles,
 } from "lucide-react";
-import { buildMetadata, SITE } from "@/lib/metadata";
+import {
+  areaLeafDescription,
+  areaLeafTitle,
+  buildMetadata,
+  SITE,
+} from "@/lib/metadata";
 import { breadcrumbSchema, faqSchema, jsonLd } from "@/lib/schema";
 import PageHero from "@/components/ui/PageHero";
 import CTABanner from "@/components/ui/CTABanner";
@@ -45,21 +50,16 @@ export async function generateMetadata({
   const service = getService(serviceSlug);
   if (!city?.live || !service?.live) return { title: "Not Found" };
 
-  // Vary the title pattern by service category to avoid duplicate patterns
-  // across pages — every leaf has a distinct <title>.
-  const titleVariants: Record<string, string> = {
-    "Hormone Therapy": `Hormone Replacement Therapy in ${city.name}, NV | Bio-Identical HRT`,
-    "Weight Loss": `Medical Weight Loss in ${city.name}, NV | GLP-1 & Semaglutide Programs`,
-    "Sexual Wellness": `${service.name} in ${city.name}, NV | Concierge Sexual Wellness`,
-    Aesthetics: `${service.name} in ${city.name}, NV | Expert Injectors`,
-    "Body Contouring": `${service.name} in ${city.name}, NV | Non-Invasive Body Sculpting`,
-    Wellness: `${service.name} in ${city.name}, NV | Concierge IV & Wellness`,
-  };
-  const title =
-    titleVariants[service.category] ??
-    `${service.name} in ${city.name}, NV`;
-
-  const description = `${service.shortDescription} Serving ${city.name} and greater ${city.county} — ${city.driveTimeFromClinic}.`;
+  // Service + city stays unique. The helper keeps the brand and the
+  // description inside 60 / 158 characters without cutting a word.
+  const title = areaLeafTitle(service.name, city.name);
+  const description = areaLeafDescription({
+    serviceName: service.name,
+    shortDescription: service.shortDescription,
+    cityName: city.name,
+    county: city.county,
+    driveTime: city.driveTimeFromClinic,
+  });
 
   return cmsPageMetadata(
     buildMetadata({
