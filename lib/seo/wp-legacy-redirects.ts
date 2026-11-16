@@ -97,6 +97,11 @@ export const wpLegacyRedirects: LegacyRedirect[] = [
     permanent: true,
   },
   {
+    source: '/author/developer',
+    destination: '/',
+    permanent: true,
+  },
+  {
     source: '/beyond-the-pill-why-trimix-is-the-breakthrough-ed-treatment-men-turn-to-when-medications-fail',
     destination: '/blogs/beyond-the-pill-why-trimix-is-the-breakthrough-ed-treatment-men-turn-to-when-medications-fail/',
     permanent: true,
@@ -129,6 +134,11 @@ export const wpLegacyRedirects: LegacyRedirect[] = [
   {
     source: '/blog-posts/glp-1-medication-for-effective-weight-loss-management',
     destination: '/glp-1/',
+    permanent: true,
+  },
+  {
+    source: '/blog-posts/gw-magazine-october-2024',
+    destination: '/gainswave-tm/',
     permanent: true,
   },
   {
@@ -362,6 +372,16 @@ export const wpLegacyRedirects: LegacyRedirect[] = [
     permanent: true,
   },
   {
+    source: '/sample-page',
+    destination: '/',
+    permanent: true,
+  },
+  {
+    source: '/search',
+    destination: '/',
+    permanent: true,
+  },
+  {
     source: '/see-why-the-sexual-medicine-society-of-north-america-advises-avoiding-penile-enhancement-surgery-and-fillers',
     destination: '/blogs/see-why-the-sexual-medicine-society-of-north-america-advises-avoiding-penile-enhancement-surgery-and-fillers/',
     permanent: true,
@@ -447,6 +467,11 @@ export const wpLegacyRedirects: LegacyRedirect[] = [
     permanent: true,
   },
   {
+    source: '/terms-conditions',
+    destination: '/',
+    permanent: true,
+  },
+  {
     source: '/the-7-signs-its-time-for-medical-weight-loss-support-not-another-diet-that-fails',
     destination: '/blogs/the-7-signs-its-time-for-medical-weight-loss-support-not-another-diet-that-fails/',
     permanent: true,
@@ -459,6 +484,11 @@ export const wpLegacyRedirects: LegacyRedirect[] = [
   {
     source: '/the-power-of-emsella-strengthening-your-core-for-better-health',
     destination: '/blogs/the-power-of-emsella-strengthening-your-core-for-better-health/',
+    permanent: true,
+  },
+  {
+    source: '/title',
+    destination: '/',
     permanent: true,
   },
   {
@@ -571,6 +601,7 @@ export const wpLegacyRedirectNotes: { source: string; destination: string; reaso
   { source: '/aesthetics/skin/under-eye-treatment/', destination: '/under-eye-treatment/', reason: 'Nested under-eye page' },
   { source: '/areas-we-serve/goodsprings/octopro-onda/', destination: '/areas-we-serve/goodsprings/onda-pro/', reason: 'Renamed ONDA Pro area page' },
   { source: '/areas-we-serve/whitney/octopro-onda/', destination: '/areas-we-serve/whitney/onda-pro/', reason: 'Renamed ONDA Pro area page' },
+  { source: '/author/developer/', destination: '/', reason: 'WordPress developer author archive; no matching staff page' },
   { source: '/beyond-the-pill-why-trimix-is-the-breakthrough-ed-treatment-men-turn-to-when-medications-fail/', destination: '/blogs/beyond-the-pill-why-trimix-is-the-breakthrough-ed-treatment-men-turn-to-when-medications-fail/', reason: 'Exact blog slug' },
   { source: '/blog-posts/6-powerful-benefits-of-gainswave-tm-therapy/', destination: '/gainswave-tm/', reason: 'GAINSWave article' },
   { source: '/blog-posts/a-non-invasive-solution-for-erectile-dysfunction/', destination: '/gainswave-tm/', reason: 'Non-invasive ED therapy is GAINSWave' },
@@ -578,6 +609,7 @@ export const wpLegacyRedirectNotes: { source: string; destination: string; reaso
   { source: '/blog-posts/common-causes-of-erectile-dysfunction-in-men/', destination: '/men/', reason: "Men's ED overview" },
   { source: '/blog-posts/emsella-treatment-for-ed/', destination: '/emsella/', reason: 'Emsella article' },
   { source: '/blog-posts/glp-1-medication-for-effective-weight-loss-management/', destination: '/glp-1/', reason: 'GLP-1 article' },
+  { source: '/blog-posts/gw-magazine-october-2024/', destination: '/gainswave-tm/', reason: 'GW magazine post; closest live page is GAINSWave' },
   { source: '/blog-posts/how-does-ed-affect-a-relationship/', destination: '/men/', reason: "Men's ED overview" },
   { source: '/blog-posts/how-emsella-improves-neuromuscular-control-for-ed/', destination: '/blogs/how-emsella-improves-neuromuscular-control-for-ed/', reason: 'Exact blog slug' },
   { source: '/blog-posts/how-ozempic-simplifies-weight-loss/', destination: '/glp-1/', reason: 'Ozempic is a GLP-1 medication' },
@@ -624,6 +656,8 @@ export const wpLegacyRedirectNotes: { source: string; destination: string; reaso
   { source: '/questioning-viagra-consider-ed-alternatives/', destination: '/blogs/questioning-viagra-consider-ed-alternatives/', reason: 'Exact blog slug' },
   { source: '/revitalize-your-health-with-vitamin-booster-injections-in-las-vegas/', destination: '/blogs/revitalize-your-health-with-vitamin-booster-injections-in-las-vegas/', reason: 'Exact blog slug' },
   { source: '/revival-health-wellness-reigniting-your-vitality-in-las-vegas-nv/', destination: '/blogs/revival-health-wellness-reigniting-your-vitality-in-las-vegas-nv/', reason: 'Exact blog slug' },
+  { source: '/sample-page/', destination: '/', reason: 'WordPress sample page; no successor' },
+  { source: '/search/', destination: '/', reason: 'WordPress search URL; no live search page' },
   { source: '/see-why-the-sexual-medicine-society-of-north-america-advises-avoiding-penile-enhancement-surgery-and-fillers/', destination: '/blogs/see-why-the-sexual-medicine-society-of-north-america-advises-avoiding-penile-enhancement-surgery-and-fillers/', reason: 'Exact blog slug' },
   { source: '/self-injection-simplified-a-step-by-step-guide-to-using-trimix-at-home-for-men-in-las-vegas/', destination: '/blogs/self-injection-simplified-a-step-by-step-guide-to-using-trimix-at-home-for-men-in-las-vegas/', reason: 'Exact blog slug' },
   { source: '/sexual-wellness-enhancement-services-in-las-vegas/', destination: '/sexual-wellness/', reason: 'Audit: sexual wellness service page' },
@@ -641,9 +675,11 @@ export const wpLegacyRedirectNotes: { source: string; destination: string; reaso
   { source: '/sexual-wellness/women/o-shot/', destination: '/o-shot-tm/', reason: 'Nested O-Shot page' },
   { source: '/shockwave-therapy-the-secret-to-a-rock-solid-you/', destination: '/blogs/shockwave-therapy-the-secret-to-a-rock-solid-you/', reason: 'Exact blog slug' },
   { source: '/summer-ready-gainswave-for-women/', destination: '/blogs/summer-ready-gainswave-for-women/', reason: 'Exact blog slug' },
+  { source: '/terms-conditions/', destination: '/', reason: 'No indexable terms page; privacy policy is noindex' },
   { source: '/the-7-signs-its-time-for-medical-weight-loss-support-not-another-diet-that-fails/', destination: '/blogs/the-7-signs-its-time-for-medical-weight-loss-support-not-another-diet-that-fails/', reason: 'Exact blog slug' },
   { source: '/the-emotional-triggers-sabotaging-your-weight-loss-and-why-willpower-alone-is-not-the-answer/', destination: '/blogs/the-emotional-triggers-sabotaging-your-weight-loss-and-why-willpower-alone-is-not-the-answer/', reason: 'Exact blog slug' },
   { source: '/the-power-of-emsella-strengthening-your-core-for-better-health/', destination: '/blogs/the-power-of-emsella-strengthening-your-core-for-better-health/', reason: 'Exact blog slug' },
+  { source: '/title/', destination: '/', reason: 'WordPress leftover slug; no successor' },
   { source: '/transform-your-body-fast-how-emsculpt-neo-builds-muscle-and-eliminates-fat-in-30-minutes/', destination: '/blogs/transform-your-body-fast-how-emsculpt-neo-builds-muscle-and-eliminates-fat-in-30-minutes/', reason: 'Exact blog slug' },
   { source: '/vitamin-injection-benefits-for-weight-loss/', destination: '/blogs/vitamin-injection-benefits-for-weight-loss-in-henderson/', reason: 'Audit: renamed vitamin-injection post' },
   { source: '/weight-loss/glp-1/', destination: '/glp-1/', reason: 'Nested GLP-1 page' },

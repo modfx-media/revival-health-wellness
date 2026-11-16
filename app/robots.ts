@@ -6,7 +6,8 @@ export default function robots(): MetadataRoute.Robots {
     rules: {
       userAgent: "*",
       allow: "/",
-      disallow: ["/sample-page/", "/title/"],
+      // /sample-page/ and /title/ used to be disallowed. They now 308 to /,
+      // so crawlers must be allowed to request them and see the redirect.
     },
     sitemap: `${SITE.url}/sitemap.xml`,
   };
