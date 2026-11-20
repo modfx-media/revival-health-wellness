@@ -1,9 +1,11 @@
 import type { Metadata } from "next";
 
+import { mergeCmsMeta } from "./merge-meta";
 import { withCMS } from "./safe";
-import { queryPublishedMeta, type CmsDoc } from "./queries";
-import { composeTitle } from "@/lib/metadata";
-import { absoluteURL, normalizePath } from "./url";
+import { queryPublishedMeta } from "./queries";
+import { normalizePath } from "./url";
+
+export { blogDocumentTitle, mergeCmsMeta, publishedSeoText } from "./merge-meta";
 
 function pathFromMetadata(meta: Metadata): string | null {
   const canonical = meta.alternates?.canonical;
@@ -17,41 +19,6 @@ function pathFromMetadata(meta: Metadata): string | null {
   } catch {
     return null;
   }
-}
-
-export function mergeCmsMeta(fallback: Metadata, doc: CmsDoc): Metadata {
-  const meta = doc.meta ?? {};
-  const title =
-    (typeof meta.title === "string" && meta.title) ||
-    (typeof doc.title === "string" && doc.title) ||
-    undefined;
-  const description =
-    (typeof meta.description === "string" && meta.description) ||
-    (typeof doc.excerpt === "string" && doc.excerpt) ||
-    undefined;
-  const path = typeof doc.path === "string" ? doc.path : "/";
-  const canonical =
-    (typeof meta.canonicalUrl === "string" && meta.canonicalUrl) ||
-    absoluteURL(path);
-
-  const fullTitle = title ? composeTitle(title) : undefined;
-
-  return {
-    ...fallback,
-    ...(fullTitle ? { title: { absolute: fullTitle } } : {}),
-    ...(description ? { description } : {}),
-    alternates: { canonical },
-    robots: {
-      index: !meta.noIndex,
-      follow: !meta.noFollow,
-    },
-    openGraph: {
-      ...(typeof fallback.openGraph === "object" ? fallback.openGraph : {}),
-      ...(fullTitle ? { title: fullTitle } : {}),
-      ...(description ? { description } : {}),
-      url: canonical,
-    },
-  };
 }
 
 /**
