@@ -1,0 +1,4 @@
+{
+  "note": "No video embeds (YouTube, Vimeo, Wistia, self-hosted <video>, etc.) were detected on the homepage or any of the 14 priority pages crawled. The live site is image-only. If videos are added later, record their embed URLs here.",
+  "videos": []
+}

@@ -1,0 +1,219 @@
+{
+  "note": "Content + SEO extracted from the live site for the 14 priority pages. Meta titles/descriptions are from Rank Math output where captured; where only the homepage <head> was fully crawled, page title reflects the on-page H1/document title. Body copy is the verbatim marketing text from the live pages. All pages share the same global CTA ('Book Your Free Consultation' -> Zenoti) and footer (see brand.json / external-links.json).",
+  "globalCta": {
+    "label": "Book Your Free Consultation",
+    "url": "https://revivalhealth.zenoti.com/webstorenew"
+  },
+  "pages": {
+    "home": {
+      "path": "/",
+      "metaTitle": "Revival Health & Wellness | Weight Loss & Aesthetic Solutions",
+      "metaDescription": "Revival Health and Wellness offers medical weight loss and aesthetic treatments in Las Vegas. Feel your best with personalized plans designed for your goals.",
+      "robots": "follow, index, max-snippet:-1, max-video-preview:-1, max-image-preview:large",
+      "canonical": "https://revivalhealthandwellnessgroup.com/",
+      "og": {
+        "locale": "en_US",
+        "type": "website",
+        "title": "Revival Health & Wellness | Weight Loss & Aesthetic Solutions",
+        "description": "Revival Health and Wellness offers medical weight loss and aesthetic treatments in Las Vegas. Feel your best with personalized plans designed for your goals.",
+        "url": "https://revivalhealthandwellnessgroup.com/",
+        "siteName": "Revival Health And Wellness",
+        "updatedTime": "2026-05-20T01:02:38+00:00"
+      },
+      "twitter": { "card": "summary_large_image" },
+      "h1": "Take the first step towards a vibrant and fulfilling future",
+      "sections": [
+        "A Modern Luxury Experience",
+        "A synergistic, multi-pronged approach",
+        "What Our Patients Say",
+        "SUBSCRIBE TO OUR EMAIL LIST",
+        "Why choose Revival Health and Wellness?",
+        "About US",
+        "Blogs & Insights"
+      ]
+    },
+    "about-us": {
+      "path": "/about-us/",
+      "metaTitle": "About Us",
+      "h1": "About Us",
+      "headings": [
+        "About Revival Health and Wellness",
+        "Our Core Values",
+        "Meet Our Team",
+        "Testimonials",
+        "Client Results",
+        "Mission Statement",
+        "Revival Health and Wellness \u2013 A Modern Approach to Healing & Vitality"
+      ],
+      "intro": "At Revival Health and Wellness, everything we do is centered around you and your journey to becoming the best version of yourself. Our mission is to provide top-tier care that empowers you to achieve your goals and feel your best, through personalized health solutions tailored to your unique needs. We believe in a comprehensive approach to wellness, focusing on revitalizing your mind, body, and spirit. Our dedicated team genuinely cares about your health and future, and we are committed to helping you lead a longer, happier, and healthier life. We specialize in weight loss, hormone replacement therapy, body contouring, and aesthetics.",
+      "coreValues": [
+        { "name": "Honesty", "text": "We prioritize honesty in all our interactions, ensuring transparent communication and trust with our clients." },
+        { "name": "Integrity", "text": "Our integrity drives us to uphold the highest ethical standards, consistently delivering on our promises." },
+        { "name": "Client", "text": "We place our clients at the heart of everything we do, tailoring our services to meet their unique needs and exceed their expectations." },
+        { "name": "Experience", "text": "We are dedicated to creating exceptional experiences for our clients, combining expertise with personalized care to enhance their journey." },
+        { "name": "Teamwork", "text": "Our success is built on effective teamwork, where every member collaborates seamlessly to achieve common goals." },
+        { "name": "Commitment", "text": "We demonstrate unwavering commitment to our clients and our mission, continuously striving for excellence in all that we do." },
+        { "name": "Result-Oriented", "text": "We focus on being result-oriented, driven by our goal to achieve tangible and impactful outcomes for our clients." }
+      ],
+      "team": [
+        { "name": "Radford Raquedan", "role": "Nurse Practitioner", "bio": "Radford Raquedan serves as the clinic's Nurse Practitioner at Revival Health and Wellness. Born and raised in Hawaii, he has dedicated over a decade to the medical field, specializing in emergency medicine and acute care. His journey into nursing was inspired by a close friend's courageous battle with cancer. As a lifelong athlete who transformed his own health\u2014losing over 50 pounds\u2014Radford became a nurse practitioner to guide others toward their best selves. He focuses on hormone optimization, weight loss, sexual wellness, and aesthetics." },
+        { "name": "Sanaz Salmani", "role": "Clinic Director", "bio": "Sanaz Salmani serves as the clinic director at Revival Health and Wellness, bringing over two decades of luxury customer service experience to her leadership role. A mom of two and a certified personal trainer and professional bodybuilder, she earned her pro card in the natural bodybuilding community. Her dedication to health, empowerment, and personal growth inspires both patients and team." },
+        { "name": "Daesja Johnson", "role": "Medical Assistant", "bio": "Daesja Johnson serves as a Medical Assistant at Revival Health and Wellness. A passionate fitness enthusiast with a background in personal training and nutrition, she blends fitness expertise, nutritional guidance, and practical meal-planning strategies to empower clients toward sustainable habits." },
+        { "name": "Carola Villasenor", "role": "Lead Medical Assistant", "bio": "Carola Villasenor serves as a Lead Medical Assistant at Revival Health and Wellness. A bilingual team member of five years, she takes pride in helping patients achieve their goals through personalized care and is pursuing her education to become a registered nurse." }
+      ],
+      "mission": "At Revival Health and Wellness, our purpose is to deliver an exceptional experience and achieve optimal results for our patients through our comprehensive and personalized services. We treat each person like family, offering genuine care and support. During your free consultation, you'll have the opportunity to use our state-of-the-art body analysis and composition scale, providing in-depth information about your overall body composition and well-being."
+    },
+    "weight-loss": {
+      "path": "/weight-loss/",
+      "metaTitle": "Weight Loss",
+      "h1": "Weight Loss",
+      "headings": [
+        "Achieve your weight loss goals",
+        "How does medical weight loss work?",
+        "You can lose weight and stay healthy",
+        "Our approach to medical weight loss",
+        "Good Candidates for medical weight loss",
+        "OPTIONS FOR WEIGHT LOSS"
+      ],
+      "intro": "At Revival Health and Wellness, we understand that achieving your ideal weight requires a plan that's as unique as you are. That's why we take a scientific approach to weight loss, focusing on your body's specific needs. With a step-by-step guide tailored just for you, we'll help you reach your goals and maintain them for the long term.",
+      "approach": "Our team will conduct a thorough analysis of your blood panels to gain a deep understanding of your body's inner workings. We assess the performance of your cardiovascular system, metabolism, thyroid, and adrenal glands. Our customized approach includes a personalized one-on-one consultation, comprehensive blood panels, a custom weight loss plan, ongoing support, and weekly body composition analysis to monitor real progress.",
+      "candidates": ["Have a BMI of 30 or higher", "Have struggled with other weight loss methods", "Are at risk for health issues related to their weight", "Have genetic or medical conditions that make weight management more challenging"],
+      "options": [
+        { "name": "GLP-1", "url": "/glp-1/", "blurb": "Take control of your weight and health with our GLP-1 Therapy. This advanced treatment helps regulate appetite, improve blood sugar control, and support long-term weight management." },
+        { "name": "Phentermine", "url": "/phentermine/", "blurb": "Jumpstart your weight loss journey with Phentermine, a clinically proven prescription that helps suppress appetite and boost energy levels." },
+        { "name": "Vitamin Injections", "url": "/vitamin-injections/", "blurb": "Re-energize your body and boost overall wellness with our Vitamin Injections, packed with essential nutrients to improve energy, immunity, metabolism, and support healthy skin, hair, and nails." }
+      ],
+      "disclaimer": "We provide compounded GLP-1 medication. We do not sell or dispense brand-name medications such as Ozempic\u00ae, Wegovy\u00ae, or Mounjaro\u00ae. Our compounded medications are prepared by licensed compounding pharmacies in compliance with all applicable regulations."
+    },
+    "hormone-therapy": {
+      "path": "/hormone-therapy/",
+      "metaTitle": "Hormone Therapy",
+      "h1": "Hormone Therapy",
+      "headings": [
+        "Comprehensive Guide to Hormone Therapy for Optimal Health",
+        "What is Hormone therapy?",
+        "A Hormone replacement treatment (HRT) plan",
+        "Women's Hormone Therapy",
+        "Men's Hormone Therapy",
+        "Growth Hormone Optimization"
+      ],
+      "intro": "Hormones can fluctuate significantly over time, making it challenging for the body to maintain its natural balance. At Revival Health and Wellness, our hormone replacement therapy (HRT) can help restore your hormone levels to a more youthful range, bringing balance back to your body and helping you live your healthiest life.",
+      "methods": ["Intramuscular injections", "Hormone pellet insertions", "Topical gel applications", "Oral capsules"],
+      "subServices": [
+        { "name": "Men's Hormone Therapy", "url": "/mens-hormone-therapy/" },
+        { "name": "Women's Hormone Therapy", "url": "/womens-hormone-therapy/" },
+        { "name": "Growth Hormone Optimization", "url": "/growth-hormone-optimization/" }
+      ]
+    },
+    "sexual-wellness": {
+      "path": "/sexual-wellness/",
+      "metaTitle": "Sexual Wellness",
+      "h1": "Sexual Wellness",
+      "headings": ["Comprehensive Sexual Wellness Solutions for Enhanced Wellbeing"],
+      "intro": "At Revival Health and Wellness, we provide sexual wellness solutions for men and women.",
+      "links": [
+        { "name": "Women's sexual wellness", "url": "/women/" },
+        { "name": "Men's sexual wellness", "url": "/men/" }
+      ]
+    },
+    "men": {
+      "path": "/men/",
+      "metaTitle": "Sexual Wellness for Men",
+      "h1": "Sexual Wellness for Men",
+      "headings": ["Sexual Wellness for Men", "The importance of sexual wellness", "Options for sexual wellness products for men"],
+      "intro": "If you're looking for a solution to erectile dysfunction, penis enlargement, or enhanced sexual performance, Revival Health and Wellness offers safe and proven sexual wellness treatments for men, all administered by our experienced specialists.",
+      "ctaUrl": "/quiz/",
+      "options": [
+        { "name": "P-Shot", "url": "/p-shot-tm/", "blurb": "The P-Shot (Priapus Shot\u00ae) is a non-surgical treatment that uses platelet-rich plasma (PRP) from your own blood to improve blood flow, sensitivity, and sexual function." },
+        { "name": "Gainswave", "url": "/gainswave-tm/", "blurb": "GainsWave is a cutting-edge, non-invasive treatment for men's sexual health that uses acoustic sound wave therapy to improve blood flow and enhance performance." },
+        { "name": "Viagra", "url": "/viagra-trimix/", "blurb": "Viagra is a trusted prescription treatment for erectile dysfunction that works by improving blood flow, helping men achieve and maintain stronger, longer-lasting erections." },
+        { "name": "TriMix", "url": "/trimix/", "blurb": "TriMix is an effective, customized injection therapy for erectile dysfunction. It increases blood flow to help men achieve and maintain firm erections." },
+        { "name": "Priapus Toxin", "url": "/priapus-toxin/", "blurb": "The Priapus Toxin is an advanced, non-surgical treatment that combines the benefits of Botox with specialized techniques to relax smooth muscles and improve blood flow." },
+        { "name": "Emsella", "url": "/emsella/", "blurb": "EMSELLA is a breakthrough, non-invasive solution for urinary incontinence and pelvic floor strengthening using advanced HIFEM technology." }
+      ]
+    },
+    "women": {
+      "path": "/women/",
+      "metaTitle": "Sexual Wellness for Women",
+      "h1": "Sexual Wellness for women",
+      "headings": ["Discover the Benefits of O-Shot Treatments for Women's Wellness", "Options for sexual wellness for Women", "What is the O-Shot?", "What does the O-Shot do?", "How the O-Shot works", "O-Shot treatment details"],
+      "intro": "For many women, sexual wellness is an essential component of emotional well-being. If you're experiencing sexual issues such as low libido, vaginal dryness, or difficulty reaching orgasm, the O-Shot may be the ideal solution for you.",
+      "options": [
+        { "name": "GainsWave\u2122 For Her", "url": "/gainswavetm-for-her/", "blurb": "A breakthrough, non-invasive treatment designed to enhance women's sexual wellness using gentle acoustic sound wave therapy to stimulate blood flow, promote new tissue growth, and increase sensitivity." },
+        { "name": "O-Shot", "url": "/o-shot-tm/", "blurb": "The O-Shot (Orgasm Shot\u00ae) uses platelet-rich plasma (PRP) from your own blood to help regenerate tissue, improve blood flow, and increase sensitivity." },
+        { "name": "Emsella", "url": "/emsella-2/", "blurb": "EMSELLA strengthens the pelvic floor and helps improve urinary incontinence using advanced HIFEM technology\u2014all while remaining fully clothed." }
+      ]
+    },
+    "aesthetics": {
+      "path": "/aesthetics/",
+      "metaTitle": "Aesthetics",
+      "h1": "Aesthetics",
+      "headings": ["Comprehensive Aesthetic Services for Enhanced Beauty and Confidence", "Health and Aesthetic Solutions at Revival Health and Wellness", "Our Top Injectable Aesthetic Services"],
+      "intro": "At Revival Health and Wellness, we believe in providing services that can make you feel your best at every age. Our team of clinical advanced aesthetic professionals believe that looking your best can significantly impact how you feel, boost confidence and self esteem.",
+      "services": [
+        { "name": "Botox", "url": "/botox/", "blurb": "Smooth away fine lines and wrinkles with our expert Botox treatments. This non-surgical, quick, and personalized treatment relaxes facial muscles and restores a naturally refreshed, youthful look." },
+        { "name": "Derma Filler", "url": "/derma-filler/", "blurb": "Revive your beauty with Derma Fillers. Our expert team ensures safe, effective, and rejuvenating treatments tailored just for you." },
+        { "name": "Kybella", "url": "/kybella/", "blurb": "Eliminate stubborn chin fat and achieve a beautifully contoured jawline with Kybella, with minimal downtime." },
+        { "name": "Microneedling", "url": "/microneedling/", "blurb": "An advanced skin rejuvenation treatment that boosts collagen production, reduces fine lines, wrinkles, and scars, and improves overall skin texture." },
+        { "name": "Under Eye Treatment", "url": "/under-eye-treatment/", "blurb": "Targets dark circles, puffiness, and fine lines, helping to rejuvenate and brighten the under-eye area." },
+        { "name": "PDO Thread Lifts", "url": "/pdo-thread-lifts/", "blurb": "A minimally invasive procedure that reduces sagging, redefines facial contours, and stimulates collagen production." },
+        { "name": "PRP Hair Restoration", "url": "/prp-hair-restoration/", "blurb": "Stimulate natural hair growth, strengthen thinning hair, and restore a fuller, thicker head of hair over time." },
+        { "name": "Finasteride", "url": "/finasteride/", "blurb": "A clinically proven treatment for hair loss that blocks the hormone causing thinning and promotes fuller, healthier growth." },
+        { "name": "Emsculpt NEO", "url": "/emsculpt-neo/", "blurb": "An advanced body contouring treatment that simultaneously builds muscle and reduces fat using high-intensity electromagnetic technology." }
+      ]
+    },
+    "glp-1": {
+      "path": "/glp-1/",
+      "metaTitle": "GLP-1",
+      "h1": "GLP-1",
+      "headings": ["Weight Loss with GLP-1", "Understanding GLP-1 & Its Role in Weight Loss", "What Is GLP-1 and Why It's Key to Effective Weight Loss", "How GLP-1 Helps with Weight Loss", "Does COMPOUNDED GLP-1 Medication actually help you lose weight?", "who can benefit from glp-1 medication?"],
+      "intro": "At Revival Health and Wellness, we give value to our patients by offering the latest weight management solutions given by our committed team of medical experts.",
+      "mechanisms": ["Appetite Suppression", "Slower Gastric Emptying", "Blood Sugar Regulation", "Enhanced Fat Metabolism"],
+      "candidates": "GLP-1 medications are an excellent option for those who have a BMI of 27 or higher with weight-related health conditions, struggle with persistent cravings and appetite control, or are looking for a medically supervised, sustainable approach to weight loss."
+    },
+    "botox": {
+      "path": "/botox/",
+      "metaTitle": "Botox",
+      "h1": "Botox",
+      "headings": ["Transform Your Appearance with Botox: Reveal a Youthful You", "What is Botox?", "Understanding Botox: A Comprehensive Overview of Its Use and Benefits", "Botox treatment details", "Recovery and results", "Good candidates for Botox"],
+      "intro": "Botox is one of the most popular and effective non-surgical anti-aging treatments worldwide, offering both convenience and renewed confidence.",
+      "candidates": ["Want to reduce lines, creases, and wrinkles on the face and neck", "Are over the age of 18", "Do not have an allergy to Botox", "Are not pregnant or breastfeeding", "Are free of any skin infections", "Do not have a neurological condition"],
+      "results": "A typical Botox treatment takes about 15 minutes and requires no downtime. You can expect to start seeing effects about three days after your appointment. On average, Botox results last between 3 to 5 months."
+    },
+    "emsculpt-neo": {
+      "path": "/emsculpt-neo/",
+      "metaTitle": "Emsculpt NEO",
+      "h1": "Emsculpt NEO",
+      "headings": ["Transform Your Body with Emsculpt NEO: Build Muscle & Burn Fat", "Who Qualifies for EMSCULPT NEO & How the Treatment Feels", "FDA-Cleared Benefits of Emsculpt NEO in Functional Wellness", "Recovery and results", "Frequently Asked Questions (FAQ's)"],
+      "intro": "EMSCULPT NEO is the first and only non-invasive body-shaping procedure that helps eliminate fat and build muscle simultaneously in 30 minutes. The Ultimate Muscle Building and Fat Reduction System.",
+      "fdaCleared": ["Prevention or retardation of disuse atrophy", "Muscle re-education", "Maintaining or increasing range of motion", "Post-surgical prevention of calf muscle venous thrombosis", "Relaxation of muscle spasms", "Increasing local blood circulation", "No downtime, non-invasive"],
+      "results": "On average patients can experience 25% more muscle and 30% reduced fat in hard-to-target regions. Optimal results are typically observed 90 days after the final session."
+    },
+    "iv-hydration": {
+      "path": "/iv-hydration/",
+      "metaTitle": "IV Hydration",
+      "h1": "IV Hydration",
+      "headings": ["Rehydrate. Replenish. Revitalize.", "Why IV Hydration Therapy?", "IV Hydration Therapy Benefits: Hydration, Energy & Detox", "Why Choose Revival Health and Wellness?"],
+      "intro": "At Revival Health and Wellness, we believe that optimal hydration is the foundation of good health. Our IV Hydration Therapy offers a fast and effective way to replenish fluids, deliver essential vitamins, and restore balance to your body.",
+      "drips": ["Quench: hydrate and combat fatigue from dehydration", "Get-Up-and-Go: Burn fat, feel energized and boost your metabolism", "Recovery and Performance: Decrease recovery time and enhance your performance", "Immunity: Boost your immune system, feel better fast", "Alleviate: Minimize bloating, irritability, abdominal discomfort and lower back pain", "Inner Beauty: Fight acne, wrinkles and tired skin from the inside out", "Myer's Cocktail: Gold Standard for overall wellness", "Brain Storm: Improve cognitive function and information processing", "NAD+: Mental clarity, antiaging support", "Reboot: Ease hangover headache, nausea and dehydration", "Rehydrate: Contains essential electrolytes to boost your energy"]
+    },
+    "telehealth": {
+      "path": "/telehealth/",
+      "metaTitle": "Telehealth",
+      "h1": "Telehealth",
+      "headings": ["Book Your Virtual Consultation For Weight Loss"],
+      "intro": "We are ready to support your weight loss journey through virtual consultations. Book your call with our expert team to start getting support today. We will provide you with everything you need to help you start your health transformation journey from home."
+    },
+    "contact-us": {
+      "path": "/contact-us/",
+      "metaTitle": "Contact Us",
+      "h1": "Get in Touch With Us",
+      "headings": ["Get in Touch with Revival Health & Wellness for Your Health Needs", "Have Questions About Our Health and Wellness Services?", "We're here to help you!"],
+      "intro": "Whether you have questions about our services, need professional guidance for your health journey, or want to schedule a personalized consultation \u2014 our team is always here for you.",
+      "contactPoints": [
+        { "phone": "(702) 963-1154", "address": "7220 S. Cimarron Road, Suite #140, Las Vegas, Nevada 89113" },
+        { "phone": "702-725-1588", "address": "2585 Box Canyon Drive Suite 150, Las Vegas, Nevada 89128" }
+      ]
+    }
+  }
+}

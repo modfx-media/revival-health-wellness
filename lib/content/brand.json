@@ -1,0 +1,114 @@
+{
+  "name": "Revival Health & Wellness",
+  "legalName": "Revival Health and Wellness",
+  "ogSiteName": "Revival Health And Wellness",
+  "tagline": "Take the first step towards a vibrant and fulfilling future",
+  "shortDescription": "Premium weight loss and aesthetic solutions in Las Vegas.",
+  "longDescription": "Revival Health and Wellness offers medical weight loss and aesthetic treatments in Las Vegas. Feel your best with personalized plans designed for your goals.",
+  "url": "https://revivalhealthandwellnessgroup.com",
+  "poweredBy": {
+    "name": "ModfxMedia",
+    "url": "https://www.modfxmedia.com/"
+  },
+  "platform": {
+    "cms": "WordPress",
+    "pageBuilder": "Elementor 4.1.4",
+    "seoPlugin": "Rank Math SEO",
+    "booking": "Zenoti"
+  },
+  "fonts": {
+    "heading": {
+      "family": "Barlow Condensed",
+      "source": "Google Fonts",
+      "note": "Used by the live Elementor theme for headings/display."
+    },
+    "body": {
+      "family": "DM Sans",
+      "source": "Google Fonts",
+      "note": "Used by the live Elementor theme for body copy."
+    },
+    "rebuildOverride": {
+      "note": "The Next.js rebuild intentionally uses a luxury serif/sans pairing instead of the live theme fonts.",
+      "heading": "Cormorant Garamond",
+      "body": "Inter",
+      "smallCaps": "Cormorant SC"
+    }
+  },
+  "colors": {
+    "note": "Brand-relevant colors extracted from the live site. Most other detected colors were WordPress/Elementor defaults.",
+    "darkBrown": "#211715",
+    "taupe": "#957f6e",
+    "goldLight": "#f2bf6d",
+    "goldMid": "#febe69",
+    "goldWarm": "#ffcb70",
+    "lightBlue": "#d8e8f5",
+    "accentBlue": "#3d8dcc",
+    "gray": "#85807f",
+    "rebuildPalette": {
+      "note": "Tokens actually used by the Next.js rebuild (revival-* in Tailwind).",
+      "dark": "#0E0B0A",
+      "charcoal": "#1A1614",
+      "gold": "#C9A96E",
+      "cream": "#F5EFE6",
+      "warmWhite": "#FAF7F2"
+    }
+  },
+  "layout": {
+    "maxWidth": "1080px",
+    "system": "CSS Grid"
+  },
+  "interactions": [
+    "Hover states (CSS)",
+    "CSS animations",
+    "IntersectionObserver scroll-triggered animations",
+    "Carousel / slider",
+    "Modal / dialog",
+    "Dropdown",
+    "Tabs",
+    "Smooth scroll (Lenis-like)"
+  ],
+  "contact": {
+    "email": "Southwest@revivalhealthandwellnessgroup.com",
+    "primaryPhone": "(702) 963-1154"
+  },
+  "locations": [
+    {
+      "id": "henderson-southwest",
+      "name": "Henderson / Southwest",
+      "streetAddress": "7220 S. Cimarron Road, Suite #140",
+      "addressLocality": "Las Vegas",
+      "addressRegion": "NV",
+      "postalCode": "89113",
+      "addressCountry": "US",
+      "telephone": "(702) 963-1154",
+      "faxNumber": "(702) 475-4621",
+      "geo": { "latitude": 36.0569688, "longitude": -115.2693326 },
+      "mapUrl": "https://www.google.com/maps/place/Revival+Health+and+Wellness/@36.0569688,-115.2693326,15z/data=!4m2!3m1!1s0x0:0xaefffda66fa347cb",
+      "hours": [
+        { "days": ["Monday"], "opens": "09:00", "closes": "13:00" },
+        { "days": ["Tuesday", "Wednesday", "Thursday"], "opens": "09:00", "closes": "19:00" }
+      ]
+    },
+    {
+      "id": "summerlin-northwest",
+      "name": "Summerlin / Northwest",
+      "streetAddress": "2585 Box Canyon Drive, Suite #150",
+      "addressLocality": "Las Vegas",
+      "addressRegion": "NV",
+      "postalCode": "89128",
+      "addressCountry": "US",
+      "telephone": "(702) 725-1588",
+      "faxNumber": "(702) 475-4621",
+      "geo": { "latitude": 36.2067927, "longitude": -115.2473736 },
+      "mapUrl": "https://www.google.com/maps/dir//2585+Box+Canyon+Dr+Suite+150+Las+Vegas,+NV+89128/@36.2067927,-115.2473736,10z",
+      "hours": [
+        { "days": ["Friday", "Saturday"], "opens": "09:00", "closes": "17:00" }
+      ]
+    }
+  ],
+  "social": {
+    "facebook": "https://www.facebook.com/RevivalHealthAndWellness",
+    "instagram": "https://www.instagram.com/revival.healthandwellness/",
+    "tiktok": "https://www.tiktok.com/@revival.lv"
+  }
+}

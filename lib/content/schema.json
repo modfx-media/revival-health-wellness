@@ -1,0 +1,95 @@
+{
+  "note": "Structured data (JSON-LD) extracted verbatim from the live homepage <head>. Two schema blocks were present. HTML entities have been decoded.",
+  "graph": {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "Organization",
+        "@id": "https://revivalhealthandwellnessgroup.com/#organization",
+        "name": "Revival Health And Wellness",
+        "url": "https://revivalhealthandwellnessgroup.com"
+      },
+      {
+        "@type": "WebSite",
+        "@id": "https://revivalhealthandwellnessgroup.com/#website",
+        "url": "https://revivalhealthandwellnessgroup.com",
+        "name": "Revival Health And Wellness",
+        "publisher": { "@id": "https://revivalhealthandwellnessgroup.com/#organization" },
+        "inLanguage": "en-US",
+        "potentialAction": {
+          "@type": "SearchAction",
+          "target": "https://revivalhealthandwellnessgroup.com/?s={search_term_string}",
+          "query-input": "required name=search_term_string"
+        }
+      },
+      {
+        "@type": "ImageObject",
+        "@id": "https://revivalhealthandwellnessgroup.com/wp-content/uploads/2025/08/Image_20250829_162859_344.jpeg",
+        "url": "https://revivalhealthandwellnessgroup.com/wp-content/uploads/2025/08/Image_20250829_162859_344.jpeg",
+        "width": "200",
+        "height": "200",
+        "inLanguage": "en-US"
+      },
+      {
+        "@type": "WebPage",
+        "@id": "https://revivalhealthandwellnessgroup.com/#webpage",
+        "url": "https://revivalhealthandwellnessgroup.com/",
+        "name": "Revival Health & Wellness | Weight Loss & Aesthetic Solutions",
+        "datePublished": "2025-08-21T21:46:16+00:00",
+        "dateModified": "2026-05-20T01:02:38+00:00",
+        "about": { "@id": "https://revivalhealthandwellnessgroup.com/#organization" },
+        "isPartOf": { "@id": "https://revivalhealthandwellnessgroup.com/#website" },
+        "primaryImageOfPage": { "@id": "https://revivalhealthandwellnessgroup.com/wp-content/uploads/2025/08/Image_20250829_162859_344.jpeg" },
+        "inLanguage": "en-US"
+      }
+    ]
+  },
+  "healthAndBeautyBusiness": {
+    "@context": "https://schema.org",
+    "@type": "HealthAndBeautyBusiness",
+    "name": "Revival Health and Wellness",
+    "url": "https://revivalhealthandwellnessgroup.com/",
+    "logo": "https://revivalhealthandwellnessgroup.com/wp-content/uploads/2025/08/66ce476cca1ded6cc6d21cdc_revival-dark-ver-2@3x-p-1080-3-756x1024.png",
+    "image": "https://revivalhealthandwellnessgroup.com/wp-content/uploads/2025/08/66ce476cca1ded6cc6d21cdc_revival-dark-ver-2@3x-p-1080-3-756x1024.png",
+    "@id": "https://revivalhealthandwellnessgroup.com/#organization",
+    "description": "Premium weight loss and aesthetic solutions in Las Vegas.",
+    "sameAs": ["https://www.instagram.com/revival.healthandwellness/"],
+    "subOrganization": [
+      {
+        "@type": "MedicalClinic",
+        "name": "Revival Health and Wellness - Henderson / Southwest",
+        "telephone": "(702) 963-1154",
+        "faxNumber": "(702) 475-4621",
+        "address": {
+          "@type": "PostalAddress",
+          "streetAddress": "7220 S. Cimarron Road, Suite #140",
+          "addressLocality": "Las Vegas",
+          "addressRegion": "NV",
+          "postalCode": "89113",
+          "addressCountry": "US"
+        },
+        "openingHoursSpecification": [
+          { "@type": "OpeningHoursSpecification", "dayOfWeek": "Monday", "opens": "09:00", "closes": "14:00" },
+          { "@type": "OpeningHoursSpecification", "dayOfWeek": ["Tuesday", "Wednesday", "Thursday"], "opens": "09:00", "closes": "19:00" }
+        ]
+      },
+      {
+        "@type": "MedicalClinic",
+        "name": "Revival Health and Wellness - Summerlin / Northwest",
+        "telephone": "(702) 725-1588",
+        "faxNumber": "(702) 475-4621",
+        "address": {
+          "@type": "PostalAddress",
+          "streetAddress": "2585 Box Canyon Drive, Suite #150",
+          "addressLocality": "Las Vegas",
+          "addressRegion": "NV",
+          "postalCode": "89128",
+          "addressCountry": "US"
+        },
+        "openingHoursSpecification": [
+          { "@type": "OpeningHoursSpecification", "dayOfWeek": ["Friday", "Saturday"], "opens": "09:00", "closes": "15:00" }
+        ]
+      }
+    ]
+  }
+}

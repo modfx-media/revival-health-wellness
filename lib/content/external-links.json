@@ -1,0 +1,28 @@
+{
+  "note": "External links found on the live site. Preserve these as-is in the rebuild. The 'images.leadconnectorhq.com' chat-widget asset is excluded as it belongs to a third-party live-chat widget.",
+  "booking": {
+    "label": "Book now / Book Your Free Consultation",
+    "url": "https://revivalhealth.zenoti.com/webstorenew"
+  },
+  "quiz": {
+    "label": "Sexual wellness quiz CTA (men page)",
+    "url": "https://revivalhealthandwellnessgroup.com/quiz/"
+  },
+  "legitScript": {
+    "label": "LegitScript certification",
+    "url": "https://www.legitscript.com/websites/?checker_keywords=revivalhealthandwellnessgroup.com"
+  },
+  "zenotiPrivacy": {
+    "label": "Zenoti's Privacy",
+    "url": "https://www.zenoti.com/trust/privacy-notice"
+  },
+  "social": {
+    "facebook": "https://www.facebook.com/RevivalHealthAndWellness",
+    "instagram": "https://www.instagram.com/revival.healthandwellness/",
+    "tiktok": "https://www.tiktok.com/@revival.lv"
+  },
+  "maps": {
+    "henderson": "https://www.google.com/maps/place/Revival+Health+and+Wellness/@36.0569688,-115.2693326,15z/data=!4m2!3m1!1s0x0:0xaefffda66fa347cb",
+    "summerlin": "https://www.google.com/maps/dir//2585+Box+Canyon+Dr+Suite+150+Las+Vegas,+NV+89128/@36.2067927,-115.2473736,10z"
+  }
+}
