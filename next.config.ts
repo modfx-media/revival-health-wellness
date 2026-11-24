@@ -58,6 +58,21 @@ const nextConfig: NextConfig = {
         destination: "/co2-laser-treatments/",
         permanent: true,
       },
+      {
+        source: "/home",
+        destination: "/",
+        permanent: true,
+      },
+      {
+        source: "/body-contouring",
+        destination: "/skin/",
+        permanent: true,
+      },
+      {
+        source: "/break-weight-loss-plateau",
+        destination: "/blogs/break-weight-loss-plateau/",
+        permanent: true,
+      },
       // Renamed to match the ONDA Pro brand name.
       {
         source: "/octopro-onda",

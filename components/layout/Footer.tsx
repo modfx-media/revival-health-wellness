@@ -11,7 +11,7 @@ import { motion } from "framer-motion";
 /* ── Footer link data ──────────────────────────────────────────────────── */
 
 const QUICK_LINKS = [
-  { label: "Home", href: "/home/" },
+  { label: "Home", href: "/" },
   { label: "Weight Loss", href: "/weight-loss/" },
   { label: "Hormone Therapy", href: "/hormone-therapy/" },
   { label: "Sexual Wellness for Men", href: "/men/" },

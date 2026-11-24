@@ -28,7 +28,7 @@ export const MARQUEE: { label: string; href: string }[] = [
   { label: "Sexual Wellness", href: "/sexual-wellness/" },
   { label: "Aesthetics & Injectables", href: "/aesthetics/" },
   { label: "IV Hydration", href: "/iv-hydration/" },
-  { label: "Body Contouring", href: "/body-contouring/" },
+  { label: "Body Contouring", href: "/skin/" },
   { label: "Telehealth", href: "/telehealth/" },
 ];
 
@@ -77,7 +77,7 @@ export const SERVICES: Service[] = [
   },
   {
     name: "Body Contouring",
-    href: "/body-contouring/",
+    href: "/skin/",
     image: "/images/services/emsculpt-neo.webp",
     blurb:
       "Non-invasive sculpting and skin tightening, ONDA Pro, Emsculpt NEO, and Everesse RF for a stronger, more defined silhouette.",
@@ -320,7 +320,7 @@ export const BLOGS: BlogPost[] = [
     title: "Break a Las Vegas Weight Loss Plateau: Lab Tests and What Results Mean",
     category: "Weight Loss",
     date: "June 21, 2026",
-    href: "https://revivalhealthandwellnessgroup.com/break-weight-loss-plateau/",
+    href: "/blogs/break-weight-loss-plateau/",
     excerpt:
       "Stop the plateau spiral and restart fat loss. You are eating cleaner and moving more, here's what your labs reveal and how to break through.",
     image: "/images/blog/weight-loss-plateau.jpg",

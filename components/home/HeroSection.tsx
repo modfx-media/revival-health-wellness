@@ -595,7 +595,7 @@ const SHOWCASE_LABELS = [
 
 const SHOWCASE_HREFS = [
   "/aesthetics/",
-  "/body-contouring/",
+  "/skin/",
   "/prp-hair-restoration/",
   "/weight-loss/",
 ];
