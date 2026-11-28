@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { draftMode } from "next/headers";
-import { cmsPageMetadata } from "@/lib/cms/generateMeta";
+import { blogDocumentTitle, cmsPageMetadata } from "@/lib/cms/generateMeta";
+import { queryPublishedMeta } from "@/lib/cms/queries";
 import { mergeBlogPosts } from "@/lib/cms/blog-posts";
 import { blogCalendarDay, isFutureBlogDate } from "@/lib/cms/dates";
 import { loadPublishedBlog, relatedJournalPosts } from "@/lib/cms/posts";
@@ -114,14 +115,18 @@ export async function generateMetadata({
     },
     }, `/blogs/${slug}`);
   // Self-canonical even if a CMS field still points at the old /<slug>/ URL.
+  // An empty SEO title keeps the composed headline. A published meta.title
+  // is the document title, including Open Graph.
   const self = absoluteURL(`/blogs/${slug}`);
+  const published = await withCMS(() => queryPublishedMeta(`/blogs/${slug}`), null);
+  const documentTitle = blogDocumentTitle(composeTitle(fullTitle), published?.meta?.title);
   return {
     ...meta,
-    title: { absolute: composeTitle(fullTitle) },
+    title: { absolute: documentTitle },
     alternates: { canonical: self },
     openGraph: {
       ...(typeof meta.openGraph === "object" ? meta.openGraph : {}),
-      title: composeTitle(fullTitle),
+      title: documentTitle,
       url: self,
     },
   };
